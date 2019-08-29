@@ -1,15 +1,15 @@
 # Welcome to Intro to Linux
 Schedule:
-1. Why Linux/Unix 7-7:20
-2. About the class 7:20-7:30
-3. Connect to machine 7:30-7:50
-4. Bash Part 1 7:50-8:00
-5. Break 8:00 - 8:05
-6. Bash Part 2 8:05-8:30
-7. Vim 8:30-9:00
-7. Break 9:00-9:05
-8. Bash Part 3 9:05-9:35
-9. Homework 9:35-9:45
+1.  7:00 - 7:20 Why Linux/Unix 
+2.  7:20 - 7:30 About the class
+3.  7:30 - 7:50 Connect to machine
+4.  7:50 - 8:00 Bash Part 1
+5.  8:00 - 8:05 Break 
+6.  8:05 - 8:30 Bash Part 2
+7.  8:30 - 9:00 Vim
+8.  9:00 - 9:05 Break 
+9.  9:05 - 9:35 Bash Part 3
+10. 9:35 - 9:45 Homework 
 
 ## Why Linux / Unix? [ 7:00 - 7:30 ]
 Let me give you a reason to learn Linux. Look what you can do:
