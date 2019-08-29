@@ -45,14 +45,15 @@ No late assignments.
 
 ## Get everyone connected to a machine [ 7:30 - 7:50 ]
 Present options for class:
-1. Beaglebone black.
+1. Beaglebone black ( you're going to need an sd card or usb stick later too )
 2. Digital ocean rental ( $5/month for a machine, plus a few dollars here and there for additional rentals, maybe an additional 10 bucks total for the semester).
-3. Get a laptop.
+3. Get a laptop ( you're going to need an sd card or usb stick later too )
 
+Take a few minutes to show buying options.
 
 I recommend getting a laptop, using it everyday for everything to get used to linux. It's going to take you 5 years to become a linux wizard if you use it everyday. If you use it once a week, you'll take a little while longer. The same goes for anything related to computers.
 
-Download putty and connect to my home machine.
+For this first class we have no actual Linux machine to use. I don't want to waste time getting a machine - the burden is on you to have one by next week. For now we are going to use the git bash terminal installed on our windows machines. Linux is so good that Microsoft is slowly rolling Linux features in Windows, after just a handful of years earlier they called Linux "Cancer" and wanted to destroy it!
 
 ## Bash Part 1 [ 7:50 - 8:00 ]
 1. ls
