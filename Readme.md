@@ -4,6 +4,6 @@ In this repo you'll find lecture notes, homework assignments, and other course m
 
 The class discord is:
 
-https://SERVER.gg/qKwXQZ
+https:///SERVER.gg/gkQUCPz
 
 but replace 'SERVER' with 'discord'
