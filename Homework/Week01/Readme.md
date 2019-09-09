@@ -29,5 +29,3 @@ Remember:
 
 ## Addendum
 Deadlines are strict in this class as I want to make sure you've finished your work a few days before class so that you can properly digest the material. In the past I've seen people hurrying to do the assignment 2 minutes before class, so their brains haven't had time to subconsciously process the really cool things they've just done. If the work is done a few days early, you'll have time to think about what you've done and spend a few days playing with Linux with no pressure.
-
-Nevertheless, this is the first assignment and some students may miss the first class. For those students, this assignment is due Monday, September 16th at midnight along with the week 2 homework. From then on out, the same rules apply to everyone.

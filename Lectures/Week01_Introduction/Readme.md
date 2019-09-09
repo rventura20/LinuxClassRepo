@@ -70,6 +70,7 @@ For this first class we have no actual Linux machine to use. I don't want to was
 12. rm
 13. rm -r
 9. which
+10. cp -r
 
 ## Break [ 8:00 - 8:05 ]
 Designated time for mental relaxation.
