@@ -12,11 +12,10 @@
 * 7:30 - 8:00 if/test/comparisons
 * 8:00 - 8:05 break
 * 8:05 - 8:30 stdin, stdout, stderr
-* 8:30 - 8:45 A python interlude
+* 8:30 - 8:45 A programming interlude
 * 8:45 - 9:00 processes
 * 9:00 - 9:05 break
-* 9:05 - 9:20 More about processes
-* 9:20 - 9:35 A look at 'file descriptors'
+* 9:05 - 9:35 More about processes
 * 9:35 - 9:45 homework discussion.
 
 ## [ 7:00 - 7:30 ] pipes
@@ -69,6 +68,91 @@ Have students search the internet for cool pipe examples.
 Have class experiment with pipes to make sure they understand.
 
 ## [ 7:30 - 8:00 ] if/test/comparisons
+The bash syntax for if is 
+
+```
+if [ condition ]
+then
+ command
+fi
+```
+
+One more useful piece of information is that bash generally interprets values as strings, unless they can be used as numbers, in which case it assumes they are numbers. https://www.tldp.org/LDP/abs/html/untyped.html.
+
+Comparison operators for numbers in bash are:
+
+1. -eq
+2. -ne
+3. -gt
+4. -ge 
+etc.
+
+Comparison operators for strings are:
+
+1. =
+2. !=
+etc.
+
+for more information see here https://www.tldp.org/LDP/abs/html/comparison-ops.html
+
+```
+# an arithmetic comparison
+x1=1
+x2=2
+if [ $x1 -lt $x2 ]        
+then
+    echo "$x1 < $x2"
+else
+    echo "$x2 <= $x1"
+fi
+```
+
+Then this script will fail, because you are using an arithmetic comp on strings:
+
+```
+x1=1a
+x2=2a
+if [ $x1 -lt $x2 ]        
+then
+    echo "$x1 < $x2"
+else
+    echo "$x2 <= $x1"
+fi
+```
+
+You can easily fix this with:
+
+```
+#
+# The old bash advice is to double quote all variables in bash to make sure they are interpreted as a single value.
+# 
+# notice the difference between how this script runs with bash and with sh
+#
+# sh is the bourne shell, bash is the bourne again shell
+#
+
+x1=1a
+x2=2a
+
+if [[ "$x1" < "$x2" ]]
+then
+    echo "$x1 < $x2"
+else
+    echo "$x2 <= $x1"
+fi
+
+if [ "$x1" \< "$x2" ]        
+then
+    echo "$x1 < $x2"
+else
+    echo "$x2 <= $x1"
+fi
+```
+
+So I've shown you how to use if and some comparisons and highlighted some pitfalls, okay?
+
+Notice how I made variables and how I used them in here. Now I want to show you a bit more about variables in bash. Again, what I'm showing you will work with sh (probably) but I take no responsibility for it if it doesn't. There are a million shells out there - a cool one I came across recently is fish. I think you install it with apt-get install fish, or fsh, can't remember, but I guess it purports to be a beginner friendly shell. I've never had any issue with bash, I've used the c shell maybe once or twice on an old server, and zsh a few times, but I like bash.
+
 
 ### 7:50 Exercises 
 Have class write some if/else/test comparisons to make sure they understand.
@@ -168,15 +252,23 @@ A common place to send unwanted output is to /dev/null, it just writes your outp
 
 The above command should give an error, but you won't see it, its just gone. There are many times you'll want to do this. I won't dream up some big situation right now to illustrate this to you, just know you'll see this all over the place in bash scripts and there will come a time, if there hasn't already, where you'll just want to throw away either stdout or stderr and never hear about it.
 
-## [ 8:30 - 8:45 ] A python interlude
-You see this in many programming languages too, like c++ gives you 
-cout << 
-and 
-cerr <<
+## [ 8:30 - 8:45 ] An Interlude For the Programmers
+I'm a software developer, not an Operating System developer, as I suspect many of you will be. For those of you who want to system administrators you can largely ignore what I'm about to say, but it is interesting. 
 
-python gives you sys.stdout sys.stderr.
+When you write software on Linux, a fundamental thing you will do is write things to standard error and standard out. Most of the tools we're using in this class are C programs that do just that - they read stdin, and write to stdout and stderr. That's why you can use the `wc`, `md5sum`, `uniq`, etc. programs with pipes - because they are all written to use these channels.
 
-<Ask for examples from other programing languages>
+In c++, for example, you may see
+
+```
+#include <iostream> // this gives you cout and cerr
+
+int main(){
+	std::cout << "Hello world!" << std::endl;
+	std::cerr << "Oh no, an error!" << std::endl;
+}
+```
+
+python also gives you sys.stdin, sys.stdout and sys.stderr.
 
 ```
 # put the following in a file and run it
@@ -204,6 +296,8 @@ $python output.py 1>log 2>errLog; cat errLog | wc
 ```
 
 We saw before there were newlines appended to the outputs of md5sum and echo.
+
+\<Do you write software in a different language? Have you ever done this? cout? cerr? stdout.write? in your language? What is your language of choice? \>
 
 ## [ 8:45 - 8:55 ] processes
 In this section we're going to talk about processes in linux. Processes are just running programs.
@@ -262,6 +356,10 @@ Then when we type jobs, we see it is a stopped job. We can bring it back into th
 
 As an experiment now, start a python incrementNumber process and let it get to 2. Then stop it with ctl + z. Then start another and let it get to 10. The start the first one with fg %1. Then stop it with ctrl + z. Then start the second one with fg %2. See how they pick up where they left off?
 
+## [ 8:55 - 9:00 ] Break
+
+## [ 9:00 - 9:35 ] More about processes.
+
 ----------ps---------------
 Here is a real powerhouse for dealing with processes.
 https://shapeshed.com/unix-ps/
@@ -302,13 +400,6 @@ to see processes by `user ps -u USERNAME`. For example, try `ps -u $(whoami)`
 
 to see processes by group `ps -g GROUPNAME` - but whats a group?? We'll cover that in a few weeks.
 
-
-
-
-## [ 8:55 - 9:00 ] Break
-
-## [ 9:00 - 9:20 ] More about processes.
-
 Exercise:
 How many processes am I running? 
 
@@ -337,57 +428,6 @@ kill -TERM pid
 pkill sends the term signal, which is signal number 15. Ctrl + C sends the signal SIGINT, signal number 2. You may notice that if you try to Ctrl + C a program it doesnt respond. sigint tries to interrupt the process and says "excuse me, you should stop now". But sometimes you need to be more direct so you send the sigterm -TERM signal, signal number 15, as with pkill. But sometimes the process just wont listen so you bring out the bazooka and blast it with the -KILL signal, the dreaded number 9. How the process / operating system goes about handling these signals is interesting and will be discussed later if we have time to write a simple program to handle signals, but we probably wont have time. You'd need to grab a book on C programming and look into signal handlers.
 
 https://gist.github.com/aspyct/3462238 Here is an example of a sample program that has signal handler logic in it. You can see that the programmer has written the program to behave in different ways depending on the signal it receives.
-
-## [ 9:20 - 9:35 ] A look at 'file descriptors'
-Now lets start talking about something that always comes up when discussing linux. "Everything is a file". Throughout the course of this class we're going to see that in many ways! For example, look in you current directory. 
-
-```
-ls
-```
-
-you see a bunch of files, right?  a bunch of paths, right?
-
-Well, type `which bash` and you'll see which bash you're using. type `which python` and you'll see which python you're using on your machine. Type which `gcc` and youll see where one of the C compilers is on your computer. It looks just like a file!
-
-
-Is stdout/stdin/stderr a file? Yes. Let's write a python program that runs forever. In this class we're going to talk about linux processes, lets get a taste real quick.
-
-```
-#
-# runforever.py
-#
-import time
-while True:
-    time.sleep(100)
-```
-
-Here is a python script that will run forever, okay? If you don't write python, it doesn't matter. This is a program that will run while True - thats a common programming idiom for "run forever". and forever it will sit there and read stdin. Lets run this "in the background" - more on that in just a minute. for now we just know that it will run in the background and give control of the terminal back to us.
-
-Lets get the pidof the process - actually putting the job in the background tells us the process id of the script. We need the pid so you can do stuff to the process, as we saw before.
-
-```
-$ python runForever.py &
-[pid]
-$ kill -9 $pid
-$ pidof python
-```
-
-see? Its dead now. There's much more you can do with the pid as we saw before. I'm going to blow your mind now, and show you more about how everything is a file in linux, we're going to take a little peek in the operating system. All linux processes have at least three file descriptors. They have three channels for communicating with the outside world. These channels were given numbers, do you remember? They are 0, 1, and 2. The 0 file descriptor is for input, the 1 is for output, and the 2 is for error output, that's just how it is.
-
-Let's restart the python script in the background.
-
-```
-$python runForever.py &
-[pid]
-```
-Now lets go to the following directory:
-
-`cd /proc/PID/fd`
-
-and don't cheat!! Just cd to the directory and don't do anything else. NOTHING!!! NO CHEATING!!! 
-Can you guess what fd stands for? Ill tell you one more thing as a hint. All unix processes have at least three associated file descriptors. What does fd stand for?? And everything in linux is a file. So if you were, hypothetically, to look at the files that are associated with the three fds for process PID - /proc/PID - what do you think the files would be called?? They ought to be called 0, 1 and 2. There might be more, but those should be there. Type ls and have a look!
-
-There are three file descriptors! That was pretty deep, and I expect you to be somewhat astounded if you aren't familiar with sort of thing. I was truly amazed when I heard of these topics and it just goes to show you that linux is beautiful, mysterious, powerful, intriguing, etc..
 
 
 ## [ 9:35 - 9:45 ] homework discussion.
