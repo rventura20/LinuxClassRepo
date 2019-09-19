@@ -2,24 +2,45 @@
 
 This week we will learn a few more command line tools.
 
-Schedule:
-* Pattern Matching
-* 7:00 - 7:15 Grep
-* 7:15 - 7:30 Loops
-* 7:30 - 7:40 Exercises
-* 7:40 - 7:55 More if
-* 7:55 - 8:00 Exercises
-* 8:00 - 8:05 Break
-* 8:05 - 8:40 Users + Groups
-* 8:40 - 8:50 Exercises
-* 8:40 - 9:00 Start permissions
-* 9:00 - 9:05 Break
-* 9:05 - 9:40 Permissions. chmod, chown, chgrp 
-* 7:20 - 7:23 Miscellany [ if time ]
-* 7:23 - 7:40 Arrays [ if time ]
-* 9:40 - 9:45 Homework + whatever else needs discussing.
+The main focus of todays class is to introduce the following concepts:
+* pattern matching in bash
+* grep 
+* regular expressions
+* bash arrays
+* bash loops
 
-## Pattern matching in bash 
+Don't forget - in a few weeks we are going to be doing some cool stuff, setting up various linux servers, running a website on Linux, manipulating text in cool ways, and we'll learn two more languages. For now we are still familiarizing ourselves with common command line tools so those later activities will be easier to understand.
+
+Schedule:
+
+## [ 7:00 - 7:10 ] Homework Review
+## [ 7:10 - 7:20 ] Pattern matching in bash 
+## [ 7:20 - 7:30 ] Grep
+## [ 7:30 - 7:40 ] Exercises
+## [ 7:40 - 7:50 ] Grep and Regexes!
+## [ 7:50 - 8:00 ] Exercise
+## [ 8:00 - 8:15 ] Miscellany
+## [ 8:15 - 8:20 ] Exercise
+## [ 8:20 - 8:25 ] vim pro-tip
+## [ 8:20 - 8:28 ] Arrays
+## [ 8:28 - 8:30 ] Quick Quiz
+## [ 8:30 - 8:40 ] For Loops
+## [ 8:40 - 8:45 ] while loops
+## [ 8:45 - 8:55 ] More if
+## [ 8:55 - 9:05 ] Exercises
+## [ 9:05 - 9:15 ] Users
+## [ 9:15 - 9:25 ] Exercise
+## [ 9:25 - 9:35 ] Groups
+## [ 9:35 - 9:40 ] Exercise
+## [ 9:40 - 9:45 ] Summary, Homework, Hacktoberfest, Openhouse 
+
+
+
+## [ 7:00 - 7:10 ] Homework Review
+
+See the week2test directory here
+
+## [ 7:10 - 7:20 ] Pattern matching in bash 
 No we get into pattern matching in linux. A common way to match patterns in Linux is to 
 use * when using bash. Lets make a directory called dir, and put a bunch of files in it. 
 Lets name them:
@@ -42,9 +63,7 @@ You can use these wild cards in the terminal. So, for example, if you want to ge
 cat * | wc -l
 ```
 
-
-## [ 7:00 - 7:20 ] Grep
-
+## [ 7:20 - 7:30 ] Grep
 
 Now lets look at some more advanced pattern matching used in Linux via the grep command. 
 Grep stands for Global regular expression print, it uses regular expressions to search for strings.
@@ -96,11 +115,13 @@ We are going to cover a bunch of grep options to pick apart this poem.
     lecture.txt
     woods.txt
     ```
-## Exercises
+
+## [ 7:30 - 7:40 ] Exercises
 
 Use the above patterns on the file `hamletSolilquy.txt`. See what patterns you can extract.
 
-## Grep and Regexes!
+
+## [ 7:40 - 7:50 ] Grep and Regexes!
 
 Ah, but we have yet to get to regular expressions!
 
@@ -142,106 +163,12 @@ Some more syntax:
 9. \{x\}   =   match exactly x occurrences of the preceding.
 10. \{x,\}  =   match x or more occurrences of the preceding.
 
-## Exercise
+## [ 7:50 - 8:00 ] Exercise
+
 Change a.txt and change some of the grep patterns and verify that they work as expected.
 
 
-
-## [ 7:20 - 7:23 ] Miscellany
-A couple more useful commands:
-* date
-* watch
-* alias
-* another vim tip
-
-### watch \& date
-```
-melvyn@thinkpad$ watch -n1 date
-```
-### alias
-
-You use the alias command to change the names of system commands, implement system commands, etc. 
-
-For example
-
-```
-touch filea
-mv filea fileb
-move fileb filec
-# error
-alias move=mv
-move fileb filec
-# now fileb is called filec
-```
-
-### .bashrc, /etc/profile.rc
-
-There are many bash profile configuration files on your machine we need to mention now.
-
-These files save custom system configurations. There are several of these files on you system, and the availability of these files may vary from system to system. We'll focus on the .bashrc file, which will work for 99% of your usage needs.
-
-If you change a user's bashrc file, you'll be able to change the system configuration for that user. We can alias "mv" to "move" so that it persists every time we log on to our system.
-
-Open a new subshell after aliasing move as you did above and try it again. Notice that the alias hasn't persisted to the new subshell - you can't use the alias, the system doesnt know about it.
-
-```
-alias move=mv
-touch a
-move a b
-# works
-bash
-move b a
-# error
-```
-
-```
-# append 'alias move=mv' to the end of the bashrc file.
-```
-## Exercise
-
-Follow steps carefully!!
-
-### Step 1
-Add this line to your .bashrc file:
-
-`alias rm="echo 'I refuse to delete: '"` 
-
-### Step 2
-```
-$touch b.txt
-$ls
-# b.txt is there
-$rm b.txt
-$ls
-# b.txt is not there
-$ source ~/.bashrc
-$ touch b.txt
-$ rm b.txt
-I refuse to delete: b.txt
-$ ls
-# b.txt is there still
-```
-
-### Step 3
-Remove the line from .bashrc
-
-### Step 4
-```
-$ rm b.txt
-I refuse to delete b.txt
-$ source ~/.bashrc
-$ rm b.txt
-I refuse to delete b.txt
-$ bash
-$ rm b.txt
-$ ls
-# b is gone
-```
-
-### Step 5
-quick class discussion
-
-### vim pro-tip
+## [ 8:20 - 8:25 ] vim pro-tip
 
 another vim tip is that you can go to the bottom of a file with 
 shift+g. top is gg.
@@ -249,7 +176,8 @@ shift+g. top is gg.
 The rm command is a particularly dangerous command on your system, as we have discussed before. Whereas windows has a "trash can" when you delete a file, Linux does not. When you rm a file, it is gone forever - there are some hail mary ways to possibly, maybe, pleasepleaseplease save your rm-ed files, but generally speaking, if you rm a file it is gone for forever. Your homework deals with using your bashrc and an alias to make rm safer.
 
 
-## [ 7:23 - 7:40 ] Arrays
+## [ 8:20 - 8:38 ] Arrays
+
 This article starts out by saying:
 "the intent of this article is to avoid having to RTFM", it's a great read!
 https://medium.com/@robaboukhalil/the-weird-wondrous-world-of-bash-arrays-a86e5adf2c69
@@ -365,10 +293,7 @@ echo ${array2[@]}
 
 We'll put arrays on the back burner for a second while we look into another topic.
 
-
-## [ 7:40 - 8:00 ] Loops
-
-### for loops
+## [ 8:38 - 8:50 ] for loops
 
 For loops are a common construct in many programming languages! C, Java, Python, Ruby, Javascript etc. all use this construct, so you've probably seen it before. Bash has it too.
 
@@ -390,7 +315,7 @@ You also might want to loop over an array:
 array=(1 2 3)
 for i in ${array[@]}
 do
-echo $i
+	echo $i
 done
 ```
 
@@ -402,7 +327,7 @@ Look at our previous array
 array=(1 2 3)
 for i in ${!array[@]}
 do
-echo $i
+	echo $i
 done
 ```
 
@@ -415,287 +340,58 @@ arr[10]=1
 arr[15]=2
 for i in ${!arr[@]}
 do
-echo $i
+	echo $i
 done
 # 10 15
 ```
 
-# Populating arrays ( Can omit in class. Come back if time. )
+## [ 8:50 - 9:05 ] Exercise
 
-Just a quick note about populating arrays
+Write a bash program to create a bash array with indices:
+
+`1, 3, 5, 7, 9, 11`
+
+and values
+
+`one, three, five, seven, nine, eleven`
+
+Your program should user a for loop to print out:
 
 ```
-arr[1]=10
-arr[20]=11
-empty=()
+$ bash myScript.sh
+arr[1]=one
+arr[3]=three
+...
+arr[11]=eleven
+```
 
+As guidance, look at these example carefully and think about how you'll modify them:
+
+### Example A
+```
+arr[10]=1
+arr[15]=2
 for i in ${!arr[@]}
 do
-empty+=${arr[$i]}
+	echo $i
 done
-#10 11
+# 10
+# 15
 ```
 
-### while loops
-
-There are also while loops in bash. Many programming languages support while loops, the same thing I said about for loops. A while loop is a loop that will run forever until a specified condition is met. 
-
-while ( alive ) {
-    eat
-    sleep
-    etc.
-}
-
+### Example 2
 
 ```
-i=0
-while [ $i -lt 3 ]
-do
-echo $i
-i=$[$i+1]
-done
-# 0 1 2
+arr=(1 2 3)
+echo ${arr[0]}
+# prints 1
+echo ${arr[1]}
+# 2
+echo ${arr[2]}
+# 3
 ```
 
-Another usage of test/while:
-https://unix.stackexchange.com/questions/128204/what-does-while-test-gt-0-do
+## Homework Discussion
 
-I increment the variable i in this loop, but this isn't of too much interest to us at this moment. In the notes I have a link that explains the multitude of ways to increment a variable in bash. It's not worth it to us right now to spend a half hour discussing the ins and outs, pros and cons, etc. The important message here is that bash, like many other languages supports a loop called a while loop.
 
-https://askubuntu.com/questions/385528/how-to-increment-a-variable-in-bash
 
-http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_09_02.html
-
-## [ 8:00 - 8:05 ] Break
-
-## [ 8:05 - 8:25 ] More if
-
-### [ ] vs [[ ]] vs test
-
-There are at least three ways to write ifs to check for conditions in bash.
-
-You can write 
-
-```
-if [ 1 -eq 1 ]
-then 
-    echo "true"
-else
-    echo "false"
-fi
-```
-
-You can also write
-
-```
-if test 1 -eq 1
-then 
-    echo "true"
-else
-    echo "false"
-fi
-```
-
-The previous two are standard sh commands. The [[ ]] construct is a bash extension. It permits you to do more than the [] and test constructs allow, but it's not portable. 
-
-One thing it can do is match regular expressions to strings.
-
-```
-$ var=aaab
-$ if [[ $var == *ab ]]; then echo "match"; fi
-match
-```
-
-but without the extra bracket:
-
-```
-$ var=aaab
-$ if [ $var == *ab ]; then echo "match"; fi
-$
-$ #no match
-```
-
-More interesting uses of if:
-* https://unix.stackexchange.com/questions/306111/what-is-the-difference-between-the-bash-operators-vs-vs-vs
-* https://www.tldp.org/LDP/abs/html/testconstructs.html
-* https://wiki.bash-hackers.org/commands/classictest
-
-
-### Exercises
-
-1. Look at the additional 'if/test' flags here: https://www.tldp.org/LDP/abs/html/fto.html
-   Write some code using these operators.
-
-## [ 8:25 - 9:00 ] Users + Groups
-
-Linux/Unix is a multiuser operating system. This may not seem revolutionary, but when Unix came out the concept of a multiuser machine was a big deal. Windows is also multiuser and macs run a verion of BSD ( like linux ) so this may not impress you. I'm going to show you how to add/remove and manage users now.
-
-There is even discussion in modern operating systems of being single user! https://discuss.haiku-os.org/t/suggestion-we-remain-single-user-read-on/2031 Look at the cook haiku os!
-
-You have already seen that when logged into a machine you login as a user - `whoami` will tell you your username. You have a home directory for storing your personal files at `/home/$(whoami)`. Users can be added, removed, and modified in your system.
-
-### Adding Users
-You add users with the `adduser` command. Try it to add a user to your machine!
-
-```
-user@machine$ sudo adduser newusername
-# Then answer the following questions.
-# The only two essential questions are the password questions, you can just hit <enter> to go through the rest.
-```
-
-To see that the user created, look under `/home`. You will now have a home directory for this user.
-
-```
-user@machine$ ls /home
-you thenewuseryouadded
-```
-
-You don't have permission to touch edit this user's files. The permissions you have depends on the way your system is configured! For example, on
-this system you can look in the user's home directory.
-
-```
-user@machine$ touch /home/thenewuseryouadded/file.txt
-#error
-```
-
-but
-
-```
-user@machine$ ls /home/thenewuseryouadded
-#No error message
-```
-
-And look what vim says if you try to :wq a file there:
-
-```
-user@machine$ vim /home/thenewuseryouadded/file.txt
-#no problem. Now add some text and try to :wq. You will see
-# something to the effect of "readonly is set"
-# exit with :q!
-```
-
-To switch to using the user you created, you can user the 'substitute user' command `su`.
-
-```
-user@machine$ sudo su - thenewuseryouadded
-thenewuseryouadded@machine$ whoami
-thenewuseryouadded
-thenewuseryouadded@machine$ exit
-user@machine$
-```
-
-### Deleting Users
-
-To delete a user you use the deluser command. This can only be run as a superuser. 
-
-```
-user@machine$ sudo deluser thenewuseryouadded
-```
-
-You may want to remove their home directory as well in one fell swoop. If you run the command above, you'll have to 
-
-```
-user@machine$ sudo rm -r /home/thenewuseryouadded
-```
-
-To do everything at once:
-
-```
-user@machine$ sudo deluser --remove-home thenewuseryouadded
-```
-
-There are other options for deluser, you can see them all with `man deluser`.
-
-### The root user. sudo
-
-There is a special user in Linux/Unix called root / the superuser. The superuser is all powerful on the machine and can do anything he wants. You can delete whatever files you want, install software, modify system configuration settings, tamper with the operating system - anything. As such, it is important to limit access to this user profile. If you are a sysadmin at a company you will have root access to the company machines. Other employees typically do not, to limit the chances that non professionals will ruin the software on the machine. For example, go on the internet on these njcu machine and try to download and install a program. It will ask for administrator access and prohibit you from installing software - it is the same on Linux.
-
-There are a few ways to gain root access to your machine.
-
-You can run:
-
-1. ` sudo su -` to change your user to root.
-2. You can run an individual command with the `sudo` prefix. e.g. `sudo apt-get install somesoftware`.
-
-Not everyone is granted root access. Log in to the user account of the new user your created.
-
-```
-user@machine$ sudo su - thenewuseryouadded
-thenewuseryouadded@machine$ sudo apt-get install software
-#Asks for password
-#You enter password
-thenewuseryouadded is not in the sudoers file. This incident will be reported.
-```
-
-Whereas you do not get this error with the user given to you by default on the cloud machine. The new user is not a privileged user.
-
-There are several ways to make a user a privileged user. One way is to run the following command from the account of a privileged user:
-
-```
-user@machine$ sudo adduser thenewuseryouadded sudo
-```
-
-This adds the new user to the sudo group. More about groups later.
-
-### Changing passwords
-
-You can change a user's password. To change your own password, run `passwd` and follow the prompts.
-
-To change any user's password, type `passwd USER` from a privileged setting. Then follow the prompts.
-
-## Groups
-Users can be binned together into groups to allow common security measures, privileges, etc. to be applied to all the users in a particular group.
-
-### Adding Groups
-
-Create a group
-
-```
-user@machine$ sudo groupadd njcu
-```
-
-To verify that the group was added, lets count the available groups on our system before and after the add.
-
-```
-user@machine$ sudo getent group | wc -l
-N
-user@machine$ sudo groupadd njcu2
-user@machine$ sudo getent group | wc -l
-N+1
-```
-
-### Deleting Groups
-
-Just as easy as removing a user.
-
-```
-user@machine$ sudo groupdel njcu
-```
-
-### Adding a user to a group
-
-```
-user@machine$ sudo usermod -a -G GROUP USER
-```
-
-or use
-
-```
-user@machine$ sudo adduser USER GROUP
-```
-
-as we did before with adding the new user to the sudo group.
-
-### Deleting a user from a group
-
-You can delete a user from a group just as you can add a user to a group.
-
-```
-user@machine$ sudo deluser USER GROUP
-```
-
-## [ 9:00 - 9:05 ] Break
-
-## [ 9:05 - 9:40 ] Permissions. chmod, chown, chgrp 
-
-What is the purpose of 
