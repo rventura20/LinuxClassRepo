@@ -30,11 +30,18 @@ Schedule:
 
 
 ## [ 7:00 - 7:10 ] Homework Review
-See the week2test directory here
-
+See the week 2 homework directory.
+ 
 ## [ 7:10 - 7:20 ] Pattern matching in bash 
 No we get into pattern matching in linux. A common way to match patterns in Linux is to 
-use * when using bash. Lets make a directory called dir, and put a bunch of files in it. 
+use * when using bash. There are a couple of more commands. Here they are:
+* \* - match zero or more characters
+* ? - match any single character
+* [xyz] - match any characters in the set.
+
+And here's a reference: https://www.linuxjournal.com/content/pattern-matching-bash
+
+Lets make a directory called dir, and put a bunch of files in it. 
 Lets name them:
 
 ```
@@ -55,10 +62,13 @@ You can use these wild cards in the terminal. So, for example, if you want to ge
 cat * | wc -l
 ```
 
+`cat` concatenates all the files ( * ) and dumps them to stdout. Via a pipe, the stdin of `wc -l` reads that stdout and processes it.
+
 ## [ 7:20 - 7:40 ] Grep
 
 Now lets look at some more advanced pattern matching used in Linux via the grep command. 
-Grep stands for Global regular expression print, it uses regular expressions to search for strings.
+Grep stands for Global regular expression print, it uses regular expressions to search for strings. "What's a regular expressions???" - we'll get to those nasty things in a second, but first we'll take a peek at grep.
+
 Now, grep is immensely useful, as we already saw last week. Last week we typed
 
 ```
@@ -66,10 +76,6 @@ history | grep wget
 ```
 
 to look through our messy bash history to find exactly the command of interest to us, to see what files we downloaded in the past and to potentially download them again.
-
-But there is an old Linux saying about regular expressions. "You have to solve a problem and you decide to use a regular expression. Now you have two problems."
-
-https://opensourceforu.com/2012/06/beginners-guide-gnu-grep-basics/
 
 A poem I like:
 https://www.cc.gatech.edu/~spencer/poems/woods.txt
@@ -108,10 +114,12 @@ We are going to cover a bunch of grep options to pick apart this poem.
     woods.txt
     ```
 
+A reference for later:
+https://opensourceforu.com/2012/06/beginners-guide-gnu-grep-basics/
 
 ## [ 7:40 - 7:50 ] Exercises
 
-Use the above patterns on the file `hamletSolilquy.txt`. See what patterns you can extract.
+Use the above patterns on the file `hamletSolilquy.txt`. See what patterns you can extract. Make sure you test all of the patterns above, as you need to understand grep very well for your homework!
 
 ## [ 7:50 - 8:20 ] Grep and Regexes!
 
