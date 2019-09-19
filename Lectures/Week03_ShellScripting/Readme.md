@@ -15,29 +15,21 @@ Schedule:
 
 ## [ 7:00 - 7:10 ] Homework Review
 ## [ 7:10 - 7:20 ] Pattern matching in bash 
-## [ 7:20 - 7:30 ] Grep
-## [ 7:30 - 7:40 ] Exercises
-## [ 7:40 - 7:50 ] Grep and Regexes!
-## [ 7:50 - 8:00 ] Exercise
-## [ 8:00 - 8:15 ] Miscellany
-## [ 8:15 - 8:20 ] Exercise
-## [ 8:20 - 8:25 ] vim pro-tip
-## [ 8:20 - 8:28 ] Arrays
-## [ 8:28 - 8:30 ] Quick Quiz
-## [ 8:30 - 8:40 ] For Loops
-## [ 8:40 - 8:45 ] while loops
-## [ 8:45 - 8:55 ] More if
-## [ 8:55 - 9:05 ] Exercises
-## [ 9:05 - 9:15 ] Users
-## [ 9:15 - 9:25 ] Exercise
-## [ 9:25 - 9:35 ] Groups
-## [ 9:35 - 9:40 ] Exercise
-## [ 9:40 - 9:45 ] Summary, Homework, Hacktoberfest, Openhouse 
+## [ 7:20 - 7:40 ] Grep
+## [ 7:40 - 8:00 ] Exercises
+## [ 8:00 - 8:20 ] Grep and Regexes!
+## [ 8:20 - 8:30 ] Exercise
+## [ 8:30 - 8:35 ] vim pro-tip
+## [ 8:35 - 9:00 ] Arrays
+## [ 9:00 - 9:15 ] for loops
+## [ 9:15 - 9:28 ] Exercise
+## [ 9:28 - 9:43 ] Homework Discussion
+## [ 9:43 - 9:45 ] Hacktoberfest / Open House
 
+( If overtime we can look more at if / test )
 
 
 ## [ 7:00 - 7:10 ] Homework Review
-
 See the week2test directory here
 
 ## [ 7:10 - 7:20 ] Pattern matching in bash 
@@ -63,7 +55,7 @@ You can use these wild cards in the terminal. So, for example, if you want to ge
 cat * | wc -l
 ```
 
-## [ 7:20 - 7:30 ] Grep
+## [ 7:20 - 7:40 ] Grep
 
 Now lets look at some more advanced pattern matching used in Linux via the grep command. 
 Grep stands for Global regular expression print, it uses regular expressions to search for strings.
@@ -116,18 +108,22 @@ We are going to cover a bunch of grep options to pick apart this poem.
     woods.txt
     ```
 
-## [ 7:30 - 7:40 ] Exercises
+
+## [ 7:40 - 7:50 ] Exercises
 
 Use the above patterns on the file `hamletSolilquy.txt`. See what patterns you can extract.
 
-
-## [ 7:40 - 7:50 ] Grep and Regexes!
+## [ 7:50 - 8:20 ] Grep and Regexes!
 
 Ah, but we have yet to get to regular expressions!
 
-Regular expressions are for pattern matching.
+They say when a programmer has a problem and says "I know, I'll use a regular expression!". This is because regular expressions are tricky and easy to screw up if you don't pay attention. The lesson here is the same as with using vim - don't complain that the thing is hard, just learn to use it and then use it without whining! I suspect this proverb is so popular because alot of people don't pay attention to what a regex ( that's short, slang for a regular expression ) is and how to use it. 
+
+Regular expressions are for pattern matching. They are found in every major programming language out there - C++, Python, Java, etc. and you can use them in the bash shell too along with the 'grep' utility.
 
 https://www.gnu.org/software/grep/manual/html_node/Basic-vs-Extended.html
+
+There are two types - regular and extended. We'll just look at the basic ones - extended is about the same. In your free time click the link above and read it quickly. You'll see they are about the same.
 
 > In basic regular expressions the meta-characters ‘?’, ‘+’, ‘{’, ‘|’, ‘(’, and ‘)’ lose their special meaning; instead use the backslashed versions ‘\?’, ‘\+’, ‘\{’, ‘\|’, ‘\(’, and ‘\)’.
 
@@ -136,20 +132,6 @@ The period (.) matches any single character.
 * means that the preceding item will be matched zero or more times.
 + means the preceding item will be matched one or more times.
 {n} means the preceding item is matched exactly n times, while {n,} means the item is matched n or more times. {n,m} means that the preceding item is matched at least n times, but not more than m times. {,m} means that the preceding item is matched, at the most, m times.
-
-That's it! So, given the file a.txt ( see this directory )
-
-We can do the following
-```
-$ grep "a" a.txt # Find lines with an a
-$ grep "a\?" a.txt # find lines with an optional a.
-$ grep "a?" a.txt # find lines containing a?
-$ grep "a+" a.txt # find lines with 1 or more "a"s
-$ grep "a$" a.txt # find lines that end with a
-$ grep "+" a.txt # find lines with a +
-$ grep "[0-9]$" a.txt # find lines that end with a number
-$ grep "^[a-zA-Z]$" a.txt # find lines with one letter.
-```
 
 Some more syntax:
 1. ^ (Caret)   =   match expression at the start of a line, as in ^A.
@@ -163,21 +145,36 @@ Some more syntax:
 9. \{x\}   =   match exactly x occurrences of the preceding.
 10. \{x,\}  =   match x or more occurrences of the preceding.
 
-## [ 7:50 - 8:00 ] Exercise
+That's it! So, given the file a.txt ( see this directory )
 
-Change a.txt and change some of the grep patterns and verify that they work as expected.
+We can do the following
+```
+$ grep "a" a.txt # Find lines with an a
+$ grep "a\?" a.txt # find lines with an optional a.
+$ grep "a?" a.txt # find lines containing a?
+$ grep "a\+" a.txt # find lines with 1 or more "a"s
+$ grep "a+" a.txt # find lines  containing "a+" 
+$ grep "a$" a.txt # find lines that end with a
+$ grep "[0-9]$" a.txt # find lines that end with a number
+$ grep "^[a-zA-Z]$" a.txt # find lines with one letter.
+$ grep "a\{2,\}" a.txt # find lines with 2 or more "a"s
+```
 
 
-## [ 8:20 - 8:25 ] vim pro-tip
+## [ 8:20 - 8:30 ] Exercise
+Change a.txt and change some of the grep patterns and verify that they work as expected on your system. You might have a weird version of grep installed, so let's make sure grep works the same for all of us.
 
+
+
+## [ 8:30 - 8:35 ] vim pro-tip
 another vim tip is that you can go to the bottom of a file with 
 shift+g. top is gg.
 
 The rm command is a particularly dangerous command on your system, as we have discussed before. Whereas windows has a "trash can" when you delete a file, Linux does not. When you rm a file, it is gone forever - there are some hail mary ways to possibly, maybe, pleasepleaseplease save your rm-ed files, but generally speaking, if you rm a file it is gone for forever. Your homework deals with using your bashrc and an alias to make rm safer.
 
 
-## [ 8:20 - 8:38 ] Arrays
 
+## [ 8:35 - 9:00 ] Arrays
 This article starts out by saying:
 "the intent of this article is to avoid having to RTFM", it's a great read!
 https://medium.com/@robaboukhalil/the-weird-wondrous-world-of-bash-arrays-a86e5adf2c69
@@ -293,8 +290,7 @@ echo ${array2[@]}
 
 We'll put arrays on the back burner for a second while we look into another topic.
 
-## [ 8:38 - 8:50 ] for loops
-
+## [ 9:00 - 9:15 ] for loops
 For loops are a common construct in many programming languages! C, Java, Python, Ruby, Javascript etc. all use this construct, so you've probably seen it before. Bash has it too.
 
 A common use case of the for loop is when you want to loop over something a predetermined number of times. You'll say "for iteration = 1 to 100 do a thing. In bash to write this you say:
@@ -345,8 +341,7 @@ done
 # 10 15
 ```
 
-## [ 8:50 - 9:05 ] Exercise
-
+## [ 9:15 - 9:28 ] Exercise
 Write a bash program to create a bash array with indices:
 
 `1, 3, 5, 7, 9, 11`
@@ -391,7 +386,11 @@ echo ${arr[2]}
 # 3
 ```
 
-## Homework Discussion
+## [ 9:28 - 9:43 ] Homework Discussion
+Read the Homework example.
 
+* Show frequency chart
+* Talk about hacking, the letter swapping encryption scheme
+* `cd ~; bash countingFrequencies.sh | sort -nr` show the output. DONT SHOW THE CODE!
 
-
+## [ 9:43 - 9:45 ] Hacktoberfest / Open House
