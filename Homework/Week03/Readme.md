@@ -90,5 +90,5 @@ Submit a combination of screenshots and scripts that indicate that YOU did the w
 
 Due September 25th at Midnight on Blackboard, not a second later!! You're going to need to flex your brain muscles on this a little bit, don't give up.
 
-33% for each right answer. The books may or may not agree with the statistical distribution of letters as linked above. I'm going to compare what you get to what I got. I repeat - it may or may not agree with the expected distribution - but it should. Again, I am the standard of correctness for this assignment. If you're distribution agrees with mine, you're golden.
+33% for each right answer. The books may or may not agree with the statistical distribution of letters as linked above. I'm going to compare what you get to what I got. I repeat - it may or may not agree with the expected distribution - but it should. Again, I am the standard of correctness for this assignment. If your distribution agrees with mine, you're golden.
 
