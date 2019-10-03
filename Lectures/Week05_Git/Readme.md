@@ -160,7 +160,7 @@ you can checkout a previous commit using its hash. Git works on the basis of the
 user@machine$ git checkout $HASHVALUE
 ```
 
-Then look at the files - they will be as they were during that commit.
+Then look at the files - they will be as they were during that commit. As an example of this, I will checkout the first commit of the class repo. Let class see that my local copy on my machine changed. Do this for various commits to see how it worked. Let them see how the class developed over the last few weeks.
 
 To go back to your current commit, just type
 
