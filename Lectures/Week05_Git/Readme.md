@@ -146,6 +146,20 @@ You can see the commits in a neater way with:
 user@machine$ git log --pretty=oneline
 ```
 
+you can checkout a previous commit using its hash. Git works on the basis of the SHA-1 hash - don't worry about the details yet, just file that away in your brain.
+
+```
+user@machine$ git checkout $HASHVALUE
+```
+
+Then look at the files - they will be as they were during that commit.
+
+To go back to your current commit, just type
+
+```
+git checkout master
+```
+
 You can also tag commits. Generally, when you write software, you get to a point of stability that you are more or less happy with. You know when you have to download updates for things? The software writer wrote a successful piece of software, maybe with bugs in it, tagged it as v1.0, sold it to you , and then continues to update it and improve it. They may eventually get to v2.0 or v1.1 and then theyll let you update your software. That's the idea of tags. You can tag your own software.
 
 ```
@@ -218,9 +232,19 @@ We can make a few more changes here on our machine, add/commit/push to the cloud
 
 ## Forking!
 
-Now go online and fork one of my repositories. Notice how you have your own copy. Add a file named after yourself. Then Create a pull request for the file.
+Now we will see how to fork repos. This a  concept on GITHUB - not on git. It's related to git, but I won't expect you to understand what goes on on the github server just yet when you click fork. Just fork and see what happens.
 
-If there is no time to cover PRs in depth, then for homework have students just create a repo, upload their materials to it, and then email me a link. If there is time to cover PRs, then have them make a PR with the homework.
+## Exercise
+* I create a repo
+* Everyone forks
+* Then everyone clones to their machine
+* Everyone adds a directory called MY_NAME
+* Add a file called "aboutMe.md" to "MY_NAME" and put anything relevant about yourself. If you don't know what to say, just put something like "I like pizza" or "I don't like pizza"
+* now add, commit and push to your fork
+* Now back on github, make a pull request on my repo
+
+## Adding collaborators
+Show how to add a collaborator on github.
 
 ## Conclusion
 
