@@ -254,6 +254,22 @@ Now we will see how to fork repos. This a  concept on GITHUB - not on git. It's 
 ## Adding collaborators
 Show how to add a collaborator on github.
 
+## How to sync your fork with the original. 
+Sometimes the original will pass your fork. You will want to get in sync with the main branch.
+
+Use this repo:
+https://github.com/melvyniandrag/VexRiscv
+
+and this 
+https://github.com/KirstieJane/STEMMRoleModels/wiki/Syncing-your-fork-to-the-original-repository-via-the-browser
+
+guide
+
+## Another example of syncing fork with the original
+https://stackoverflow.com/questions/7244321/how-do-i-update-a-github-forked-repository
+
+Try this  in class using a repo I create and allow the class to fork. Then make a change to my repo and make sure they can get the changes down to their computers.
+
 ## Conclusion
 
 There are other version control softwares out there, like SVN(subversion), mercurial, surround but git is intimately tied to linux. You can read all the details in the homework reading assignment.
@@ -261,3 +277,35 @@ There are other version control softwares out there, like SVN(subversion), mercu
 If you want to learn about SVN, you can check out a few tutorials I put on youtube which are to date my best videos ( even though they aren't perfect ).
 
 I'm offline while I'm writing these notes, so I can't get to youtube, but you can go to youtube and look for melvyniandrag subversion or melvyniandrag SVN. If you like them, don't forget to like and subscribe!!!
+
+## Extra 
+
+Hacktoberfest-
+show the mathtestmaker repo and the pdfmaker thing
+
+Show how to contribute.
+
+Remember, 5 prs = tshirt! Actually . . . you're going to get the shirt if you do the homework!!!
+
+But still, contribute to my project if you want!!
+
+https://hacktoberfest.digitalocean.com/
+
+They might not give you a tshirt for "fake contributions" like we're doing in class. 
+
+I'm not sure.
+
+
+## if extra time
+![home raspberry pis](Rpi.jpg)
+
+
+Create a user name on homeraspby pi for a non-priv user
+have everyon generate an ssh key pair
+PUt the keys on the rpi for the non-priv user
+Allow everyone to login
+Show the 'who' command so everyone can see that they are all logged in to my machine. 
+
+WIll the little rpi handle the traffic??!?!
+
+Then remember to remove the keys, delete the user, and restart the machine
