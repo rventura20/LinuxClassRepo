@@ -1,3 +1,11 @@
+1. git config --list
+2. git config --global core.editor "vim"
+3. git config --global user.name "Melvyn Drag"
+4. git config --global user.email melvyniandrag@gmail.com
+5. git config --list
+
+
+
 In this lecture we'll follow part of this book:
 https://git-scm.com/book/en/v2
 
