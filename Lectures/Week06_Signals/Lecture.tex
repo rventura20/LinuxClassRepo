@@ -1,0 +1,314 @@
+\documentclass[12pt]{article}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{color}
+
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+
+\usepackage{listings}
+\lstset{language=bash,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  basicstyle=\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
+
+\title{\textbf{Week 06} \\
+\Large Signals, C Programs, SetUID, SetGID, and Fun Stuff }
+\author{
+	Melvyn Ian Drag
+}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We'll learn about signal handling, C Programs, setuid, setgid, tmux, vim tricks, fork bombs, and talk about the exam.
+\end{abstract}
+
+\section{SIGTSTP and SIGINT}
+In \*nix a common thing you do is send signals to processes. You will sometimes want to send information to a running program to make it do things. Signals are how we do that. 
+
+The most common signals you'll want to send are \textbf{SIGINT} and \textbf{SIGTSTP}
+
+We'll see what these do by running a small python program. Create this program and run it on your computer:
+
+\lstinputlisting[language=Python]{runForever.py}
+
+This program will run forever and hog up our terminal. How do we make it stop? We can send the \textbf{SIGINT} signal by typing "CTRL+C". Note that it stops. Another thing you might want to do is just pause the program for a bit. You pause the program by sending it a \textbf{SIGTSTP}. This is done by typing CTRL+Z. To restart the program that you paused you can send it a \textbf{SIGCONT} command. To send a \textbf{SIGCONT} command is a little different, you must type
+
+\begin{lstlisting}
+user@machine$ kill -18 $PYTHON_PID # where $PYTHON_PID is the PID of the process you stopped.
+\end{lstlisting}
+
+\subsection{Verify the signals}
+
+\begin{enumerate}
+\item type \textit{pidof python} ( or \textit{python3} )
+\item Run \textit{runForever.py}
+\item Send \textbf{SIGINT} with the keyboard
+\item type \textit{pidof python} ( or \textit{python3} )
+\item There should be no pid there corresponding to your process.
+\item Run \textit{runForever.py}
+\item Send \textbf{SIGTSTP} with the keyboard
+\item type \textit{pidof python} ( or \textit{python3} )
+\item There \textbf{should} be a pid corresponding to your process.
+\item Restart the process with \textit{kill -18 \$ PID}
+\item Type \textit{jobs}
+\item Type \textit{fg \$JOB\_ID}
+\item Kill the process so it doesn't hog memory.
+\end{enumerate}
+
+\section{jobs}
+Note I used the \textit{jobs} command above. That command lists the processes started by the current shell. If you start a new shell and type \textit{jobs} there will be no output, because your new shell didn't do anything yet.
+
+\section{ kill }
+You use the \textit{kill} command to send a signal to a process. I showed you one example wherein we sent an 18 to a process. You can see all of the signals available to send by typing 
+
+\begin{lstlisting}
+user@machine$ kill -l
+\end{lstlisting}
+
+Using the kill command you can send these signals in three ways:
+
+\begin{itemize}
+\item Using the signal name e.g \textbf{CONT}
+\item Using `SIG' + the signal name e.g. \textbf{SIGCONT}
+\item Using the numeric code for the signal e.g. 18
+\end{itemize}
+
+In this lecture we're going to focus on the following signals:
+
+\begin{enumerate}
+\item SIGINT
+\item SIGKILL
+\item SIGTERM
+\item SIGSTOP
+\item SIGTSTP
+\item SIGSEGV
+\end{enumerate}
+
+though there are more signals, this should be enough to get you started. And if you want to learn more you of course can go get a book. We're going to look at when you use each one of the above and how programs handle them when they are received. I think these are the most interesting of the 64 signals.
+
+Let's test the signals
+
+\begin{lstlisting}
+user@machine$ python3 runForever.py & # ampersand puts it in the background
+user@machine$ jobs
+[1]+Running   python3 runForever.py &
+user@machine$ kill -20 %1 # or kill -20 $PIDOF_PYTHON. kill takes job ids or pids
+user@machine$ jobs
+#stopped
+user@machine$ kill -18 %1
+user@machine$ jobs
+# it's running again
+user@machine$ fg 1
+user@machine$ [type ctrl + z]
+\end{lstlisting}
+
+We just sent \textbf{SIGCONT} and \textbf{SIGTSTP} using the numeric codes for them. Remember that we got the numeric codes by looking at the output of \textit{kill -l}. You'll note that, while the command is called \textit{kill}, it does more than kill. It can send all kinds of signals.
+
+There is a signal related to \textbf{SIGTSTP} called \textbf{SIGSTOP}.
+The difference between them is that \textbf{STOP} cannot be ignored and typically comes from a program. \textbf{TSTP} can be ignored. Depending on how much you've used linux, you may or may  not have been in a situation where you were mashing \textit{CTRL+C} over and over again, but the program wouldn't stop! By the end of tonight we'll write some code showing how that happens. Just know, that by the design of the Linux OS, \textbf{STOP} signals cannot be ignored.
+
+\begin{lstlisting}
+user@machine$ python runForever.py &
+user@machine$ jobs
+[1]+ Running python runForever.py &
+user@machine$ kill -STOP %1
+user@machine$ jobs
+# it's stopped
+user@machine$ kill -18 %1
+user@machine$ jobs 
+# it's running
+user@machine$ fg 1
+user@machine$ [type ctrl + z]
+\end{lstlisting}
+
+\section{fg and bg}
+You'll note I've used \textit{fg} a bit. This command takes a job id and puts it in the foreground. When you continue a job with \textbf{SIGCONT} it starts in the background. You have to bring it back into the foreground with \textit{fg} so you can interact with it e.g. send it a \textbf{SIGINT}. \textit{bg} has the opposite effect of putting a job in the background, like we did with \textit{\&}
+
+\section{INT, TERM, KILL}
+\textbf{INT} is sent when you hit `CTRL+Z` on your keyboard. It interupt the process and makes it stop. `SIGINT` can also be sent will \textit{kill}. \textbf{SIGTERM} and \textbf{SIGINT} are approximately the same thing, differences in their behavior are left up to the application developer. You should now send \textbf{INT} and \textbf{TERM} to the \textit{runForever} program and you will see that both end the process. \textbf{KILL} is like \textbf{INT} or \textbf{TERM} but it cannot be ignored.
+
+\begin{center}
+\textbf{Allow students to send the signals. Go around room and make sure everyone knows how to use the kill command to send those signals.}
+\end{center}
+
+\subsection{01\_signal\_handler.c}
+This code shows the Linux programs can choose how to handle signals.
+
+We will change write come code to change signal handling behavior now. Open `01*.c` on your computer and have a look at it. This is a small C program that registers two signal handlers. Remember, all these linux command line tools we are using like mv, cp, etc. are all simple C programs like the one we are writing now. They all register signal handlers like we are going to do now, and that's how the programs know what to do when you type CTRL+C or CTRL+Z on the keyboard, or what to do when you send a command with \textit{kill}
+
+\begin{center}
+\textbf{modify the program, compile, run. Allow students a few minutes to change the messages returned by SIGINT and SIGTERM. }
+\end{center}
+
+\lstinputlisting[language=C]{SignalHandlers/01_signal_handler.c}
+\subsection{How to compile?}
+Go to the SignalHandlers directory and type:
+
+\begin{lstlisting}
+user@machine$ gcc 01_signal_handler.c -o 01.out #compile
+user@machine$ ./01.out #run
+\end{lstlisting}
+
+\subsection{02\_ignore.c}
+This example shows that we can ignore a signal! We can tell a program to ignore a signal. 
+
+What happens if you tell a program to ignore a signal that is unignorable?
+\lstinputlisting[language=C]{SignalHandlers/02_ignore.c}
+
+\subsection{03\_block.c}
+This example shows that programs can temporarily refuse to handle signals. This is done with blocking. This program temporarily blocks a signal - can you see which one?
+
+Try to send the signal while it is blocked and see what happens!!
+
+\lstinputlisting[language=C]{SignalHandlers/03_block.c}
+
+\section{Summary}
+
+What can happen with signals?
+
+\begin{itemize}
+\item They can be handled
+\item They can be ignored
+\item They can be blocked
+\end{itemize}
+
+\section{What are signals?}
+Signals are a form of interprocess communication used in Linux. There are many interprocess communication mechanisms, this is just one of them. If you've never heard of IPC, just know it is all around you when you are using computers. For example, consider the case when you are on your telephone and you're listening to music. When a phone call comes in, the music is probably paused and the phone app is brought up on the screen. The operating system on your phone needed an IPC mechanism to detect that the phone process was in some active state and that other interfering processes need to take action while the call is active. Depending on how the software is written on your phone, the music might resume playing when you hang up, and the music app might come to the foreground on your screen. Or maybe it stays paused and you have to manually reopen the app and hit 'play' again. Or maybe something else happens.
+
+IPC might also be used if you have two processes on a device - maybe you have one process listening for radio transmissions and another on that turns a motor. If the radio receiver receives a signal, maybe you want another process to turn a motor and open your garage door or something.
+
+There are many ways to do IPC, even on Linux there are a bunch of IPC mechanisms. Signals is just one of them.
+
+\section{C Programming}
+Just in case you were confused by the above, C is a language that is very intimately related to Linux. It looks and feels somewhat like other languages like 
+\begin{enumerate}
+\item Java
+\item C\#
+\item C++
+\item But has many similarities to others. . .
+\end{enumerate}
+
+So if you have any experience with those languages, you'll more or less be able to read C.
+Example program:
+
+\lstinputlisting[language=C]{helloworld.c}
+
+\section{ssh and break}
+ssh is a command line tool you use to access remote machines. This tool has many uses, and I use it every day. I'm very surprised that so many of you don't know it, but that's fine, it's a pleasure to show you!! I can't imagine how life was before ssh! It's truly one of the most common protocols/tools that Linux people use. 
+
+I'm going to show you how to connect to my raspberry pi at my house.
+
+Take 20 minutes for everyone to do the following. Students need to install software, create an ssh key, the fork and pr my repo. Should take a while. Then they need to connect to the server.
+
+\begin{center}
+\begin{enumerate}
+\item have students install openssh-client
+\item have students generate an ssh key with ssh-keygen
+\item create a repo called ssh-keys
+\item have students make a pr with their ssh keys to that repo - add the contents of your id_rsa.pub to the Readme.md
+\item create a user on the rpi
+\item put all the public ssh  keys in the authorized_keys file
+\item have students try to connect with username@ip_for_rpi
+\item have the students make a text file on the raspberry pi
+\end{enumerate}
+\end{center}
+
+For your midterm you're going to use ssh to connect to a remote machine and configure a postgres database on it.
+Next week in Lecture I'll show you how databases work.
+
+
+\section{SetUID and SetGID}
+\subsection{TL;DR}
+In the next few minutes we're going to write a program that you can run as a non-root user and delete  files belonging to root. This shouldn't happen! But it can if you know this cool trick. 
+
+\subsection{Introduction}
+There are some special permissions that can be assigned to executables in Linux. You can trick your operating system into running a process as root, even though you are not root. The idea being, maybe you have a very trusted program that needs to do some root stuff. You are absolutely sure that the root stuff it does will not destroy your system, so you want to allow other users to do the root stuff even though they aren't root. <Flesh this out with some more discussion until it is clear>. 
+  
+\subsection{war story}
+Show Sparcus.com
+
+A use case that I had was I wrote a very secure docker container and wanted anyone to be able to build and launch it, connected to a few system resources. I needed root permissions to make this happen, but I didn't want to drop into root all the time I wanted to do this safe thing, so I wrote a little program that would do some "rootly stuff", set the permissions and ownership of the file appropriately, and now I can run it as an unprivileged user.
+
+If you call setuid(0) in your program, it changes you to the root user from the eyes of the operating system and lets you do rootly stuff.
+
+\subsection{uid}
+In Linux, all users have a user id. You can get your user id from the command line by typing `id`. We haven't talked about this uid yet, and we certainly haven't used it, but it has been there all along. Today we will see what it is and we'll use it.
+
+Try this:
+\begin{lstlisting}
+$ id
+[your id]
+$ sudo su -
+$ id
+[you see user id is 0]
+\end{lstlisting}
+
+So now we know what the uid of the root user is. Check out this program
+
+
+\lstinputlisting[language=C]{setuid_setgid/example.c}
+
+We see that with this program we make a few calls to getuid() and a few calls to setuid(). You don't have to worry too much about this program - if you don't know C it will maybe scare you a bit. That's why I've chosen this simple and illustrative program.  The main idea is that you see some source code here that calls these mysterious functions getuid() and setuid()! We can change our user id while the program is running to trick the computer into thinking you are root!
+
+`getuid` returns the user id of the user running the program.
+
+
+We will first compile this normally and run it. You will see it fails and it exits with the value 1.
+
+\begin{lstlisting}
+$ gcc setuid.c -o setuid
+$ ./setuid
+...
+error msg
+$ echo $?
+1
+\end{lstlisting}
+
+To make this work, we will have to change the ownership, the group, and the permissions.
+
+\begin{lstlisting}
+$ sudo chown root:root setuid
+$ sudo chmod +s setuid
+$ ls -l setuid
+$ ./setuid
+\end{lstlisting}
+
+So you see that both user and group have an `s` where there used to be an `x`. This means that the program can setuid() and setgid(). For this example we only wanted to setuid(), so we can just set u+s.
+
+\begin{lstlisting}
+$sudo chmod g-s setuid
+$ls -l setuid
+$./setuid
+\end{lstlisting}
+
+Notice if we make group have `+s` but take the privilege away from user, 
+
+\begin{lstlisting}
+$sudo chmod u-s,g+s setuid
+$ls -l setuid
+$./setuid
+[fails]
+\end{lstlisting}
+
+Also, rememberwhen we were setting permissions using the octal notation? You can do that for this as well. There is no setAllID, there isonly setuid and setgid
+So set uid is a 4, setgid is a 2, but what does the 1 correspond to? Not a big deal, I'll leave it here for you to read if you're curious! https://askubuntu.com/questions/432699/what-is-the-t-letter-in-the-output-of-ls-ld-tmp . So getting back to octal numbers and setuid/setgid we can set the permissions to r-sr-xr-x by saying `chmod 4555`. We can set the permissions to `r-xr-sr-x` with `chmod 2555`. Etc.
+
+\end{document}

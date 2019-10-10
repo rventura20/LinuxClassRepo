@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{SIGTSTP and SIGINT}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Verify the signals}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{jobs}{}% 3
+\BOOKMARK [1][-]{section.3}{ kill }{}% 4
+\BOOKMARK [1][-]{section.4}{fg and bg}{}% 5
+\BOOKMARK [1][-]{section.5}{INT, TERM, KILL}{}% 6
+\BOOKMARK [2][-]{subsection.5.1}{01\137signal\137handler.c}{section.5}% 7
+\BOOKMARK [2][-]{subsection.5.2}{How to compile?}{section.5}% 8
+\BOOKMARK [2][-]{subsection.5.3}{02\137ignore.c}{section.5}% 9
+\BOOKMARK [2][-]{subsection.5.4}{03\137block.c}{section.5}% 10
+\BOOKMARK [1][-]{section.6}{Summary}{}% 11
+\BOOKMARK [1][-]{section.7}{What are signals?}{}% 12
+\BOOKMARK [1][-]{section.8}{C Programming}{}% 13
+\BOOKMARK [1][-]{section.9}{SetUID and SetGID}{}% 14
+\BOOKMARK [2][-]{subsection.9.1}{TL;DR}{section.9}% 15
+\BOOKMARK [2][-]{subsection.9.2}{Introduction}{section.9}% 16
+\BOOKMARK [2][-]{subsection.9.3}{war story}{section.9}% 17
+\BOOKMARK [2][-]{subsection.9.4}{uid}{section.9}% 18

@@ -4,8 +4,6 @@
 4. git config --global user.email melvyniandrag@gmail.com
 5. git config --list
 
-
-
 In this lecture we'll follow part of this book:
 https://git-scm.com/book/en/v2
 
