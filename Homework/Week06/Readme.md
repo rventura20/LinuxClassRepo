@@ -5,7 +5,9 @@ Problem 1: < 5 minutes if you paid attention
 Problem 2: < 1 hr if you read the attached article, play with the code for a few minutes, and then just do what the article says.
 Problem 3: < 1 hr
 
-If you are confused it might take you 3-4 hours. If you find yourself 20 hours in and balding, ask for help, this is supposed to be a fun assignment!
+If you are confused it might take you 3-4 hours. If you find yourself 20 hours in and balding, ask for help, this is supposed to be a fun assignment! 
+
+Make a pull request for the homework, see submission guidelines for details. 
 
 ## Problem 1
 Compile, change ownership, change permissions, and run the execve_setuid program we looked at in class. All you need to do is repeat what we did in class. I just want to know 100% that you have made compiled and run a setuid program before. 
@@ -37,7 +39,7 @@ In total it will cost you about 10-15 bucks and then you can cancel it. This wil
 
 ## Submission Guidelines
 Due: Before 7:00 PM on October 16th. Fork and pull request the class repository. 
-Include your files under Homework/Week06/FirstnameLastname
+Include your files under Homework/StudentSubmissions/Week06/FirstnameLastname
 
 Do the PR correctly or I'll reject it! I need the format to be precise to make sure that you don't ruin the repo.
 
