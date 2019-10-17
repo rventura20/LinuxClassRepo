@@ -4,15 +4,21 @@
 \BOOKMARK [1][-]{section.3}{ kill }{}% 4
 \BOOKMARK [1][-]{section.4}{fg and bg}{}% 5
 \BOOKMARK [1][-]{section.5}{INT, TERM, KILL}{}% 6
-\BOOKMARK [2][-]{subsection.5.1}{01\137signal\137handler.c}{section.5}% 7
-\BOOKMARK [2][-]{subsection.5.2}{How to compile?}{section.5}% 8
-\BOOKMARK [2][-]{subsection.5.3}{02\137ignore.c}{section.5}% 9
-\BOOKMARK [2][-]{subsection.5.4}{03\137block.c}{section.5}% 10
-\BOOKMARK [1][-]{section.6}{Summary}{}% 11
-\BOOKMARK [1][-]{section.7}{What are signals?}{}% 12
-\BOOKMARK [1][-]{section.8}{C Programming}{}% 13
-\BOOKMARK [1][-]{section.9}{SetUID and SetGID}{}% 14
-\BOOKMARK [2][-]{subsection.9.1}{TL;DR}{section.9}% 15
-\BOOKMARK [2][-]{subsection.9.2}{Introduction}{section.9}% 16
-\BOOKMARK [2][-]{subsection.9.3}{war story}{section.9}% 17
-\BOOKMARK [2][-]{subsection.9.4}{uid}{section.9}% 18
+\BOOKMARK [1][-]{section.6}{Exercise}{}% 7
+\BOOKMARK [1][-]{section.7}{C Programming}{}% 8
+\BOOKMARK [1][-]{section.8}{Writing Custom Signal Handlers With C}{}% 9
+\BOOKMARK [2][-]{subsection.8.1}{01\137signal\137handler.c}{section.8}% 10
+\BOOKMARK [2][-]{subsection.8.2}{How to compile?}{section.8}% 11
+\BOOKMARK [2][-]{subsection.8.3}{02\137ignore.c}{section.8}% 12
+\BOOKMARK [2][-]{subsection.8.4}{03\137block.c}{section.8}% 13
+\BOOKMARK [1][-]{section.9}{Summary}{}% 14
+\BOOKMARK [1][-]{section.10}{What are signals?}{}% 15
+\BOOKMARK [1][-]{section.11}{ssh and break}{}% 16
+\BOOKMARK [1][-]{section.12}{SetUID and SetGID}{}% 17
+\BOOKMARK [2][-]{subsection.12.1}{TL;DR}{section.12}% 18
+\BOOKMARK [2][-]{subsection.12.2}{Introduction}{section.12}% 19
+\BOOKMARK [2][-]{subsection.12.3}{war story}{section.12}% 20
+\BOOKMARK [2][-]{subsection.12.4}{uid}{section.12}% 21
+\BOOKMARK [1][-]{section.13}{Homework}{}% 22
+\BOOKMARK [1][-]{section.14}{Exam}{}% 23
+\BOOKMARK [1][-]{section.15}{Show Reading Materials}{}% 24

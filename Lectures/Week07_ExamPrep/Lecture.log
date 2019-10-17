@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.28)  10 OCT 2019 14:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.28)  17 OCT 2019 13:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -194,9 +194,6 @@ Package: listings 2015/06/04 1.6 (Carsten Heinz)
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2015/06/04 1.6 listings language file
 ) (./Lecture.aux)
 \openout1 = `Lecture.aux'.
 
@@ -286,81 +283,105 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <14.4> on input line 38.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 38.
- (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2015/06/04 1.6 listings language file
-)
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 50.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 47.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 47.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 47.
 
-(./runForever.py) [1
+Overfull \hbox (169.26997pt too wide) in paragraph at lines 47--48
+[][]$\OT1/cmtt/m/n/12 https : / / www . digitalocean . com / community / tutori
+als / how-[]to-[]install-[]and-[]use-[]postgresql-[]on-[]ubuntu-[]18-[]04$[] 
+ []
+
+
+Overfull \hbox (119.36995pt too wide) in paragraph at lines 49--50
+[][]$\OT1/cmtt/m/n/12 https : / / dba . stackexchange . com / questions / 19067
+4 / can-[]a-[]database-[]table-[]not-[]have-[]a-[]primary-[]key$[] 
+ []
+
+
+Overfull \hbox (47.94492pt too wide) in paragraph at lines 50--51
+[][]$\OT1/cmtt/m/n/12 https : / / www . postgresql . org / message-[]id / 001f0
+1c018c2$830133b0$64898cd5 @ northlink .
+ []
+
+
+Overfull \hbox (332.32005pt too wide) in paragraph at lines 51--52
+[][]$\OT1/cmtt/m/n/12 https : / / support . plesk . com / hc / en-[]us / articl
+es / 115003321434-[]How-[]to-[]enable-[]remote-[]access-[]to-[]PostgreSQL-[]ser
+ver-[]on-[]a-[]Plesk-[]server-[]$[] 
+ []
+
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 89.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 89.
- [2] [3]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 153.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 153.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 153.
-
-Overfull \hbox (75.64493pt too wide) in paragraph at lines 154--155
-[][]$\OT1/cmtt/m/n/12 https : / / unix . stackexchange . com / questions / 2814
-39 / why-[]should-[]i-[]not-[]use-[]kill-[]9-[]sigkill$[] 
+Overfull \hbox (2.89754pt too wide) in paragraph at lines 72--74
+\OT1/cmr/m/n/12 Follow in-stuc-tions here pre-cisely: []$\OT1/cmtt/m/n/12 https
+ : / / www . digitalocean . com / community / tutorials /
  []
 
-
-Overfull \hbox (57.11992pt too wide) in paragraph at lines 156--157
-[][]$\OT1/cmtt/m/n/12 https : / / unix . stackexchange . com / questions / 8916
- / when-[]should-[]i-[]not-[]kill-[]9-[]a-[]process$[] 
- []
-
-[4] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-) (./helloworld.c) [5] (./SignalHandlers/01_signal_handler.c [6]) (./SignalHand
-lers/02_ignore.c
-[7]) (./SignalHandlers/03_block.c [8]) [9] [10] (./setuid_setgid/example.c
-[11]) [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 366.
- [13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 366.
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+) [2] [3]
+[4]
+Overfull \hbox (80.81993pt too wide) in paragraph at lines 196--197
+[][]$\OT1/cmtt/m/n/12 https : / / bosnadev . com / 2015 / 12 / 15 / allow-[]rem
+ote-[]connections-[]postgresql-[]database-[]server/$[] 
+ []
+
+
+Overfull \hbox (332.32005pt too wide) in paragraph at lines 197--198
+[][]$\OT1/cmtt/m/n/12 https : / / support . plesk . com / hc / en-[]us / articl
+es / 115003321434-[]How-[]to-[]enable-[]remote-[]access-[]to-[]PostgreSQL-[]ser
+ver-[]on-[]a-[]Plesk-[]server-[]$[] 
+ []
+
+[5]
+Overfull \hbox (89.99525pt too wide) in paragraph at lines 275--276
+[]$\OT1/cmtt/m/n/12 https : / / dba . stackexchange . com / questions / 190674 
+/ can-[]a-[]database-[]table-[]not-[]have-[]a-[]primary-[]key$[] 
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 280.
+[6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 280.
  (./Lecture.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 366.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 366.
-Package rerunfilecheck Info: File `Lecture.out' has not changed.
-(rerunfilecheck)             Checksum: CB6EFCBC13542925084CBA62857D4D00;1307.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 366.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 280.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 280.
+
+
+Package rerunfilecheck Warning: File `Lecture.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Lecture.out':
+(rerunfilecheck)             Before: 9B4A28CC2BA3E3E04A63717718962B5D;1160
+(rerunfilecheck)             After:  5CCAA133D8C97727D79DE39AD7ECC7B9;1287.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 280.
  ) 
 Here is how much of TeX's memory you used:
- 7255 strings out of 494923
- 105667 string characters out of 6180742
- 256532 words of memory out of 5000000
- 10219 multiletter control sequences out of 15000+600000
- 10938 words of font info for 38 fonts, out of 8000000 for 9000
+ 6884 strings out of 494923
+ 100611 string characters out of 6180742
+ 276088 words of memory out of 5000000
+ 10086 multiletter control sequences out of 15000+600000
+ 9585 words of font info for 34 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 32i,6n,52p,933b,1713s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,6n,47p,898b,1793s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmtt12.pfb>
-Output written on Lecture.pdf (13 pages, 165681 bytes).
+fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Lecture.pdf (6 pages, 107600 bytes).
 PDF statistics:
- 535 PDF objects out of 1000 (max. 8388607)
- 505 compressed objects within 6 object streams
- 305 named destinations out of 1000 (max. 500000)
- 193 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 237 PDF objects out of 1000 (max. 8388607)
+ 220 compressed objects within 3 object streams
+ 98 named destinations out of 1000 (max. 500000)
+ 145 words of extra memory for PDF output out of 10000 (max. 10000000)
 

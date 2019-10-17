@@ -1,15 +1,7 @@
-/*
- * A simple example program demonstrating signal handlers.
- * This simple program also illustrates how C programs return values
- * to bash.
- */
-
 #include <signal.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-#define MY_EXIT_TERM 100
-#define MY_EXIT_INT 101
 
 static volatile int keep_running_int = 1;
 static volatile int keep_running_term = 1;
@@ -37,13 +29,12 @@ int main(void)
 
     if( !keep_running_term ){
         puts("Received SIGTERM!");
-        return MY_EXIT_TERM;
+        return 1;
     }
     else if ( !keep_running_int ){
         puts("Received SIGINT!");
-        return MY_EXIT_INT;
+        return 2;
     }
-    // You should never see EXIT_SUCCESS, we're trapped in the
-    // while loop unless we get SIGINT, SIGTERM, or SIGKILL
-    return EXIT_SUCCESS;
+    
+    return 0;
 }
