@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.28)  17 OCT 2019 13:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.28)  17 OCT 2019 19:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -347,28 +347,30 @@ Overfull \hbox (89.99525pt too wide) in paragraph at lines 275--276
 / can-[]a-[]database-[]table-[]not-[]have-[]a-[]primary-[]key$[] 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 280.
-[6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 280.
- (./Lecture.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 280.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 280.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 281.
 
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 281.
+ [6] [7]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 335.
+ [8]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 335.
 
-Package rerunfilecheck Warning: File `Lecture.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Lecture.out':
-(rerunfilecheck)             Before: 9B4A28CC2BA3E3E04A63717718962B5D;1160
-(rerunfilecheck)             After:  5CCAA133D8C97727D79DE39AD7ECC7B9;1287.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 280.
+(./Lecture.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 335.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 335.
+Package rerunfilecheck Info: File `Lecture.out' has not changed.
+(rerunfilecheck)             Checksum: 57E61FA5B9989CB6406B3C366B76DA79;1560.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 335.
  ) 
 Here is how much of TeX's memory you used:
- 6884 strings out of 494923
- 100611 string characters out of 6180742
- 276088 words of memory out of 5000000
- 10086 multiletter control sequences out of 15000+600000
+ 6933 strings out of 494923
+ 101240 string characters out of 6180742
+ 277092 words of memory out of 5000000
+ 10115 multiletter control sequences out of 15000+600000
  9585 words of font info for 34 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  29i,6n,47p,898b,1793s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -377,11 +379,12 @@ r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Lecture.pdf (6 pages, 107600 bytes).
+fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Lecture.pdf (8 pages, 120534 bytes).
 PDF statistics:
- 237 PDF objects out of 1000 (max. 8388607)
- 220 compressed objects within 3 object streams
- 98 named destinations out of 1000 (max. 500000)
- 145 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 291 PDF objects out of 1000 (max. 8388607)
+ 271 compressed objects within 3 object streams
+ 115 named destinations out of 1000 (max. 500000)
+ 201 words of extra memory for PDF output out of 10000 (max. 10000000)
 
