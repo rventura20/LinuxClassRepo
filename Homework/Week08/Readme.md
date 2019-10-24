@@ -14,6 +14,8 @@ Submit:
 * supporting scripts you wrote to make this work
 * screenshot showing a directory containing at least 5 hours worth of cowtime files ( that will be at least 5 files ). Show them with `ls -l` so I can see time stamps and verify that they were created one hour apart.
 
-## 
+## Problem 2
+Enable 2 factor authentication on your github page and show how to use curl against a 2FA account to access private data. 
 
+![Access Denied](need2FA.png)
 ## Submission
