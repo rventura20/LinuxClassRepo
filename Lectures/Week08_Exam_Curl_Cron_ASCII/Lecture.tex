@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{color}
+
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+
+\usepackage{listings}
+\lstset{language=bash,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  basicstyle=\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
+
+\title{\textbf{Week 08} \\
+\Large Exam, Cron, Curl, ASCII}
+\author{
+	Melvyn Ian Drag
+}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A `paella' of things to learn today. We will start with you demonstrating that you can configure a postgres server and do an interesting query on it. Then we will play with `curl' to make a variety of interesting http requests. Then we'll use `cron' to schedule tasks on our computer. Finally I'll set you up for what's to come later as we look at a text encoding called `ASCII'
+\end{abstract}
+
+
+\section{Exam}
+Allocate time from 7:00 - 8:00 for the exam.
+
+\section{Curl}
+8-8:45
+What is HTTP/HTTPS?
+
+A prototcol used on the internet. You send some data to a server, the server responds with some data. As you will see with many data transmission technologies with computers, there is a header and a body. The header typically has meta data and bytes required by certain bits of computer hardware to process the body. Then the body contains the actual information.
+
+HTTP/HTTP work with a few verbs. We'll just focus on two of them for now, but there are ( at least ) 4. 
+
+Make some get, post requests. 
+
+We're going to use this tutorial here:
+\url{https://gist.github.com/joyrexus/85bf6b02979d8a7b0308}
+
+Do one with authentication and a REST API.
+
+Can we do two factor authentication with the REST API?
+
+\section{Cron}
+8:45 - 9:30
+
+Schedule a cowsay
+
+Schedule a system backup
+
+\section{ASCII}
+9:30 - 9:44 discuss the ASCII encoding.
+Write it on the board, quiz class.
+
+\subsection{xxd}
+show xxd.
+
+\section{Homework}
+9:44 - 9:45 discuss homework
+
+\end{document}
