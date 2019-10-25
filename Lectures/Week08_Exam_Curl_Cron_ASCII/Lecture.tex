@@ -37,41 +37,29 @@
 \maketitle
 
 \begin{abstract}
-A `paella' of things to learn today. We will start with you demonstrating that you can configure a postgres server and do an interesting query on it. Then we will play with `curl' to make a variety of interesting http requests. Then we'll use `cron' to schedule tasks on our computer. Finally I'll set you up for what's to come later as we look at a text encoding called `ASCII'
+How to schedule a cron job
 \end{abstract}
 
 
-\section{Exam}
-Allocate time from 7:00 - 8:00 for the exam.
-
-\section{Curl}
-\subsection{Intro and Using Github to Test}
-8-8:30
-What is HTTP/HTTPS?
-
-A prototcol used on the internet. You send some data to a server, the server responds with some data. As you will see with many data transmission technologies with computers, there is a header and a body. The header typically has meta data and bytes required by certain bits of computer hardware to process the body. Then the body contains the actual information.
-
-HTTP/HTTP work with a few verbs. We'll just focus on two of them for now, but there are ( at least ) 4. 
-
-Make some get, post requests. 
-
-We're going to use this tutorial here:
-\url{https://gist.github.com/joyrexus/85bf6b02979d8a7b0308}
-
-Do one with authentication and a REST API.
-
-Can we do two factor authentication with the REST API?
-
-\subsection{}
-
 \section{Cron}
-8:45 - 9:30
+Cron is used for scheduling jobs on your computer. You can modify a thing called a crontable to tell your computer to do thing at certain time(s) in the future.
 
-Schedule a cowsay
+View your cron table with \textit{crontab -l}, edit the crontab with \textit{crontab -e}. Choose vim if prompted to  select which text editor to use.
 
-Schedule a system backup
+Add rows of the form
+\begin{lstlisting}
+m h dom moy dow command
+\end{lstlisting}
 
-\section{Homework}
-9:44 - 9:45 discuss homework
+where the above represent:
+
+\begin{itemize}
+\item m - minute (0-59),
+\item h - hour (0-23),
+\item dom - day of the month (1-31),
+\item moy - month of the year (1-12),
+\item dow - day of the week (0-6, 0=Sunday)
+\item command - bash command
+\end{itemize}
 
 \end{document}
