@@ -1,5 +1,9 @@
 # Setting up an Apache Web Server on Debian.
 
+These are the two references I used to deploy my application:
+https://www.bogotobogo.com/python/Flask/Python_Flask_HelloWorld_App_with_Apache_WSGI_Ubuntu14.php
+https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
+
 For this lecture we are going to get a simple flask application running.
 
 To start, make sure you have git installed and clone this repository.
