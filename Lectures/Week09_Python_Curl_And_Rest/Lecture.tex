@@ -316,6 +316,13 @@ Create a private repo on github. See that you can download a file from it using 
 
 Prompt github to send you a 2fa key.Then get the readme like this:
 
+```
+curl  -X GET -u $GITHUB_USERNAME:$GITHUB_PASSWORD -H 'X-GitHub-OTP: 413096' https://api.github.com/repos/melvyniandrag/IntroToJavaFall2019/contents/Readme.md
+```
+
+( but make sure to set the code to the one given to you by github via the phone or email, however they send you the 2FA code. )
+
+Note that the encoding is something calle "base64".  There are many encodings out there. In my JAva class we talked quite a bit about Hex, binary, and decimal encodings for bytes. Then for text we talked about encodings like ASCII, UTF8 and UTF16. We'll visit those topics in this class eventually, but for now it's just something interesting to look at.You'll see that the content of your Readme.md file is NOT what you put on github - its a bunch of random alphanumeric cahracters in something called "base64". Interesting! But what does it mean?!>! You'll have to wait and see! Unless your curiosity gets the better of you, in which case you can just go online and loo kup what base64 encoding is.
 
 
 \subsection{Danger of curl in place of 2FA}
