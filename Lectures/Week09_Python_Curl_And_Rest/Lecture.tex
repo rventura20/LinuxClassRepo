@@ -324,6 +324,11 @@ curl  -X GET -u $GITHUB_USERNAME:$GITHUB_PASSWORD -H 'X-GitHub-OTP: 413096' http
 
 Note that the encoding is something calle "base64".  There are many encodings out there. In my JAva class we talked quite a bit about Hex, binary, and decimal encodings for bytes. Then for text we talked about encodings like ASCII, UTF8 and UTF16. We'll visit those topics in this class eventually, but for now it's just something interesting to look at.You'll see that the content of your Readme.md file is NOT what you put on github - its a bunch of random alphanumeric cahracters in something called "base64". Interesting! But what does it mean?!>! You'll have to wait and see! Unless your curiosity gets the better of you, in which case you can just go online and loo kup what base64 encoding is.
 
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.9\textwidth]{getReadme.PNG}
+  \caption{See how I got the readme data}
+\end{figure}
 
 \subsection{Danger of curl in place of 2FA}
 There was a security leak a little while back at paypal whereby you could bypass 2FA using curl.
