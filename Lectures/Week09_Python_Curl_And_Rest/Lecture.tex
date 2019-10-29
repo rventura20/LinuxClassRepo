@@ -118,8 +118,6 @@ As I've said before, there is alot of bickering in the tech communty about every
 
 I really like Python. I think it's the easiest language to write, there are many great libraries for math, science, system administration, web development, graphics, etc.. The community is great! There are conferences all year long all around the world. And I like not having to wast space in my code with curly braces. Different strokes.
 
-
-
 \subsection{Simple Python Webserver}
 Okay, so now that you have Python installed, we can set up a simple web server and begin to make some HTTP GET and SET requests!
 
@@ -235,14 +233,12 @@ user@machine$ curl -X POST --verbose -d"myname=melvyn&mylastname=drag" localhost
 # Try sending more and more data values by separating them with an ampersand.
 \end{lstlisting}
 
-
 The `-X' flag is used for specifying the HTTP verb associated with your request. As you've seen, the webserver will contain code for handling different types of requests.
 
 The `-d' flag is used for passing data. Typically we associate the `-d' flag with POST requests and not GET requests.
 
 \subsection{Headers}
 As with most other data transmission protocols, file formats, etc. - most computer data formats - there is a header, followed by a body. What are HTTP headers?
-
 
 \subsection{Congratulations!}
 You may have just run your first webserver! If this wasn't your first webserver project, I hope it was fun anyway.
@@ -251,25 +247,68 @@ You may have just run your first webserver! If this wasn't your first webserver 
 There are many different return codes. When you send a request to a webserver, it responds
 
 
-
-\subsection{Intro and Using Github to Test}
-What is HTTP/HTTPS?
-
-A prototcol used on the internet. You send some data to a server, the server responds with some data. As you will see with many data transmission technologies with computers, there is a header and a body. The header typically has meta data and bytes required by certain bits of computer hardware to process the body. Then the body contains the actual information.
-
-HTTP/HTTP work with a few verbs. We'll just focus on two of them for now, but there are ( at least ) 4. 
-
-Make some get, post requests. 
-
-We're going to use this tutorial here:
-\url{https://gist.github.com/joyrexus/85bf6b02979d8a7b0308}
-
-Do one with authentication and a REST API.
-
 \subsection{What kind of headers does curl take?}
 What kind of header does it take?
 
 Can we do two factor authentication with the REST API?
+
+\section{A Real World Curl Example}
+Let's do a real world curl example right now. You may want to use curl to make a web request.
+
+To illustrate what we are going to do now, see the following two images:
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.5\textwidth]{unsuccessfulGithubAPIHit.png}
+  \caption{Couldn't access api}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.5\textwidth]{successfulGithubAPIHit.png}
+  \caption{Could access api}
+\end{figure}
+
+
+\begin{enumerate}
+\item Have everyone turn on 2fA on their github accounts
+\item In ~/.bashrc add the line `export GITHUB_USERNAME=yourusername'
+\item In ~/.bashrc add the line `export GITHUB_PASSWORD=yourpassword'
+\item Don't let anyone see this!
+\item source ~/.bashrc
+\item Now we are ready
+\end{enumerate}
+
+How to request a 2FA code be sent to your phone
+\begin{lstlisting}
+ curl -X POST -u $GITHUB_USERNAME:$GITHUB_PASSWORD -H 'Content-Type: application/json' -d '{"scopes": ["user:email"],"note": "blog example"}' https://api.github.com/authorizations
+\end{lstlisting}
+
+How to use it
+\begin{lstlisting}
+curl  -X GET -u $GITHUB_USERNAME:$GITHUB_PASSWORD -H 'X-GitHub-OTP: 223838' https://api.github.com/user
+\end{lstlisting}
+
+
+Note that in this example, we could omit the -X GET, because that is the default behavior.
+
+Note that there are different ways to supply parameters to cURL - I can put --header instead of -H
+
+\begin{lstlisting}
+curl  -X GET -u $GITHUB_USERNAME:$GITHUB_PASSWORD --header 'X-GitHub-OTP: 884813' https://api.github.com/user
+\end{lstlisting}
+
+\subsection{Exercise}
+Have students create a private gist on github and query github with curl to see the number of their private gists go up.
+
+
+\subsection{Danger of curl in place of 2FA}
+There was a security leak a little while back at paypal whereby you could bypass 2FA using curl.
+\url{https://duo.com/blog/duo-security-researchers-uncover-bypass-of-paypal-s-two-factor-authentication}
+
+\subsection{See these references}
+\url{https://developer.github.com/v3/auth/#working-with-two-factor-authentication}
+\url{https://blogs.infosupport.com/accessing-githubs-rest-api-with-curl/}
 
 
 \section{Back to Tabs and Spaces}
