@@ -5,10 +5,16 @@
 \BOOKMARK [2][-]{subsection.2.3}{Install Python 3.}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.4}{Don't install Python 2}{section.2}% 6
 \BOOKMARK [2][-]{subsection.2.5}{Simple Python Webserver}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.6}{Intro and Using Github to Test}{section.2}% 8
-\BOOKMARK [2][-]{subsection.2.7}{What kind of headers does curl take?}{section.2}% 9
-\BOOKMARK [2][-]{subsection.2.8}{}{section.2}% 10
-\BOOKMARK [1][-]{section.3}{Cron}{}% 11
-\BOOKMARK [1][-]{section.4}{Homework}{}% 12
-\BOOKMARK [1][-]{section.5}{Recap of what you know}{}% 13
-\BOOKMARK [1][-]{section.6}{Coming Up In This Class}{}% 14
+\BOOKMARK [2][-]{subsection.2.6}{A quick look at the code}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.7}{Verify Website Works With A Browser}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{More About Ports}{}% 10
+\BOOKMARK [1][-]{section.4}{cURL}{}% 11
+\BOOKMARK [2][-]{subsection.4.1}{Exercise \0431}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.2}{Headers}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.3}{Congratulations!}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.4}{HTTP Return Codes}{section.4}% 15
+\BOOKMARK [1][-]{section.5}{A Python Programming Interlude}{}% 16
+\BOOKMARK [2][-]{subsection.5.1}{Intro and Using Github to Test}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.2}{What kind of headers does curl take?}{section.5}% 18
+\BOOKMARK [1][-]{section.6}{Recap of what you know}{}% 19
+\BOOKMARK [1][-]{section.7}{Coming Up In This Class}{}% 20

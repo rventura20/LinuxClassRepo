@@ -71,55 +71,6 @@ user@machine$ sudo apt install python3-dev
 \subsection{Don't install Python 2}
 Python 2 is being deprecated next year. The Python language maintainers have been telling the Python community to move to Python3 for about 10 years now. If you are new to Python, use Python 3. If you are old to Python, hurry up and port your code to Python 3!
 
-\subsection{I Hate This Lecture Because This is a Linux Class, Not a Python Class}
-\textit{Why are you wasting time teaching Python in a Linux class!!!!?!?!? I didn't sign up for this!!}
-
-We're using Python in this class for this webserver activity because I think it is hand's down the easiest language to read and write. Since I don't have time to teach you Python right now, I'm just using Python code because you can more or less skim it and understand what it does. We're only using Python for about the next three hours, so I'm just going to give you  the bare minimum information needed to understand what's happening.
-
-One thing that is important to understand is that Python is a whitespace sensitive language. Whereas other languages use curly braces to denote logical blocks in code - for example, ask class where the \textit{main} and \textit{sayHi} functions , and the \textit{MyClass} class, start and ends in this Java program:
-\begin{lstlisting}[language=Java]
-public class MyClass{
-	public static void sayHi()[
-		System.out.println("Hi");
-	}
-
-	public static void main(String[] args){
-		sayHi();
-	}
-}
-\end{lstlisting}
-
-In python, the situation is different:
-
-\begin{lstlisting}[language=Python]
-def sayHi():
-	s = "Hi"
-	print(s)
-
-if __name__ == "__main__":
-	sayHi()
-\end{lstlisting}
-
-Note the lack of curly braces. Write this code on your machine and run it as;
-
-\begin{lstlisting]
-user@machine$ python3 whateverYouNamedTheFile.py
-\end{lstlisting}
-
-Then, change the space before the `s' to 4 spaces and the space before the `print' to a tab. Try to run the code again and it will fail.
-
- They will look the same, but they are not the same on the byte level. more on that at the end of lecture if there is time. 
-
-Python expects either all tabs or all spaces. If you mix tabs and spaces in your code, Python get's mad.
-
-
-As I've said before, there is alot of bickering in the tech communty about everything. Some people hate python becuase of the whitespace
-\url{https://news.ycombinator.com/item?id=1463451}
-
-I really like Python. I think it's the easiest language to write, there are many great libraries for math, science, system administration, web development, graphics, etc.. The community is great! There are conferences all year long all around the world. And I like not having to wast space in my code with curly braces. Different strokes.
-
-
-
 \subsection{Simple Python Webserver}
 Okay, so now that you have Python installed, we can set up a simple web server and begin to make some HTTP GET and SET requests!
 
@@ -250,6 +201,7 @@ You may have just run your first webserver! If this wasn't your first webserver 
 \subsection{HTTP Return Codes}
 There are many different return codes. When you send a request to a webserver, it responds
 
+\section{A Python Programming Interlude}
 
 
 \subsection{Intro and Using Github to Test}
@@ -271,9 +223,6 @@ What kind of header does it take?
 
 Can we do two factor authentication with the REST API?
 
-
-\section{Back to Tabs and Spaces}
-We briefly mentioned the difference between tabs and spaces. You can set the tab width in Vim. Maybe mention the ASCII codes for tab vs space so that the folks in the Java class can make the connection.
 
 \section{Recap of what you know}
 \begin{enumerate}

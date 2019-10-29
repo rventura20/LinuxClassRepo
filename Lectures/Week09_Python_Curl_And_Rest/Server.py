@@ -23,13 +23,15 @@ class MyFirstServer(BaseHTTPRequestHandler):
 				self.wfile.write(self._html("Received GET!"))
 
 		def do_POST(self):
-				self._set_headers()
 				content_length = int(self.headers['Content-Length'])
 				post_data = self.rfile.read(content_length)
+					
+				self._set_headers()
 				self.wfile.write(self._html("Received POST!" + post_data.decode("utf8")))
 
 if __name__ == "__main__":
-		addr = "localhost"
+		addr = "127.0.0.1"
+		#addr = "localhost"
 		port = 8000
 		server_address = (addr, port)
 		httpd = HTTPServer(server_address, MyFirstServer)
