@@ -4,17 +4,21 @@
 \BOOKMARK [2][-]{subsection.2.2}{What is a webserver?}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Install Python 3.}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.4}{Don't install Python 2}{section.2}% 6
-\BOOKMARK [2][-]{subsection.2.5}{Simple Python Webserver}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.6}{A quick look at the code}{section.2}% 8
-\BOOKMARK [2][-]{subsection.2.7}{Verify Website Works With A Browser}{section.2}% 9
-\BOOKMARK [1][-]{section.3}{More About Ports}{}% 10
-\BOOKMARK [1][-]{section.4}{cURL}{}% 11
-\BOOKMARK [2][-]{subsection.4.1}{Exercise \0431}{section.4}% 12
-\BOOKMARK [2][-]{subsection.4.2}{Headers}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.3}{Congratulations!}{section.4}% 14
-\BOOKMARK [2][-]{subsection.4.4}{HTTP Return Codes}{section.4}% 15
-\BOOKMARK [1][-]{section.5}{A Python Programming Interlude}{}% 16
-\BOOKMARK [2][-]{subsection.5.1}{Intro and Using Github to Test}{section.5}% 17
-\BOOKMARK [2][-]{subsection.5.2}{What kind of headers does curl take?}{section.5}% 18
-\BOOKMARK [1][-]{section.6}{Recap of what you know}{}% 19
-\BOOKMARK [1][-]{section.7}{Coming Up In This Class}{}% 20
+\BOOKMARK [2][-]{subsection.2.5}{I Hate This Lecture Because This is a Linux Class, Not a Python Class}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.6}{Simple Python Webserver}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.7}{A quick look at the code}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.8}{Verify Website Works With A Browser}{section.2}% 10
+\BOOKMARK [1][-]{section.3}{Two Exercises}{}% 11
+\BOOKMARK [1][-]{section.4}{cURL}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{Exercise \0431}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.2}{Headers}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.3}{Congratulations!}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.4}{HTTP Return Codes}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.5}{What kind of headers does curl take?}{section.4}% 17
+\BOOKMARK [1][-]{section.5}{A Real World Curl Example}{}% 18
+\BOOKMARK [2][-]{subsection.5.1}{Exercise}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.2}{Danger of curl in place of 2FA}{section.5}% 20
+\BOOKMARK [2][-]{subsection.5.3}{See these references}{section.5}% 21
+\BOOKMARK [1][-]{section.6}{Back to Tabs and Spaces}{}% 22
+\BOOKMARK [1][-]{section.7}{Recap of what you know}{}% 23
+\BOOKMARK [1][-]{section.8}{Coming Up In This Class}{}% 24

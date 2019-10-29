@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
 Note the lack of curly braces. Write this code on your machine and run it as;
 
-\begin{lstlisting]
+\begin{lstlisting}
 user@machine$ python3 whateverYouNamedTheFile.py
 \end{lstlisting}
 
@@ -259,21 +259,21 @@ To illustrate what we are going to do now, see the following two images:
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=0.5\textwidth]{unsuccessfulGithubAPIHit.png}
+    \includegraphics[width=0.9\textwidth]{unsuccessfulGithubAPIHit.png}
   \caption{Couldn't access api}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-    \includegraphics[width=0.5\textwidth]{successfulGithubAPIHit.png}
+    \includegraphics[width=0.9\textwidth]{successfulGithubAPIHit.png}
   \caption{Could access api}
 \end{figure}
 
 
 \begin{enumerate}
 \item Have everyone turn on 2fA on their github accounts
-\item In ~/.bashrc add the line `export GITHUB_USERNAME=yourusername'
-\item In ~/.bashrc add the line `export GITHUB_PASSWORD=yourpassword'
+\item In ~/.bashrc add the line `export GITHUB\_USERNAME=yourusername'
+\item In ~/.bashrc add the line `export GITHUB\_PASSWORD=yourpassword'
 \item Don't let anyone see this!
 \item source ~/.bashrc
 \item Now we are ready
@@ -281,12 +281,19 @@ To illustrate what we are going to do now, see the following two images:
 
 How to request a 2FA code be sent to your phone
 \begin{lstlisting}
- curl -X POST -u $GITHUB_USERNAME:$GITHUB_PASSWORD -H 'Content-Type: application/json' -d '{"scopes": ["user:email"],"note": "blog example"}' https://api.github.com/authorizations
+ curl -X POST \
+	-u $GITHUB_USERNAME:$GITHUB_PASSWORD \
+	-H 'Content-Type: application/json' \
+	-d '{"scopes": ["user:email"],"note": "blog example"}' \
+	https://api.github.com/authorizations
 \end{lstlisting}
 
 How to use it
 \begin{lstlisting}
-curl  -X GET -u $GITHUB_USERNAME:$GITHUB_PASSWORD -H 'X-GitHub-OTP: 223838' https://api.github.com/user
+curl  -X GET \
+	-u $GITHUB_USERNAME:$GITHUB_PASSWORD \
+	-H 'X-GitHub-OTP: 223838' \
+	https://api.github.com/user
 \end{lstlisting}
 
 
@@ -295,11 +302,20 @@ Note that in this example, we could omit the -X GET, because that is the default
 Note that there are different ways to supply parameters to cURL - I can put --header instead of -H
 
 \begin{lstlisting}
-curl  -X GET -u $GITHUB_USERNAME:$GITHUB_PASSWORD --header 'X-GitHub-OTP: 884813' https://api.github.com/user
+curl  -X GET \
+	-u $GITHUB_USERNAME:$GITHUB_PASSWORD \
+	--header 'X-GitHub-OTP: 884813'
+	 https://api.github.com/user
 \end{lstlisting}
 
 \subsection{Exercise}
 Have students create a private gist on github and query github with curl to see the number of their private gists go up.
+
+\subsection{Another exercise}
+Create a private repo on github. See that you can download a file from it using the REST API. Add just a readme to the private repo.
+
+Prompt github to send you a 2fa key.Then get the readme like this:
+
 
 
 \subsection{Danger of curl in place of 2FA}
@@ -310,6 +326,15 @@ There was a security leak a little while back at paypal whereby you could bypass
 \url{https://developer.github.com/v3/auth/#working-with-two-factor-authentication}
 \url{https://blogs.infosupport.com/accessing-githubs-rest-api-with-curl/}
 
+\section{What's a REST API}
+There are just too many buzzwords out there. I've showed you that we could get html back with curl when we curled out own little python server. Then I showed you that when we curled api.github.com, we got back JSON data. There is more to it, but in general, when we send and receive JSON, we call this a REST API. If you look into web development more, you'll  learn what the REST stand for, and then you'll learn why RESTful ness is important. For us it doesn't matter at all. All that matters is that you can see that REST is for exchanging JSON data.
+
+\subsection{Job interview prep}
+\noindent\textit{\textbf{Interviewer:} I see you know a bit about Linux webserver maintenance. Do you know what a REST API is?}
+
+\noindent \textbf{You: } Honestly, not too much because I'm not a webdeveloper. But I do know that REST APIs are very popular now, and they typically involve the exchange of JSON data. JSON data is when the data is structured like a Python dicitonary, or a Java Hashmap  - its a bunch of key-value pairs in curly braces.
+
+If you can give the above answer, you'll know enough for now.
 
 \section{Back to Tabs and Spaces}
 We briefly mentioned the difference between tabs and spaces. You can set the tab width in Vim. Maybe mention the ASCII codes for tab vs space so that the folks in the Java class can make the connection.
