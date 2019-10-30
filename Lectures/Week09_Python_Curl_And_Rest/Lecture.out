@@ -9,16 +9,19 @@
 \BOOKMARK [2][-]{subsection.2.7}{A quick look at the code}{section.2}% 9
 \BOOKMARK [2][-]{subsection.2.8}{Verify Website Works With A Browser}{section.2}% 10
 \BOOKMARK [1][-]{section.3}{Two Exercises}{}% 11
-\BOOKMARK [1][-]{section.4}{cURL}{}% 12
-\BOOKMARK [2][-]{subsection.4.1}{Exercise \0431}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.2}{Headers}{section.4}% 14
-\BOOKMARK [2][-]{subsection.4.3}{Congratulations!}{section.4}% 15
-\BOOKMARK [2][-]{subsection.4.4}{HTTP Return Codes}{section.4}% 16
-\BOOKMARK [2][-]{subsection.4.5}{What kind of headers does curl take?}{section.4}% 17
-\BOOKMARK [1][-]{section.5}{A Real World Curl Example}{}% 18
-\BOOKMARK [2][-]{subsection.5.1}{Exercise}{section.5}% 19
-\BOOKMARK [2][-]{subsection.5.2}{Danger of curl in place of 2FA}{section.5}% 20
-\BOOKMARK [2][-]{subsection.5.3}{See these references}{section.5}% 21
-\BOOKMARK [1][-]{section.6}{Back to Tabs and Spaces}{}% 22
-\BOOKMARK [1][-]{section.7}{Recap of what you know}{}% 23
-\BOOKMARK [1][-]{section.8}{Coming Up In This Class}{}% 24
+\BOOKMARK [1][-]{section.4}{10 Minute Break}{}% 12
+\BOOKMARK [1][-]{section.5}{cURL}{}% 13
+\BOOKMARK [2][-]{subsection.5.1}{Exercise \0431}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.2}{Headers}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.3}{HTTP Return Codes}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.4}{Congratulations!}{section.5}% 17
+\BOOKMARK [1][-]{section.6}{A Real World Curl Example}{}% 18
+\BOOKMARK [2][-]{subsection.6.1}{Exercise}{section.6}% 19
+\BOOKMARK [2][-]{subsection.6.2}{Another exercise}{section.6}% 20
+\BOOKMARK [2][-]{subsection.6.3}{Danger of curl in place of 2FA}{section.6}% 21
+\BOOKMARK [2][-]{subsection.6.4}{See these references}{section.6}% 22
+\BOOKMARK [1][-]{section.7}{What's a REST API}{}% 23
+\BOOKMARK [2][-]{subsection.7.1}{Job interview prep}{section.7}% 24
+\BOOKMARK [1][-]{section.8}{Back to Tabs and Spaces}{}% 25
+\BOOKMARK [1][-]{section.9}{Recap of what you know}{}% 26
+\BOOKMARK [1][-]{section.10}{Coming Up In This Class}{}% 27

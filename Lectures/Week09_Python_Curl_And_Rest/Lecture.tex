@@ -2,6 +2,8 @@
 \usepackage[breaklinks=true]{hyperref}
 \usepackage[margin=0.75in]{geometry}
 
+\usepackage{textcomp}
+
 \usepackage{color}
 \usepackage{graphicx}
 \definecolor{pblue}{rgb}{0.13,0.13,1}
@@ -118,6 +120,10 @@ As I've said before, there is alot of bickering in the tech communty about every
 
 I really like Python. I think it's the easiest language to write, there are many great libraries for math, science, system administration, web development, graphics, etc.. The community is great! There are conferences all year long all around the world. And I like not having to wast space in my code with curly braces. Different strokes.
 
+\begin{center}
+\textbf{TL;DR You should learn Python. Not now - you're too busy. Next year you should learn Python.}
+\end{center}
+
 \subsection{Simple Python Webserver}
 Okay, so now that you have Python installed, we can set up a simple web server and begin to make some HTTP GET and SET requests!
 
@@ -145,7 +151,7 @@ A summary of what we know about ports so far:
 
 In the webdevelopment world, we make \textbf{GET} and \textbf{POST} requests to webservers that have IP Addresses. But we rarely refer to them by their ip address - typically we use a domain name like `www.google.com' instead of a number address. We are doing the same thing here - we name our local webserver "localhost" instead of referring to it by its numeric name - 127.0.0.1 
 
-\subsection{A quick look at the code}
+\subsection{A quick look at the code} \label{samplehtml}
 
 Note that there are methods for handling \textbf{POST} and \textbf{GET} requests. This is characteristic of code running on a webserver. The code will have methods for handling different types of HTTP requests. You'll also see a few lines of code for setting up an HTTP server to run on `localhost:8000'. Theres a line that does something or other with ``headers", and we'll look into those in a minute. And there's a function that does something with html. If you've never seen HTML before, that's what it looks like. It's a markup language. If you don't know what HTML is, you can learn it in just a few minutes, it's pretty simple. It structures a document between some brackets. HTML always looks something like this:
 
@@ -210,6 +216,10 @@ Some ports are specified for a specific purpose by the os and may require specia
 
 If ip addresses interest you, like, why was `127.0.0.1' selected as `'localhost'? Are there other ip addresses that were designated as local ip addresses? Then you should learn more about computer networking! I admit that I'm very interested in the subject, but haven't studied it enough due to other responsibities and ambitions.
 
+
+\section{10 Minute Break}
+We'll take a 10 minute break now in case you need a coffee or to go to the bathroom. If you don't mind continuing to work, I encourage you to change the GET request in your little website so that your browser displays the HTML from section \ref{samplehtml}. If you can do that, try to modify it some more with some other HTML tags.
+
 \section{cURL}
 cURL is a Linux tool that has been around for about 20 years. It's used for making requests. It can be thought of as a command line browser, in some sense. The things you usually do  in a browser, like typing an address into a search bar, entering data into a form on a web page, clicking a button - these things can be done on the command line with cURL ( mostly ).
 
@@ -231,6 +241,10 @@ user@machine$ curl -X POST --verbose -d"myname=melvyn" localhost:8000
 # The lines with a < are what came back.
 user@machine$ curl -X POST --verbose -d"myname=melvyn&mylastname=drag" localhost:8000
 # Try sending more and more data values by separating them with an ampersand.
+user@machine$ curl -X POST -H "Content-Type: application/text" -H "Content-Length: 10" -d"myname=melvyn" localhost:8000
+# Look what happened due to Content-Length, play around with the length to see what else happens
+# also check and see if anything happens if you change Content-Type to application/json or application/x-www-form-urlencoded
+user@machine$
 \end{lstlisting}
 
 The `-X' flag is used for specifying the HTTP verb associated with your request. As you've seen, the webserver will contain code for handling different types of requests.
@@ -238,19 +252,51 @@ The `-X' flag is used for specifying the HTTP verb associated with your request.
 The `-d' flag is used for passing data. Typically we associate the `-d' flag with POST requests and not GET requests.
 
 \subsection{Headers}
-As with most other data transmission protocols, file formats, etc. - most computer data formats - there is a header, followed by a body. What are HTTP headers?
+As with most other data transmission protocols, file formats, etc. - most computer data formats - there is a header, followed by a body. Whenever you send an HTTP request, some header data goes along with it. Two of the more common ones you'll see are:
+
+\begin{enumerate}
+\item Content-Length - how long the data being passed is
+\item Content-Type - what type of data is being sent? Json? Text? HTML? Other?
+\end{enumerate} 
+
+
+\subsection{HTTP Return Codes}
+There are many different return codes. When you send a request to a webserver, it responds with some header data, a body, and also, a return code. Common return codes that you may have seen already are:
+
+\begin{enumerate}
+\item 200 (OK) - The 200 return code is when you HTTP transaction succeeds
+\item 404 (Not Found) - Happens when you request something from the internet that is not there
+\item 500 ( Internal Server Error ) - Generic message for when something has gone wrong with the server
+\end{enumerate}
+
+To see a 200, type
+\begin{lstlisting}
+curl --verbose https://www.google.com  2>&1 | grep "^< HTTP"
+\end{lstlisting}
+
+To see a 404 type
+\begin{lstlisting}
+icurl --verbose https://www.google.com/doesntExist  2>&1 | grep "^< HTTP"
+\end{lstlisting}
+
+To see a 500 - I'm not sure how to force this error off the top of my head.
+
+More information about return codes can be found here:
+\url{https://en.wikipedia.org/wiki/List_of_HTTP_status_codes}
+
+I said I'm not sure how to force the 500 error because I'm not an experience web programmer - but I do know a thing or two about Linux. Did you all understnad the piped commands I used to generate the status codes?
+
+Two interesting things:
+
+\begin{itemize}
+\item 2\textgreater\&1 means pass stderr to stdout. Did this because curl seems to dump to stderr.
+\item grep ``\^\textless HTTP" means find a line starting with ``\textless HTTP"
+\end{itemize}
 
 \subsection{Congratulations!}
 You may have just run your first webserver! If this wasn't your first webserver project, I hope it was fun anyway.
 
-\subsection{HTTP Return Codes}
-There are many different return codes. When you send a request to a webserver, it responds
-
-
-\subsection{What kind of headers does curl take?}
-What kind of header does it take?
-
-Can we do two factor authentication with the REST API?
+As I said, the purpose of this assignment is not for you to become a webdeveloper, but just for you to know a couple of things so that when we set up an Apache webserver, it's not totally foreign to you.
 
 \section{A Real World Curl Example}
 Let's do a real world curl example right now. You may want to use curl to make a web request.
@@ -272,10 +318,10 @@ To illustrate what we are going to do now, see the following two images:
 
 \begin{enumerate}
 \item Have everyone turn on 2fA on their github accounts
-\item In ~/.bashrc add the line `export GITHUB\_USERNAME=yourusername'
-\item In ~/.bashrc add the line `export GITHUB\_PASSWORD=yourpassword'
+\item In \texttildelow/.bashrc add the line `export GITHUB\_USERNAME=yourusername'
+\item In \texttildelow/.bashrc add the line `export GITHUB\_PASSWORD=yourpassword'
 \item Don't let anyone see this!
-\item source ~/.bashrc
+\item source \texttildelow/.bashrc
 \item Now we are ready
 \end{enumerate}
 
@@ -316,9 +362,12 @@ Create a private repo on github. See that you can download a file from it using 
 
 Prompt github to send you a 2fa key.Then get the readme like this:
 
-```
-curl  -X GET -u $GITHUB_USERNAME:$GITHUB_PASSWORD -H 'X-GitHub-OTP: 413096' https://api.github.com/repos/melvyniandrag/IntroToJavaFall2019/contents/Readme.md
-```
+\begin{lstlisting}
+curl  -X GET \
+	-u $GITHUB_USERNAME:$GITHUB_PASSWORD \
+	-H 'X-GitHub-OTP: 413096' \
+	https://api.github.com/repos/melvyniandrag/IntroToJavaFall2019/contents/Readme.md
+\end{lstlisting}
 
 ( but make sure to set the code to the one given to you by github via the phone or email, however they send you the 2FA code. )
 
@@ -381,11 +430,13 @@ We have a few more important things to cover
 \begin{enumerate}
 \item set up apache webserver
 \item set up a git server
+\item add a gitlab front end to the git server
 \item Linux and Text encodings
 \item xxd, everyone's favorite binary packet analyzer
 \item The AWK programming language
 \item The hows and whys of formatting harddrives, usb sticks, solid state drives, etc.
 \item Encryption with gpg + pgp. How it relates to ssh and other pub/priv key schemes.
+\item sed
 \end{enumerate}
 
 \end{document}
