@@ -1,0 +1,27 @@
+\BOOKMARK [1][-]{section.1}{Exam Make Up}{}% 1
+\BOOKMARK [1][-]{section.2}{Python Webserver}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{What is Python?}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{What is a webserver?}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Install Python 3.}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Don't install Python 2}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{I Hate This Lecture Because This is a Linux Class, Not a Python Class}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.6}{Simple Python Webserver}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.7}{A quick look at the code}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.8}{Verify Website Works With A Browser}{section.2}% 10
+\BOOKMARK [1][-]{section.3}{Two Exercises}{}% 11
+\BOOKMARK [1][-]{section.4}{10 Minute Break}{}% 12
+\BOOKMARK [1][-]{section.5}{cURL}{}% 13
+\BOOKMARK [2][-]{subsection.5.1}{Exercise \0431}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.2}{Headers}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.3}{HTTP Return Codes}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.4}{Congratulations!}{section.5}% 17
+\BOOKMARK [1][-]{section.6}{A Real World Curl Example}{}% 18
+\BOOKMARK [2][-]{subsection.6.1}{Exercise}{section.6}% 19
+\BOOKMARK [2][-]{subsection.6.2}{Another exercise}{section.6}% 20
+\BOOKMARK [2][-]{subsection.6.3}{Danger of curl in place of 2FA}{section.6}% 21
+\BOOKMARK [2][-]{subsection.6.4}{See these references}{section.6}% 22
+\BOOKMARK [1][-]{section.7}{What's a REST API}{}% 23
+\BOOKMARK [2][-]{subsection.7.1}{Job interview prep}{section.7}% 24
+\BOOKMARK [1][-]{section.8}{Back to Tabs and Spaces}{}% 25
+\BOOKMARK [1][-]{section.9}{Recap of what you know}{}% 26
+\BOOKMARK [1][-]{section.10}{Coming Up In This Class}{}% 27

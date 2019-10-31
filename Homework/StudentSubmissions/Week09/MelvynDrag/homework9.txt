@@ -1,0 +1,28 @@
+# Problem 1
+
+curl FOO BAR | another command
+
+this command outputs XX
+
+# Problem 2
+
+curl -X POST foo bar baz -d '{"userId": 10, "id": 1000, "title": "my awesome title", "body": "very interesting body"}' --header alskg website.com
+curl -X POST foo bar baz -d '{"userId": 10, "id": 1000, "title": "my awesome title", "body": "very interesting body"}' --header alskg website.com
+curl -X POST foo bar baz -d '{"userId": 10, "id": 1000, "title": "my awesome title", "body": "very interesting body"}' --header alskg website.com
+curl -X POST foo bar baz -d '{"userId": 10, "id": 1000, "title": "my awesome title", "body": "very interesting body"}' --header alskg website.com
+
+I ran these 4 distinct curl requests, and, while the userId, title, and body changed in the response, the id did not.
+
+# Problem 3
+The charset used in the response is utf-16
+
+# Problem 4
+curl (add options to send json from a .json file, instead of being passed as -d '{Data goes here}' )
+
+# Problem 5
+When I changed the content-type, my computer caught fire.
+
+
+
+
+

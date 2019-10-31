@@ -1,5 +1,5 @@
 \documentclass[12pt]{article}
-\usepackage{hyperref}
+\usepackage[breaklinks=true]{hyperref}
 \usepackage[margin=1in]{geometry}
 
 \usepackage{color}
@@ -37,7 +37,7 @@
 \maketitle
 
 \begin{abstract}
-We'll learn about signal handling, C Programs, setuid, setgid, tmux, vim tricks, fork bombs, and talk about the exam.
+We'll learn about signal handling, C Programs, ssh, setuid, setgid, and talk about the exam.
 \end{abstract}
 
 \section{SIGTSTP and SIGINT}
@@ -145,9 +145,66 @@ You'll note I've used \textit{fg} a bit. This command takes a job id and puts it
 \section{INT, TERM, KILL}
 \textbf{INT} is sent when you hit `CTRL+Z` on your keyboard. It interupt the process and makes it stop. `SIGINT` can also be sent will \textit{kill}. \textbf{SIGTERM} and \textbf{SIGINT} are approximately the same thing, differences in their behavior are left up to the application developer. You should now send \textbf{INT} and \textbf{TERM} to the \textit{runForever} program and you will see that both end the process. \textbf{KILL} is like \textbf{INT} or \textbf{TERM} but it cannot be ignored.
 
-\begin{center}
-\textbf{Allow students to send the signals. Go around room and make sure everyone knows how to use the kill command to send those signals.}
-\end{center}
+A special signal is signal 9. This signal cannot be blocked or ignored. You can always send signal -9, no matter what is happening this signal will work. It cannot be blocked or ignored! In any Linux system administration book you read you will see thei \textbf{warning: `NEVER USE -9!`}. We have just seen that processes can deliberately ignore or block signals if interruption would cause some serious system harm. But sometimes, we just want the darned process to stop! You can use SIGKILL under very dire circumstamstances, because issuing tihs signal could cause file corruption!
+
+Actually, thats what they say. I use \textbf{SIGKILL} sometimes and don't worry about it. My reason for doing so is boring to explain. I encourage you to read the following posts to develop your own opinion of whether or not to use SIGKILL/KILL/9
+
+\begin{itemize}
+\item \url{https://www.reddit.com/r/linux/comments/4b1mwh/do_not_use_sigkill/}
+\item \url{https://unix.stackexchange.com/questions/281439/why-should-i-not-use-kill-9-sigkill}
+\item \url{http://turnoff.us/geek/dont-sigkill/}
+\item \url{https://unix.stackexchange.com/questions/8916/when-should-i-not-kill-9-a-process}
+\end{itemize}
+
+Whether you use the following code or not in your daily life, on your own laptop . . .
+
+\begin{lstlisting}
+user@machine$ kill -9 $pid
+\end{lstlisting}
+
+when you are in the office make sure you use \textbf{SIGINT} and \textbf{SIGTERM} first or your colleagues might look down on you as a reckless person.
+
+
+\section{Exercise}
+
+Have students experiment sending the different signals to runForever.py until I'm sure they can send them all.
+Try to send signals with CTRL+C, CTRL+Z and then on the command line with \textit{kill}
+
+\section{C Programming}
+
+We are going to write some C programs now. C is a language that is very intimately related to Linux. It looks and feels somewhat like other languages like 
+\begin{enumerate}
+\item Java
+\item C\#
+\item C++
+\item But has many similarities to others. . .
+\end{enumerate}
+
+So if you have any experience with those languages, you'll more or less be able to read C.
+Example program:
+
+\lstinputlisting[language=C]{helloworld.c}
+
+To compile and run this code you:
+
+\begin{lstlisting}
+user@machine$ gcc helloworld.c -o helloworld # compile the code
+user@machine$ ./helloworld # run the code
+\end{lstlisting}
+
+\section{Writing Custom Signal Handlers With C}
+
+We will change the behavior now. Run the code. From a separate terminal window, send kill signals. Then inspect the return code of the running process and see how we customized the return valu based on which signal we received. Remember that in our first assignment we looked at \$? to see how a program ended. You can return different values not just fro mbash scripts, as we've done with `return` and `exit` statements up until now. Your software can be programmed to return values too.
+
+Returning to our discussion of signals, signals can be caught,  ignored, or blocked.
+
+Most important thing for these three samples
+
+{\LARGE GO SLOOOOOOOOW}
+
+{\LARGE Open two Terminals and show how you send various signals to the process using \textit{kill}}
+
+{\LARGE When appropriate ( i.e. TSTP or INT ) also show you can use CTRL+C and CTRL+Z}
 
 \subsection{01\_signal\_handler.c}
 This code shows the Linux programs can choose how to handle signals.
@@ -197,20 +254,6 @@ IPC might also be used if you have two processes on a device - maybe you have on
 
 There are many ways to do IPC, even on Linux there are a bunch of IPC mechanisms. Signals is just one of them.
 
-\section{C Programming}
-Just in case you were confused by the above, C is a language that is very intimately related to Linux. It looks and feels somewhat like other languages like 
-\begin{enumerate}
-\item Java
-\item C\#
-\item C++
-\item But has many similarities to others. . .
-\end{enumerate}
-
-So if you have any experience with those languages, you'll more or less be able to read C.
-Example program:
-
-\lstinputlisting[language=C]{helloworld.c}
-
 \section{ssh and break}
 ssh is a command line tool you use to access remote machines. This tool has many uses, and I use it every day. I'm very surprised that so many of you don't know it, but that's fine, it's a pleasure to show you!! I can't imagine how life was before ssh! It's truly one of the most common protocols/tools that Linux people use. 
 
@@ -223,10 +266,10 @@ Take 20 minutes for everyone to do the following. Students need to install softw
 \item have students install openssh-client
 \item have students generate an ssh key with ssh-keygen
 \item create a repo called ssh-keys
-\item have students make a pr with their ssh keys to that repo - add the contents of your id_rsa.pub to the Readme.md
+\item have students make a pr with their ssh keys to that repo - add the contents of your id\_rsa.pub to the Readme.md
 \item create a user on the rpi
-\item put all the public ssh  keys in the authorized_keys file
-\item have students try to connect with username@ip_for_rpi
+\item put all the public ssh  keys in the authorized\_keys file
+\item have students try to connect with username@ip\_for\_rpi
 \item have the students make a text file on the raspberry pi
 \end{enumerate}
 \end{center}
@@ -310,5 +353,14 @@ $./setuid
 
 Also, rememberwhen we were setting permissions using the octal notation? You can do that for this as well. There is no setAllID, there isonly setuid and setgid
 So set uid is a 4, setgid is a 2, but what does the 1 correspond to? Not a big deal, I'll leave it here for you to read if you're curious! https://askubuntu.com/questions/432699/what-is-the-t-letter-in-the-output-of-ls-ld-tmp . So getting back to octal numbers and setuid/setgid we can set the permissions to r-sr-xr-x by saying `chmod 4555`. We can set the permissions to `r-xr-sr-x` with `chmod 2555`. Etc.
+
+\section{Homework}
+Discuss the homework in detail
+
+\section{Exam}
+Discuss the exam in detail
+
+\section{Show Reading Materials}
+If time, have class  download the vim book. Make them skim it and learn something. They can all leave after they've learned and showed me they've learned 3 things about vim.
 
 \end{document}
