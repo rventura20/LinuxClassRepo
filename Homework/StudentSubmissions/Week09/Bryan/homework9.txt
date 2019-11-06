@@ -1,0 +1,29 @@
+#Problem 1
+
+curl --verbose https://jsonplaceholder.typicode.com/users/1/posts 2>&1 | grep "userId" | uniq -c | wc -l
+
+outputs: 10
+
+
+#Problem 2
+
+curl -X POST --header "Content-Type: application/json" -d'{"userId": 123, "id": 0, "title": "This", "body": "Late"}' https://jsonplaceholder.typicode.com/users/1/posts
+
+curl -X POST --header "Content-Type: application/json" -d'{"userId": 345, "id": 0, "title": "Is", "body": "Night"}' https://jsonplaceholder.typicode.com/users/1/posts
+
+curl -X POST --header "Content-Type: applicatin/json" -d'{"userId": 567, "id": 0, "title": "Pretty", "body": "Coding"}' https://jsonplaceholder.typicode.com/users/1/posts
+
+curl -X POST --header "Content-Type: applicatin/json" -d'{"userId": 789, "id": 0, "title": "Cool", "body": "Tonight"}' https://jsonplaceholder.typicode.com/users/1/posts
+
+#Problem 3
+
+Charset = utf-8
+
+#Problem 4
+
+curl -vX POST https://jsonplaceholder.typicode.com/users/1/posts -d @data.json \
+> --header "Content-Type: application/json"
+
+#Problem 5
+
+When I changed the content-type to “application/txt”, it keeps returning “userundefined”: ”1”, “id”: 101 for any of the commands in Problem 2
