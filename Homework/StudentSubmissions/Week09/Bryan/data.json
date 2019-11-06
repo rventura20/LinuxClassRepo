@@ -1,0 +1,10 @@
+#data.json file for the first command line in problem 2
+
+{
+
+"userId": 123,
+"id": 0,
+"title": "This",
+"body": "Late"
+
+}
