@@ -15,7 +15,7 @@ class MyFirstServer(BaseHTTPRequestHandler):
 				self.end_headers()
 
 		def _html(self, message):
-				content = "<html>\n\t<body>\n\t\t<h1>{}</h1>\n\t</body>\n</html>\n".format(message)
+				content = "<html>\n\t<body>\n\t\t<h1>{}</h1>\n\t\t<p> Hi </p>\t</body>\n</html>\n".format(message)
 				return content.encode("utf8")	# NOTE: must return a bytes object!
 
 		def do_GET(self):
