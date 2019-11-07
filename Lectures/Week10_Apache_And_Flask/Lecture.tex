@@ -3,7 +3,6 @@
 \usepackage[margin=0.75in]{geometry}
 
 \usepackage{textcomp}
-
 \usepackage{color}
 \usepackage{graphicx}
 \definecolor{pblue}{rgb}{0.13,0.13,1}
@@ -47,9 +46,8 @@ Last class we took a look at the toy `SimpleHTTPServer' in Python3. Tonight we'l
 \end{abstract}
 
 \section{Meta Data}
-I want to show you how to set up a webserver on Linux - last week's lecture was supposed to ease you into the mindset, but a few people missed lecture or left early. There isn't time to revist last week's lecture, there was too much information. Hopefully today will stand alone. If it doesn't, you'll need to work through last week's notes. There was a 3 hour lecture, so you will probably need at least 3 hours to read through the notes.
 
-Still, we'll try and make tonight as `stand-alone' as possible.
+Still, we'll try and make tonight as `stand-alone' as possible. If you missed last week, you ought to read the notes to catch up on what curl is and how to use it.
 
 \section{What's a Webserver?}
 The term is overloaded. A server is a computer, connected to a network, that other computers can access. There may be more ways to define it, but that's what I think of. But for your midterm I had you install some postgresql server stuff. In that case I was referring to the database server software. And tonight I'm going to refer to Apache2 as a 'webserver' - it's actually software that runs \textit{on} a webserver, which is the machine. It's just that the terms are overloaded.
@@ -58,7 +56,7 @@ The term is overloaded. A server is a computer, connected to a network, that oth
 Flask is what is called a \textbf{Library}. It's some code that you can use in a language to solve a particular problem. For example, if you know Java you've probably used the \textit{java.util} library for things like \textit{ArrayList}s. In Python last week we used a library calle \textit{SimpleHTTPServer} to serve up some webpages for us on the address \textit{localhost:8000}.
 
 \section{What's a REST API}
-There are just too many buzzwords out there. I've showed you that we could get html back with curl when we curled out own little python server. Then I showed you that when we curled api.github.com, we got back JSON data. There is more to it, but in general, when we send and receive JSON, we call this a REST API. If you look into web development more, you'll  learn what the REST stand for, and then you'll learn why RESTful ness is important. For us it doesn't matter at all. All that matters is that you can see that REST is for exchanging JSON data.
+Too many buzzwords out there. REST is an acronym. You can read about it more if you want. For the rest of the lecture just understand that you usually pass JSON data back and forth over a REST API. We'll talk about JSON later.
 
 \subsection{Job interview prep}
 \noindent\textit{\textbf{Interviewer:} I see you know a bit about Linux webserver maintenance. Do you know what a REST API is?}
@@ -66,10 +64,6 @@ There are just too many buzzwords out there. I've showed you that we could get h
 \noindent \textbf{You: } Honestly, not too much because I'm not a webdeveloper. But I do know that REST APIs are very popular now, and they typically involve the exchange of JSON data. JSON data is when the data is structured like a Python dicitonary, or a Java Hashmap  - its a bunch of key-value pairs in curly braces.
 
 If you can give the above answer, you'll know enough for now.
-
-\section{Back to Tabs and Spaces}
-We briefly mentioned the difference between tabs and spaces. You can set the tab width in Vim. Maybe mention the ASCII codes for tab vs space so that the folks in the Java class can make the connection.
-
 
 \section{What we'll do today}
 Today we'll bring a real website online. Last week we made a trivial website with Python's SimpleHTTPServer, but today we're going to use a real, professional-grade server ( Apache2 ) and a real backend web framework ( Flask ). There are other servers like NGINX and there are other backend webframeworks like Django, Play, Spring, Ruby on Rails, etc., I've just chosen this pair because it's the easiest to code of the few things I know. Spring on NGINX would be considerably harder to configure.
@@ -244,12 +238,51 @@ Here are some images showing my new site in action. The /testFlask endpoint stil
 
 \section{Example3: A Rest API}
 {\LARGE Only do this section if the class is caught up and it's before 9 PM}
+
 So far we've returned plain text and text formatted as HTML from our website. A popular thing to do now is to pass around JSON data. JSON is used all over. I showed it to you last week just to wet your feet, but you'll see it everywhere. You'll use it for web programming, internally in Python code, passing data between applications running on a laptop, for exchanging data files with scientists - everywhere. I avoided JSON for a while because I thought it was just a stupid buzz word that the nerds used to show off, but it truly is an ubiquitous data format. Now you've seen it. You'll see it again, mark my words. 
 
 So we'll just see how to return json from a Flask application.
 
-\section{sed 9:00 - 9:30}
+Just as we did in example 2, set up your server with Example3 now. Get the Example3 code from github, copy the new ExampleFlask.conf file to the proper location in /etc, create the /home/webdeveloper/Example3 directory, and put the proper code in it. 
 
+\subsection{The Flask Application: my\_flask\_app.py}
+You can skim the code to see what it does. It has some code for handling the GET and POST requests. A GET request will echo back to you the entire contents of the TODOS data it's maintaining. A POST request will add to the TODOS data set. You can verify after POSTing that your data was added by sending a GET request.
+
+\lstinputlisting{Example3/ExampleFlask3/my_flask_app.py}
+
+\subsection{Accessing Our REST API}
+Then you can get JSON data in the browser as shown below:
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.8\textwidth]{restInBrowser.png}
+  \caption{See some json in the browser!}
+\end{figure}
+
+Then, on your laptop, make a GET request with cURL
+
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.8\textwidth]{curlYourAPI.png}
+  \caption{Make a GET request with cURL!}
+\end{figure}
+
+And, you should also be able to make the following POST request:
+
+\lstinputlisting{curlExample.sh}
+
+And then look, after POSTing data, when you GET data you will see the data that you POSTed!
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.8\textwidth]{addedToTODOList.png}
+  \caption{POST data to your website with cURL!}
+\end{figure}
+
+\pagebreak
+
+\section{sed}
 
 \section{Recap of what you know 9:30 - 9:45}
 \begin{enumerate}
