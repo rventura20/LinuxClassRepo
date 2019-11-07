@@ -21,5 +21,5 @@ I showed you a crontab and mentioned how to add lines to it. Here are a couple o
 
 ## Submission Guidelines
 
-Submit all the indicated things on github via pull request. Put your content in StudentSubmissions/Week07/YourName.
+Submit all the indicated things on github via pull request. Put your content in StudentSubmissions/Week08/YourName.
 Make sure you put it in the right directory! 
