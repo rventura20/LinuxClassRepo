@@ -282,9 +282,119 @@ And then look, after POSTing data, when you GET data you will see the data that 
 
 \pagebreak
 
-\section{sed}
+\section{Flask and Bigger Websites}
+Typically your website code will return HTML. I've only shown you how to return HTML strings in example 2, but typically you create HTML templates and populate the template with data. Too complicated to explain, there is no time. Google 'Flask and HTML templates' if you want to know more.
 
-\section{Recap of what you know 9:30 - 9:45}
+NOTE if class ends early, we can do this together, but I suspect we'll be plenty busy tonight.
+
+\section{Databases}
+For your exam you set up a postgres server with some data in it. I've just shown you how to set up a Flask web application on an Apache server. And you have a good knowledge now about some linux server maintenance things. 
+
+In the TODOList REST application we stored all of our data in a dictionary - in the real world this is not how you do it. Can you guess what you do for real websites? You use a DATABASE! You are now poised to go pick up a book on Flask and learn how to wire a database and a website backend together!
+
+Of course we won't do that in this class, but now you have the prerequisite information to go and follow a tutorial on building websites with Flask.
+
+\section{sed}
+sed is one of the more popular command line tools. So far we know grep, vim, cat, mv, ls, etc.. sed is another one of the "big ones".
+
+sed stands for ``stream editor" and is a simple little programming language ( or tool, depending how you want to view it ) that is used for processing text files line by line.
+
+\subsection{What to do with sed \#1}
+Sed can be used to replace all occurences of a string in a file.
+See sedExamples/01.
+
+\begin{lstlisting}
+user@machine$ cat oldFile
+user@machine$ sed 's/hello//' oldFile
+# will replace first occurences of 'hello' with nothing\
+# note that a line with two occurences of 'hello' will only have the first occurence replaced
+user@machine$ cat oldFile
+# the file is not changed. sed did not overwrite the original file
+user@machine$ sed 's/hello/HELLO/' oldFile
+# see first occurences of hello were replaced with HELLO
+\end{lstlisting}
+
+these changes were done in place. If you want to create a new file you can do it like this
+
+\begin{lstlisting}
+user@machine$ sed 's/hello/HELLO' <oldFile >newFile
+user@machine$ sed 's/hello/HELLO' oldFile >newFile
+user@machine$ sed 's/hello/HELLO' 0<oldFile >newFile
+# all of the above are equivalent
+\end{lstlisting}
+
+or you can change the input file in place
+
+\begin{lstlisting}
+sed -i  's/HELLO/hewwo/' newFile
+\end{lstlisting}
+
+the -i means `in place'.
+
+\subsection{What to do with sed \#2}
+We saw sed can do search and replace first occurence per line. It can also replace all occurrences in a file.
+
+\begin{lstlisting}
+user@machine$ sed 's/hello/HELLO/g' oldFile
+#note all occurences of hello now say HELLO
+\end{lstlisting}
+
+by adding the g after the search/replace pattern you can replace all occurences.
+
+\subsection{What to do with sed \#3}
+Sed can do regular expressions. If you want to capitalize any 'h' at the start of a line, you can do this:
+
+\begin{lstlisting}
+user@machine$ sed 's/\(^[h]\)//' oldFile
+ello world
+ello world world
+world hello hello world
+\end{lstlisting}
+
+\subsection{What to do with sed \#4}
+You can also extract patterns. This is a weird thing that you can't always do with things like search/replace in microsoft word/excel/whatever other tools you are familiar with.
+
+the same command as before remembers and stores the search pattern in a variable called \textbackslash1. You can do the same thing with \textbackslash2, \textbackslash3, etc for subsequent search patterns. \textbf{The search patterns are the regexs enclosed in \textbackslash( and \textbackslash)}. In the example above, my regex was looking for a line that starts with h. If you scroll down a bit youll see a regex for a line that starts with an ASCII letter.
+
+\begin{lstlisting}
+sed 's/\(^[h]\)/\1\1\1/' oldFile
+hhhello world
+hhhello world world
+world hello hello world
+\end{lstlisting}
+
+You may not be mentally prepared to appreciate what I've just shown you? Maybe one day you'll be trying to do a complicated search and replace task and then you'll remember sed!
+
+Check out this interesting example too!
+
+\begin{lstlisting}
+user@machine$ sed 's/\(^[a-zA-Z]\)/\1\1\1/' oldFile
+hhhello world
+hhhello world world
+wwworld hello hello world
+\end{lstlisting}
+
+If I want to wrap the first letter of every line with smileys, for example, I can do this:
+
+\begin{lstlisting}
+user@machine$ # emojis!
+user@machine$ sed 's/\(^[a-zA-Z]\)/\xF0\x9F\x98\x82\1\xF0\x9F\x98\x82/' oldFile
+# look what comes out! Depending on your laptop, the output will be different from the output I have as can be seen in the figure below
+\end{lstlisting}
+
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.8\textwidth]{mayOrMayNotWorkForYou.png}
+  \caption{How the heck did he do that? If you already know, I'm very impressed}
+\end{figure}
+
+
+
+
+But this may or may not work on your computer, we'll talk about this in depth if there is time this semester.
+
+\section{Recap of what you know}
 \begin{enumerate}
 \item A bit about the Bash programming language
 \item grep \& regular expressions
