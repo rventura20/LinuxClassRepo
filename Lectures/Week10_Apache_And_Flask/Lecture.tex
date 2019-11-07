@@ -163,13 +163,95 @@ Then, open a browser on your laptop or the NJCU PC in front of you and go to
 
 You should see a message saying you've made your first website with Linux, flask, apache and python. You can share the link to show off your website to your friends and family! You could now also go to godaddy or namecheap, buy a domain name, and wire that up to your server so people can go to website.com instead of a scary looking ip address.
 
-
-\section{Example2: Serving HTML}
-
-\section{sed}
+\section{Additional Considerations for Example 1}
+So we have a simple flask app running on apache now. As you've probably seen by now, Linux servers are very particular about groups and permissions. I'm not sure about all of the ins and outs of the permissions for Flask and Apache. I'm showing the permisisons and groups I've set up on my machine. If you do something else I'm not sure it will work, and I don't know why it owuld be broken. We could experiment with permissions if you have something else.
 
 
-\section{Recap of what you know}
+I'm also not sure about all the details of the ExampleFlask.conf file. There are many options to it. I've always set mine up by scouring the internet for information and banging in what ever details I found. I hope to one day understand this file in depth, but for now all I know is how to make it work.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.8\textwidth]{groupsAndPermissions.png}
+  \caption{My permissions and groups on a successful install}
+\end{figure}
+
+{\LARGE Wait for class to all be caught up and have their servers running}
+
+\section{About the code for Example 1}
+This isn't a Python class as we said, but I'll just mention a few things about the Python code so you get some sense of how it's working. You will see the line
+
+\begin{lstlisting}[language=Python]
+@app.route("/")
+def hello():
+	return "some string here"
+\end{lstlisting}
+ 
+This says that when we GET the location "/" in our domain name, the webserver will respond with the return value.
+
+We have to go to "ipaddress/testFlask" to see this data because in our config file we have the line
+
+\begin{lstlisting}
+...
+WSGIScriptAlias /testFlask /home/webdeveloper/ExampleFlask/my_flask_app.wsgi
+...
+\end{lstlisting}
+
+and this registers the base end point for our website as /testFlask. If there's time we can change this. Right now apache is serving the default apache website on /, so we had to put our website at a different location on our server. Well need to delete some config files and change this config file so that we can see our website when we go to "/" instead of having to go to "/testFlask".
+
+The contents of the .wsgi file is boilerplate stuff that won't matter to you unless you want to become a serious python developer. Also, the purpose of the .wsgi file is interesting, but probably won't matter to you. Python applications can't run natively on webservers. So, about 20 years ago, some developers go together and wrote some middleware that allowds Python applications to communicate with webserver software like Apache2. The details are complicated - you can read about it if you're curious. 
+
+\url{https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface}
+
+I think php can talk right to the webserver, but I'm not sure. I've never written a line of php in my life. All I know is that PYhton needs a thing called wsgi ( which we installed at the beginning of this lecture with libapache-mod-wsgi-py3 ). You'll note that there are different version for python3 and python2.
+
+\section{Example2: Adding Endpoints and Serving HTML}
+To do this
+\begin{enumerate}
+\item Change the ExampleFlask.conf file to the one below.
+\item Create the /home/webdeveloper/Example2 directory add the files from the class repo
+\item Restart apache2
+\end{enumerate}
+
+\subsection{New /etc/apache2/sites-available/ExampleFlask.conf}
+Note that this file now serves two webpages! You can host multiple websites on one webserver.
+\lstinputlisting{Example2/ExampleFlask.conf}
+
+\subsection{my\_flask\_app.py}
+\lstinputlisting{Example2/ExampleFlask2/my_flask_app.py}
+
+\subsection{my\_flask\_app.wsgi}
+\lstinputlisting{Example2/ExampleFlask2/my_flask_app.wsgi}
+
+\subsection{\_\_init\_\_.py}
+Blank as before. To be honest I haven't given it thought if this is required or not. Just put the file. If you know python you can remove it and then meditate on why it works / doesn't work if you remove this file.
+
+\subsection{ Results }
+Here are some images showing my new site in action. The /testFlask endpoint still works, but now so do /somewhereElse and /somewhereElse/returnsHTML.
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.8\textwidth]{somewhereElse.png}
+  \caption{somewhereElse now works}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.8\textwidth]{somewhereElse_returnsHTML.png}
+  \caption{We can now return HTML from our Flask website too!}
+\end{figure}
+
+{\LARGE Wait for class to all be caught up and have their servers running again}
+
+\section{Example3: A Rest API}
+{\LARGE Only do this section if the class is caught up and it's before 9 PM}
+So far we've returned plain text and text formatted as HTML from our website. A popular thing to do now is to pass around JSON data. JSON is used all over. I showed it to you last week just to wet your feet, but you'll see it everywhere. You'll use it for web programming, internally in Python code, passing data between applications running on a laptop, for exchanging data files with scientists - everywhere. I avoided JSON for a while because I thought it was just a stupid buzz word that the nerds used to show off, but it truly is an ubiquitous data format. Now you've seen it. You'll see it again, mark my words. 
+
+So we'll just see how to return json from a Flask application.
+
+\section{sed 9:00 - 9:30}
+
+
+\section{Recap of what you know 9:30 - 9:45}
 \begin{enumerate}
 \item A bit about the Bash programming language
 \item grep \& regular expressions
@@ -208,4 +290,12 @@ We have a few more important things to cover
 \item Encryption with gpg + pgp. How it relates to ssh and other pub/priv key schemes.
 \end{enumerate}
 
+\section{References}
+This lecture was based on what I read  on these websites:
+
+\url{https://www.codementor.io/abhishake/minimal-apache-configuration-for-deploying-a-flask-app-ubuntu-18-04-phu50a7ft}
+
+
+
+There were some bugs in the tutorials above that I sorted out to make sure our lecture had a good flow.
 \end{document}
