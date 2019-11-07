@@ -4,7 +4,7 @@ curl https://jsonplaceholder.typicode.com/users/1/posts | grep -c "userID" | uni
 
 this command outputs 10
 
-# 2 Problem 2
+# Problem 2
 curl -X POST \
 > -H "Content-Type: application/json" \
 > -d'{"userId": 200, "id": 19, "title": "Apple", "body": "this is red"}' \
@@ -22,7 +22,7 @@ curl -X POST \
 > -d'{"userId": 91, "id": 77, "title": "Blueberry", "body": "this is blue"}' \
 > https://jsonplaceholder.typicode.com/users/1/posts
 
-After running 4 distinct curl requests,the output showed the change in userId, title, and body in the response, while the id remained the same.
+After running these 4 distinct curl requests, the output showed the change in userId, title, and body in the response, while the id remained the same.
 
 # Problem 3
 charset = utf-8
@@ -32,7 +32,7 @@ charset = utf-8
 curl -vX POST https://jsonplaceholder.typicode.com/users/1/posts -d @data.json --header "Content-Type: application/json"
 
 # Problem 5
-When I changed the content-type, only userundefined and id showed up as an output. It excluded userId, title, and body. The output was:
+When I changed the content-type from json to txt, I altered the type of data being sent from json to text; therefore, only userundefined and id showed up as an output. It excluded userId, title, and body. The output was:
  {
   "userundefined": "1",
   "id": 101
