@@ -1,4 +1,5 @@
 1) If you do a get request with the endpoint /users. You see there are only 10 unique users.
+  curl -s https://jsonplaceholder.typicode.com/users | grep '"id": [0-9]' | wc -l
   curl -X GET https://jsonplaceholder.typicode.com/users 
   curl -X GET https://jsonplaceholder.typicode.com/users/1/posts
 
