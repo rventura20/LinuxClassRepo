@@ -15,7 +15,7 @@ class MyFirstServer(BaseHTTPRequestHandler):
 				self.end_headers()
 
 		def _html(self, message):
-				content = "<html>\n\t<body>\n\t\t<h1>{}</h1>\n\t</body>\n</html>\n".format(message)
+				content = "<html>\n\t<body>\n\t\t<h1>{}</h1>\n\t\t<p> Hi </p>\t</body>\n</html>\n".format(message)
 				return content.encode("utf8")	# NOTE: must return a bytes object!
 
 		def do_GET(self):
@@ -32,7 +32,7 @@ class MyFirstServer(BaseHTTPRequestHandler):
 if __name__ == "__main__":
 		addr = "127.0.0.1"
 		#addr = "localhost"
-		port = 8000
+		port = 80
 		server_address = (addr, port)
 		httpd = HTTPServer(server_address, MyFirstServer)
 
