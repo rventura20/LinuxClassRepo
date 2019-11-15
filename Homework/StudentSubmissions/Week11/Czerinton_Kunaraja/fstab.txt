@@ -1,0 +1,4 @@
+# /etc/fstab: static file system information.
+UUID=65b4bbd6-39d1-49da-b0af-65261fa0b4a8	/	ext4	errors=remount-ro	0	1
+UUID=2c33a655-6390-4bb0-a7b7-8e61ab26465a 	/mnt/point ext4 defaults 0 2
+/dev/disk/by-id/scsi-0DO_Volume_volume /mnt/volume ext4 defaults,nofail,discard,noatime 0 0
