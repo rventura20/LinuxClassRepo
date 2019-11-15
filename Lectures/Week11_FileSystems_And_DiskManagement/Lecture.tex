@@ -697,13 +697,26 @@ Add a disk to your machine.
 \begin{lstlisting}
 parted /dev/sdX mklabel gpt
 mkpart primary linux-swap 0% 100%
-print quit
 sudo mkswap /dev/sdXN
 sudo swapon /dev/sdXN 
 \end{lstlisting}
 
 Then play with the swap space as we did with the swap file, you can update fstab
 too.
+
+Assuming you had a drive called `sdc' and the partition you create is called
+`/dev/sdc1' you would type the above commands as:
+
+\begin{lstlisting}
+parted /dev/sdc mklablel gpt
+mkpart primary linux-swap 0% 100%
+mkswap /dev/sdc1
+swapon /dev/sdc1
+\end{lstlisting}
+
+You need to make the swap space last between reboots on your computer, so you
+need a UUID for it to put in your /etc/fstab.
+
 
 \subsection{How much swap space to use?} 
 
@@ -733,6 +746,17 @@ money!
 \section{If Extra Time, Do The Homework}
  If there is extra time in class, just
 start the homework with students.
+
+
+\section{Week 11 Homework - How to get a 100\%}
+\subsection{Step1: 
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.8\textwidth]{Exercise1Success.png}
+  \caption{A website running on my server at IP address http://167.99.63.105/testFlask/}
+\end{figure}
+
 
 \section{References} Follow these excellent online tutorials.: 1.
 https://linuxize.com/post/how-to-add-swap-space-on-debian-9/ 2.
