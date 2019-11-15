@@ -1,0 +1,32 @@
+1) If you do a get request with the endpoint /users. You see there are only 10 unique users.
+  curl -s https://jsonplaceholder.typicode.com/users | grep '"id": [0-9]' | wc -l
+  curl -X GET https://jsonplaceholder.typicode.com/users 
+  curl -X GET https://jsonplaceholder.typicode.com/users/1/posts
+
+2)
+curl -X POST \
+      --header "Content-Type: application/json" \
+      -d'{"userId": 122, "id": 121, "title": "winnerwinner", "body": "checkinDinker(GUYSFERRI)"}' \
+      jsonplaceholder.typicode.com/posts
+curl -X POST \
+      --header "Content-Type: application/json" \
+      -d'{"userId": 2322, "id": 1, "title": "winn1212erwinner", "body": "winngerhinker(GUYSFERRI)"}' \
+      jsonplaceholder.typicode.com/posts
+curl -X POST \
+      --header "Content-Type: application/json" \
+      -d'{"userId": 112, "id": 21, "title": "winnerwinner", "body": "checkinDi212nker(GUYSFERRI)"}' \
+      jsonplaceholder.typicode.com/posts
+curl -X POST \
+      --header "Content-Type: application/json" \
+      -d'{"userId": 1212, "id": 1, "title": "hingerdinger", "body": "checkin)"}' \
+      jsonplaceholder.typicode.com/posts
+
+3) Base64 encoding
+
+4) curl -X POST -H "Content-Type: application/json" -d @./evil.json jsonplaceholder.typicode.com/posts
+
+5) You always get ID 101. I thought it would return an error for the wrong type. However, Im not sure if id:101 means an error for this API. Documentation does not specify. 
+ curl -X POST \
+      --header "Content-Type: application/text" \
+      -d'{"userId": 2, "id": 1, "title": "winnerwinner", "body": "checkinDinker(GUYSFERRI)"}' \
+      jsonplaceholder.typicode.com/posts
