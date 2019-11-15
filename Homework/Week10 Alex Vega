@@ -1,0 +1,49 @@
+http://165.227.180.119/sed/
+
+http://165.227.180.119/sed/sed1
+
+http://165.227.180.119/sed/sed2
+
+http://165.227.180.119/sed/sed3
+
+http://165.227.180.119/sed/sed4
+
+http://165.227.180.119/sed/sed5
+
+
+
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+  return "some text"
+  
+  from flask import Flask
+app = Flask(__name__)
+@app.route("/sed1")
+def firstEndpoint():
+  return "some text"
+  
+  from flask import Flask
+app = Flask(__name__)
+@app.route("/sed2")
+def secondEndpoint):
+  return "some text"
+  
+  from flask import Flask
+app = Flask(__name__)
+@app.route("/sed3")
+def thirdEndpoint():
+  return "some text"
+  
+  from flask import Flask
+app = Flask(__name__)
+@app.route("/sed4")
+def fourthEndpoint():
+  return "some text"
+  
+  from flask import Flask
+app = Flask(__name__)
+@app.route("/sed5")
+def fifthEndpoint():
+  return "some text"
