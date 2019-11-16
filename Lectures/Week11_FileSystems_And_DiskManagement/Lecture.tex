@@ -829,7 +829,10 @@ to see that the move went successfully.}
 mounted}
 \begin{center}
     \includegraphics[width=0.95\textwidth]{Images/11_done.png}
-	\textit{voila! It worked!}
+	\newline\textit{voila! It worked! Note that now /dev/sda1 is the swap
+partition and /dev/sdb1 is the /home partition. This is because sda1 and sdb1
+are \textbf{NOT PERSISENT NAMES}. This is why we refer to our disks by their
+UUIDs in /etc/fstab instead of referring to disks by their names /dev/sdX}
 \end{center}
 
 

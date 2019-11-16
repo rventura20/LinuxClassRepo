@@ -53,7 +53,16 @@ Still, we'll try and make tonight as `stand-alone' as possible. If you missed la
 The term is overloaded. A server is a computer, connected to a network, that other computers can access. There may be more ways to define it, but that's what I think of. But for your midterm I had you install some postgresql server stuff. In that case I was referring to the database server software. And tonight I'm going to refer to Apache2 as a 'webserver' - it's actually software that runs \textit{on} a webserver, which is the machine. It's just that the terms are overloaded.
 
 \section{What's Flask?}
-Flask is what is called a \textbf{Library}. It's some code that you can use in a language to solve a particular problem. For example, if you know Java you've probably used the \textit{java.util} library for things like \textit{ArrayList}s. In Python last week we used a library calle \textit{SimpleHTTPServer} to serve up some webpages for us on the address \textit{localhost:8000}.
+Flask is what is called a \textbf{Back End Web Framework}. It is sort of like a
+\textbf{Library}. Libraries are bits of code that you can use in a
+language to solve a particular problem. For example, if you know Java you've
+probably used the \textit{java.util} library for things like
+\textit{ArrayList}s. In Python last week we used a library called
+\textit{SimpleHTTPServer} to serve up some webpages for us on the address
+\textit{localhost:8000}. A \textbf{Back End Web Framework} is like a library,
+but the purpose of this code is to respond to HTTP requests against a web
+server. If that sounds confusing, don't worry! Just continue through these notes
+and by the end you'll have a notion of what I'm trying to say here.
 
 \section{What's a REST API}
 Too many buzzwords out there. REST is an acronym. You can read about it more if you want. For the rest of the lecture just understand that you usually pass JSON data back and forth over a REST API. We'll talk about JSON later.
@@ -71,13 +80,15 @@ Today we'll bring a real website online. Last week we made a trivial website wit
 \begin{figure}[h]
   \centering
     \includegraphics[width=0.8\textwidth]{Exercise1Success.png}
-  \caption{A website running on my server at IP address http://167.99.63.105/testFlask/}
+  \caption{A website running on my server at IP address
+http://167.99.63.105/testFlask/ . This is the first website we will build
+together today. It will run on Linux using Python, Flask and Apache2}
 \end{figure}
 
 
-
 \section{Setting up server}
-Get a debian 10 server
+So let's begin building our Flask + Apache2 website. Get a debian 10 server on
+digital ocean. Then run these commands:
 
 \begin{lstlisting}
 root@machine$ apt update
@@ -105,6 +116,10 @@ Open a browser on a laptop or computer. Go to the server ip address, make sure t
 
 So we've installed all the software we need! That was easy. Now we can build a little website and then connect the website code to the apache server we just installed and activated.
 
+{\Large \color{red} Warning! Make sure you have succeeded in this first task. If
+you haven't, you won't be able to do the rest of the exercises. If you can see
+the default Apache webpage, then continue on. }
+
 \section{Creating a Flask application}
 The first thing we need to do is create a non root user for managing this stuff. We'll give the user sudo permission for the few root things we need to do to bring the website online. I've created user `webdeveloper'. You should do the same so you can copy and paste the code I've provided. If you create a different username, you'll need to make the minor modifications to make everyting match up.
 
@@ -126,6 +141,17 @@ This is an empty file
 \subsection{my\_flask\_app.wsgi}
 \lstinputlisting{Example1/ExampleFlask/my_flask_app.wsgi}
 
+\subsection{Verify your configuration}
+By this point you should have these three files on your machine. I don't expect
+you to know Python, so I've provided these files online in the class repo under
+the Example1/ExampleFlask directory. You can copy and paste, wget, etc. to get
+the files, whatever you like. In the end, you need to see this on your computer:
+
+\begin{lstlisting}
+webdeveloper@machine$ cd /home/webdeveloper/ExampleFlask
+webdeveloper@machine$ ls
+__init__.py  my_flask_app.py  my_flask_app.wsgi
+\end{lstlisting}
 
 \section{Connect Flask to Apache2}
 Now we need to wire up our Flask application to the Apache webserver software. You will need to know your machine's ip address. I showed you a website you can curl that will tell you your ipaddress
@@ -138,6 +164,10 @@ user@machine$ curl ipinfo.io/ip
 Then you need to create this file, and put the proper ip address. Note that you'll need to run vim with sudo as this is a privileged file.
 
 \subsection{/etc/apache2/sites-available/ExampleFlask.conf}
+At this point, you need to create the file
+\textit{/etc/apache2/sites-available/ExampleFlask.conf}. The contents of the
+file are shown below. Make sure you change the ip address in the file to the
+ipaddress of your machine. 
 
 \lstinputlisting{Example1/ExampleFlask.conf}
 
