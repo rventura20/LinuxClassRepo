@@ -1,0 +1,49 @@
+#site 1
+
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "To select a range of lines in a file you can use ranges by line number just like sed '1,100 s/A/a/'"
+if __name__ == "__main__":
+    app.run()
+    
+#site 2
+
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "running the command 'sed -v' will print out the version of sed you are using."
+if __name__ == "__main__":
+    app.run()
+
+#site 3
+
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "using the command 'sed -h' will print out a summary of the sed commands"
+if __name__ == "__main__":
+    app.run()
+
+#site 4
+
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "sed uses the '#' symbol to comment lines!"
+if __name__ == "__main__":
+    app.run()
+
+#site 5
+
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "fun fact: sed stands for Stream EDitor"
+if __name__ == "__main__":
+    app.run()
