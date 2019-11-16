@@ -749,13 +749,88 @@ start the homework with students.
 
 
 \section{Week 11 Homework - How to get a 100\%}
-\subsection{Step1: 
+I've run through and done the homework. As you can see by the time stamps on the
+images ( my laptop clock is in the center-top of most images ) I did the work,
+took screen shots, and typed up this document in about 15 minutes. If you are
+confused about the assignment, make sure to look at what I've done in each image
+carefully and reproduce the steps on your own machine.
 
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=0.8\textwidth]{Exercise1Success.png}
-  \caption{A website running on my server at IP address http://167.99.63.105/testFlask/}
-\end{figure}
+\subsection{Go to the `Volumes' page on your digital ocean account}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/00_addVolume.png}
+\end{center}
+
+\subsection{Add a Tiny Volume for Swap Space}
+\begin{center}
+   \includegraphics[width=0.95\textwidth]{Images/01_addSwapVolume.png}
+\end{center}
+
+\subsection{Add a Tiny Volume for \textit{/home}}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/02_createVolumeHome.png}
+\end{center}
+
+\subsection{Make Sure You Have Two Disks}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/03_haveTwoDisks.png}
+	\textit{Note I have disks /dev/sda and /dev/sdb in my \textbf{lsblk}
+results. Those are the two disks added in the previous step.}
+\end{center}
+
+\subsection{Format one disk for \textit{/home}}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/04_formattedDiskForHome.png}
+	\textit{I chose to use /dev/sda for my home partition. It makes no difference
+which you chose.}
+\end{center}
+
+\subsection{Format one disk for swap space}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/05_formattedForSwap.png}
+	\textit{Format /dev/sdb for swap space and turn swap on so you can verify it
+worked.}
+\end{center}
+
+\subsection{Modify \textit{/etc/fstab}}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/06_fstab.png}
+	\textit{Edit /etc/fstab so that the new disks are mounted on reboot. Pay
+careful attention to the contents of this file - we already saw in class how a
+typo can be catastrophic!}
+\end{center}
+
+\subsection{To be thorough, lets add a user ( so \textit{/home} isn't empty )}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/07_addUser.png}
+	\textit{/home is empty. Let's add a user so there's some stuff in /home.}
+\end{center}
+
+\subsection{Let's add one more user for good measure}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/08_addUser.png}
+	\textit{Kind of boring to add just one user. Let's add another one so /home
+has two users' home directories.}
+\end{center}
+
+\subsection{Have a peek at \textit{/home} permissions before moving to new disk}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/09_homePermissions.png}
+	\textit{Now /home is more interesting.}
+\end{center}
+
+\subsection{Move \textit{/home} and verify permissions are still correct.}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/10_successfullyMovedHome.png}
+	\textit{Move the home directory to the new partition. Just take a quick peek
+to see that the move went successfully.}
+\end{center}
+
+\subsection{Reboot and verify that the swap space and home partition are still
+mounted}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/11_done.png}
+	\textit{voila! It worked!}
+\end{center}
 
 
 \section{References} Follow these excellent online tutorials.: 1.
