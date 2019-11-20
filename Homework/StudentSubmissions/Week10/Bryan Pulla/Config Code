@@ -1,0 +1,67 @@
+#This is the config file
+
+<VirtualHost *:80>
+     # Add machine's IP address (use curl ipinfo.io/ip)
+     ServerName 206.81.2.82 
+     
+     # Some error logging stuff
+     ErrorLog ${APACHE_LOG_DIR}/error.log
+     LogLevel warn
+     CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+     # Give an alias to to start your website url with
+     WSGIDaemonProcess site1
+     WSGIScriptAlias /sed1 /home/webdeveloper/Sed1/my_flask_app.wsgi
+     <Directory /home/webdeveloper/Sed1>
+            WSGIApplicationGroup site1
+            WSGIProcessGroup site1
+            Options FollowSymLinks
+            AllowOverride None
+            Require all granted
+     </Directory>
+
+     # Set up site number 2
+     WSGIDaemonProcess site2
+     WSGIScriptAlias /sed2 /home/webdeveloper/Sed2/my_flask_app.wsgi
+     <Directory /home/webdeveloper/Sed2>
+            WSGIApplicationGroup site2
+            WSGIProcessGroup site2
+            Options FollowSymLinks
+            AllowOverride None
+            Require all granted
+     </Directory>
+
+     # Set up site number 3
+     WSGIDaemonProcess site3
+     WSGIScriptAlias /sed3 /home/webdeveloper/Sed3/my_flask_app.wsgi
+     <Directory /home/webdeveloper/Sed3>
+	     WSGIApplicationGroup site3
+	     WSGIProcessGroup site3
+	     Options FollowSymLinks
+ 	     AllowOverride None
+	     Require all granted
+     </Directory>
+
+     #Set up site number 4
+     WSGIDaemonProcess site4
+     WSGIScriptAlias /sed4 /home/webdeveloper/Sed4/my_flask_app.wsgi
+     <Directory /home/webdeveloper/Sed4>
+	      WSGIApplicationGroup site4
+	      WSGIProcessGroup site4
+	      Options FollowSymLinks
+	      AllowOverride None
+	      Require all granted
+     </Directory>
+
+     #Set up site number 5
+     WSGIDaemonProcess site5
+     WSGIScriptAlias /sed5 /home/webdeveloper/Sed5/my_flask_app.wsgi
+     <Directory /home/webdeveloper/Sed5>
+	      WSGIApplicationGroup site5
+	      WSGIProcessGroup site5
+              Options FollowSymLinks
+	      AllowOverride None
+	      Require all granted
+     </Directory>	
+
+</VirtualHost>

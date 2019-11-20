@@ -1,0 +1,59 @@
+#QUESTION 2
+#
+
+curl -X POST \
+      --header "Content-Type: application/json" \
+      -d'{"userId": 10222, "id": 0, "title": "helloWorld", "body": "this is a body"}' \
+      jsonplaceholder.typicode.com/posts
+
+#THIS IS THE RUN WITH ORIGINAL VALUES
+
+curl -X POST \
+      --header "Content-Type: application/json" \
+      -d'{"userId": 10222, "id": 0, "title": "helloWorld", "body": "this is a body"}' \
+      jsonplaceholder.typicode.com/posts
+
+#THESE ARE REQURED 4 RUNS WITH MODIFIED VALUES FOR THE 4 FIELDS
+
+#1
+curl -X POST \
+      --header "Content-Type: application/json" \
+      -d'{"userId": 22222, "id":10001, "title": "helloWorld1", "body": "this is SOMETYPE OF A BUDDY"}' \
+      jsonplaceholder.typicode.com/posts
+
+#2
+curl -X POST \
+      --header "Content-Type: application/json" \
+      -d'{"userId": 33333, "id":10001, "title": "helloWorld2", "body": "HELLO NJ"}' \
+      jsonplaceholder.typicode.com/posts
+
+#3
+curl -X POST \
+      --header "Content-Type: application/json" \
+      -d'{"userId": 44444, "id":10001, "title": "helloWorld3", "body": "TURKISH DELIGHT"}' \
+      jsonplaceholder.typicode.com/posts
+
+#4
+
+curl -X POST \
+      --header "Content-Type: application/json" \
+      -d'{"userId": 55555, "id":10001, "title": "helloWorld4", "body": "GYRO"}' \
+      jsonplaceholder.typicode.com/posts
+
+#QUESTION 3
+
+#THE COMMAND WITH VERBOSE OPTION IS LIKE BELOW
+curl -v -X POST --header "Content-Type: application/json" -d' {"userId": 10222, "id": 0, "title": "helloWorld", "body": "this is a body"} '  jsonplaceholder.typicode.com/posts
+
+#THE CHARSET TYPE IS UTF-8
+
+#QUESTION 5
+
+#IF IN THE HEADER THE APPLICATION/JSON BECOMES APPLICATION/TEXT, THEN ONLY THE ID IS DISPLAYED 
+
+curl -X POST \
+      --header "Content-Type: application/txt" \
+      -d'{"userId": 10222, "id": 0, "title": "helloWorld", "body": "this is a body"}' \
+      jsonplaceholder.typicode.com/posts
+{
+# the result is "id": 101

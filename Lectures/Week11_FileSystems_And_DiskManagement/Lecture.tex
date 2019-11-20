@@ -10,255 +10,834 @@
 \definecolor{pgrey}{rgb}{0.46,0.45,0.48}
 
 \usepackage{listings}
-\lstset{language=bash,
-  showspaces=false,
-  showtabs=false,
-  breaklines=true,
-  showstringspaces=false,
-  tabsize=2,
-  breakatwhitespace=true,
-  commentstyle=\color{pgreen},
-  keywordstyle=\color{pblue},
-  stringstyle=\color{pred},
-  numbers=left,
-  stepnumber=1,
-  basicstyle=\small\ttfamily,
-  frame=single,
-  moredelim=[il][\textcolor{pgrey}]{$$},
-  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
-}
+\lstset{language=bash, showspaces=false, showtabs=false,
+	breaklines=true, showstringspaces=false, tabsize=2, breakatwhitespace=true,
+	commentstyle=\color{pgreen}, keywordstyle=\color{pblue},
+	stringstyle=\color{pred}, numbers=left, stepnumber=1,
+	basicstyle=\small\ttfamily, frame=single, moredelim=[il][\textcolor{pgrey}]{$$},
+	moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%} }
 
-\title{\textbf{Week 09} \\
-\Large How Does The Internet Work? Python, cURL and a REST API}
-\author{
-	Melvyn Ian Drag
-}
+\title{\textbf{Week 11} \\
+\Large Disks, File Systems and the Linux FHS}
+\author{ Melvyn Ian Drag }
 \date{\today}
-
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-This Lecture is preamble to the next one in which we will set up an apache webserver. We'll take a peek at Python, revisit cURL, and make some web requests.
+We will explore how physical disks are formatted in Linux,
+discuss (some of) your options for formatting your disks, learn about swap
+space, and have a look at some of the most important directories that exist on
+your Linux machine.
 \end{abstract}
 
-
-\section{Exam Make Up}
-Folks who missed the exam last week can come early and work until 7:15 to get it done. Lecture starts promptly at 7:15.
-
-\section{Python Webserver}
-\subsection{What is Python?}
-Python is a scripting language kind of like bash or javascript or perl - but different. It's the favorite language of legions of programmers. Python is used everywhere from scientific computing - I used it to solve PDEs in grad school - to game development, to system administration, to excel spreadsheet modifying, to a million other use cases. Today we're going to look at Python as a language for making websites and serving webpages.
-
-\subsection{What is a webserver?}
-As we discussed before, when type a website into a browser ( like Chrome or Firefox, or the like ) and hit \textit{ENTER}, you ask a webserver for some information. The webserver responds with the information you requested and you see a webpage. This type of transaction is called a \textbf{GET} request when performed over the \textbf{Hyper Text Transmission Protocol (HTTP)} or the related \textbf{HTTPS}, which is the secure flavor of HTTP. We'll discuss what we mean by `secure' in a few weeks. 
-
-Another thing you do when talking to a website is give some data to a webserver. This happens when you type your First Name, Last Name, User Name, phone number, password, etc. into a form on a website and click \textit{Submit}. When you click the button, the browser sends a \textbf{POST} request to the webserver that is listening to you from some other corner of the earth. 
-
-In the case of either a GET or POST request, the request goes to a webserver, which is a computer far far away from you that has some code running on it that will respond to your GETs and your POSTs. That code is very often written in Java. It is frequently written in Python. Many write that code in Ruby. Many others use Scala to write the web server code. Recently, people started using Javascript to write the server code. 
-
-In this class we will write the server code in Python.
-
-\subsection{Install Python 3.}
-
-Install it with 
-
-\begin{lstlisting}
-user@machine$ sudo apt install python3-dev
-\end{lstlisting}
-
-\subsection{Don't install Python 2}
-Python 2 is being deprecated next year. The Python language maintainers have been telling the Python community to move to Python3 for about 10 years now. If you are new to Python, use Python 3. If you are old to Python, hurry up and port your code to Python 3!
-
-\subsection{Simple Python Webserver}
-Okay, so now that you have Python installed, we can set up a simple web server and begin to make some HTTP GET and SET requests!
-
-Here is the code:
-\lstinputlisting[language=Python]{Server.py}
-
-This code is available in the class repository under the name \textit{Server.py}. From just this simple little example, we can learn alot about how the internet works. As we survey the example, we can issue some curl requests and verify that they work.
-
-We can run this code from the command line with:
-
-\begin{lstlisting}
-user@machine$ python3 Server.py
-Starting httpd server on localhost:8000
-\end{lstlisting}
-
-So we see that our little baby website is running on "localhost" at port 8000. Standard HTTP applications run on port 80, but for this demo app we are running on port 8000. Just for reference - HTTPS applications run ( by default ) on port 443. And ssh is over port 22. And postgresql is on port 5432. So now you know 4 special ports!
-
-A summary of what we know about ports so far:
-\begin{itemize}
-\item port 22 - ssh
-\item port 80 - HTTP
-\item port 443 - HTTPS
-\item port 5432 - PostgreSQL
-\end{itemize}
-
-In the webdevelopment world, we make \textbf{GET} and \textbf{POST} requests to webservers that have IP Addresses. But we rarely refer to them by their ip address - typically we use a domain name like `www.google.com' instead of a number address. We are doing the same thing here - we name our local webserver "localhost" instead of referring to it by its numeric name - 127.0.0.1 
-
-\subsection{A quick look at the code}
-
-Note that there are methods for handling \textbf{POST} and \textbf{GET} requests. This is characteristic of code running on a webserver. The code will have methods for handling different types of HTTP requests. You'll also see a few lines of code for setting up an HTTP server to run on `localhost:8000'. Theres a line that does something or other with ``headers", and we'll look into those in a minute. And there's a function that does something with html. If you've never seen HTML before, that's what it looks like. It's a markup language. If you don't know what HTML is, you can learn it in just a few minutes, it's pretty simple. It structures a document between some brackets. HTML always looks something like this:
-
-\begin{lstlisting}[language=HTML]
-<html>
-<body>
-	<h1> This is a title </h1>
-	<h2> This is a subtitle </h2>
-	<div> This is a paragraph about something </div>
-</body>
-</html>
-\end{lstlisting}
-
-\subsection{Verify Website Works With A Browser}
-To verify that our website is running, open a broswer window (chrome, firefox, etc) and type "localhost:8000". You should get a response like this:
-
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=0.5\textwidth]{GET.png}
-  \caption{GET request in browser to localhost:8000}
-\end{figure}
-
-So we know our website "localhost:8000" is running.
-
-And as I mentioned before, ``localhost" is an alias for ``127.0.0.1", which we can readily verify by going to ``127.0.0.1:8000" while our little application is running.
-
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=0.5\textwidth]{GET.png}
-  \caption{GET request in browser to 127.0.0.1:8000 }
-\end{figure}
-
-One more thing of interest - in case you've never seen this happen before - is you can see the Server code handling reqeusts on the server side. Go back to the terminal window where the webserver is running and you'll see it logging output after handling every request.
-
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=0.5\textwidth]{GET_ServerSide.png}
-  \caption{See the webserver handling the GET request traffic. }
-\end{figure}
-
-You may be frustrated because something doesn't match up with your expectations here. We see a website in a browser, but how come we don't type ``www.something.com"??? What is this ``localhost" nonsense? What do you mean it's running on port 8000??? I thought you said something or other about port 80 being for http??? All this understanding will come with time. For now we just need to know that websites handle GET and POST requests ( and other types of requests too ). And we've seen a little bit of code that features a get and post handler, and we've verified that ( the GET at least ) works as expected.
-
-Now enough fooling around! Let's use cURL to test out our little website.
-
-\section{Two Exercises}
-\begin{center}
-\textbf{ \#1 : Change port 8000 in the code to port 80 and try to rerun.}
-\end{center}
-
-Some ports are specified for a specific purpose by the os and may require special permissions to use. For example, port 80 requires root access to use. You can try to change the port 8000 in the sample code to port 80 and you will see a permission denied error unless you use sudo.
-
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=0.5\textwidth]{needRootFor80.png}
-  \caption{Need Root Access for Port 80}
-\end{figure}
+\section{Before Class} 
+Try to ssh into digital ocean on another port so people
+don't need to use their data to get into their servers.
 
 
-\begin{center}
-\textbf{\#2 : Change `localhost' in the code to `127.0.0.1'. Note that is runs as expected - localhost and 127.0.0.1 are the same thing.}
-\end{center}
+\section{Motivation for Today's lecture}
 
-If ip addresses interest you, like, why was `127.0.0.1' selected as `'localhost'? Are there other ip addresses that were designated as local ip addresses? Then you should learn more about computer networking! I admit that I'm very interested in the subject, but haven't studied it enough due to other responsibities and ambitions.
-
-\section{cURL}
-cURL is a Linux tool that has been around for about 20 years. It's used for making requests. It can be thought of as a command line browser, in some sense. The things you usually do  in a browser, like typing an address into a search bar, entering data into a form on a web page, clicking a button - these things can be done on the command line with cURL ( mostly ).
-
-\subsection{Exercise \#1}
-Open another terminal window in addition to the one running your Python webserver. Then enter these commands:
-
-\begin{lstlisting}
-user@machine$ curl localhost:8000
-# returns some html from the website
-user@machine$ curl -X GET localhost:8000
-# returns the same thing, because the default curl action is GET
-user@machine$ curl -X POST -d"myname=melvyn" localhost:8000
-# returns the POST response, along with the data you passed in
-user@machine$ curl -X POST --verbose -d"myname=melvyn" localhost:8000
-# returns the same thing, but this time with lots of extra information!
-# this time you can see what you sent over via the POST in detail
-# along with a detailed response from the server
-# The lines with a > are what you sent.
-# The lines with a < are what came back.
-user@machine$ curl -X POST --verbose -d"myname=melvyn&mylastname=drag" localhost:8000
-# Try sending more and more data values by separating them with an ampersand.
-\end{lstlisting}
-
-
-The `-X' flag is used for specifying the HTTP verb associated with your request. As you've seen, the webserver will contain code for handling different types of requests.
-
-The `-d' flag is used for passing data. Typically we associate the `-d' flag with POST requests and not GET requests.
-
-\subsection{Headers}
-As with most other data transmission protocols, file formats, etc. - most computer data formats - there is a header, followed by a body. What are HTTP headers?
-
-
-\subsection{Congratulations!}
-You may have just run your first webserver! If this wasn't your first webserver project, I hope it was fun anyway.
-
-\subsection{HTTP Return Codes}
-There are many different return codes. When you send a request to a webserver, it responds
-
-\section{A Python Programming Interlude}
-
-
-\subsection{Intro and Using Github to Test}
-What is HTTP/HTTPS?
-
-A prototcol used on the internet. You send some data to a server, the server responds with some data. As you will see with many data transmission technologies with computers, there is a header and a body. The header typically has meta data and bytes required by certain bits of computer hardware to process the body. Then the body contains the actual information.
-
-HTTP/HTTP work with a few verbs. We'll just focus on two of them for now, but there are ( at least ) 4. 
-
-Make some get, post requests. 
-
-We're going to use this tutorial here:
-\url{https://gist.github.com/joyrexus/85bf6b02979d8a7b0308}
-
-Do one with authentication and a REST API.
-
-\subsection{What kind of headers does curl take?}
-What kind of header does it take?
-
-Can we do two factor authentication with the REST API?
-
-
-\section{Recap of what you know}
+You might be studying to become any of the following:
 \begin{enumerate}
-\item A bit about the Bash programming language
-\item grep \& regular expressions
-\item What a user is on Linux
-\item What a group is on Linux
-\item What is git?
-\item You're comfortable using a command line interface now
-\item There are a few different languages on the command line - we've used bash and dash
-\item What permissions are and how to modify them
-\item What is a root user
-\item What is a process
-\item What is a job
-\item How to send signals to processes ( kill, CTRL+C, CTRL+Z )
-\item How to make code ignore or block signals
-\item How to install software on Linux
-\item A cool trick for using setuid / setgid to make a non-root user do some root stuff
-\item basics of relational dbs and how to configure one on Linux
-\item What is cron
-\item curl
-\item some vocabulary like API, REST, regex, SQL, DB
-\item A bit about python programming
+\item Sysadmin
+\item Programmer
+\item DevOps
+\item Network engineer
+\item More educated person
+\item A power user of your personal laptop
+\item Did I miss anything?
 \end{enumerate}
 
-\section{Coming Up In This Class}
+In  any one of these situations, you need to be able to add and remove ssds,
+usb drives, and hdds from Linux machines. It is somewhat scary to learn how to
+do this on your own - it's a good thing you're here today!
 
-We have a few more important things to cover
+\section{Filesytem Hierarcy Standard}
+
+Let's start with the easiest bit. Turn on
+your Linux machine and navigate to the root of your filesystem. List the files
+and directories there. If you have a laptop and a digital ocean server you might
+want to fire both up. If you have a mac, a linux laptop and a server, maybe look
+at all three. You will see what they have in common, and what is different.
+
+\begin{lstlisting}
+user@machine$ sudo su -
+root@machine$ cd / 
+root@machine$ ls
+# The subject of the coming discussion is here in the stdout.
+\end{lstlisting}
+
+\subsection{The important Directories}
+
+{\color{red} \textbf{/}} - root of your Linux install
+
+{\color{red} \textbf{/bin}} - programs needed for single user mode, for bringing
+a system up in maintenance mode. I've never had to do this for maintenance, but
+the utilities it provides are simple standard commands like `cat`,`ls`, etc.
+
+{\color{red} \textbf{/boot}} - files to be used for booting the system. These
+are low level things you won't worry much about as a general desktop user,
+application developer, or web programmer. This is lowlevel stuff for getting the
+OS up and running between the time you plug it in and hit the power button and
+start using Linux. You'll see the Linux kernel, the bootloader (on your system
+youll probably see grub, but on an embedded project you'll probably see uboot. )
+We'll compile the kernel in this class and maybe poke at the bootloader, but it
+might be more instructive to poke at the bootloader of a physical pc sitting in
+front of you.
+
+{\color{red} \textbf{/dev}} - devices and things. you'll see your harddrive/sdd
+for example as something like /dev/sda. There are a bunch of ttys. What a tty is
+and how you use it is of particular interest to me, and maybe during office
+hours Ill show you some stuff I do with those devices.
+
+{\color{red} \textbf{/etc}} - config files. We had to edit config files for
+apache2 and postgresql before. This is where you find config files for various
+applications.
+
+{\color{red} \textbf{/home}} - user home directories. Your homework will be to
+put this on a separate physical drive. This is where users put their data.
+Photos, downloads, video games, etc.
+
+{\color{red} \textbf{/lib}} - libraries for booting the system and used by
+programs on your computer.
+
+{\color{red} \textbf{/lib\textless qual \textgreater}} Youll see 32 and 64 bit
+variants of the various libraries. If you don't know what "dynamic" vs. "Static"
+linking means, and have never used static vs dynamic libraries, this will be
+outside of your understanding.
+
+{\color{red} \textbf{/media}} - where auto mounted media goes. When you stick a
+usb stick in, or a CDROM, it will generally appear here.
+
+{\color{red} \textbf{/mnt}} - where you will manually mount filesystems for your
+use. We'll explore some use cases of this today.
+
+{\color{red} \textbf{/opt}} - a place for "add on packages". Stuff you want to
+install goes here. The use of this directory is debatable and I leave it up to
+you to decide what you put here and what philosophical stance you choose on what
+ought to go here.
+
+{\color{red} \textbf{/proc}} - we already looked at this when we looked at
+stdin/stdout/stderr. We'll revisit that quickly. Write a little python program:
+
+\begin{lstlisting}
+import time
+
+while True: 
+	time.sleep(10)
+	 pass 
+\end{lstlisting}
+
+Run it in the back ground
+
+\begin{lstlisting}
+user@machine$ python program.py & [outputs pid] 
+user@machine$ ls /proc/$pid/fd 0 1 2 
+\end{lstlisting}
+
+you see the file descriptors for stdin, stdout, stderr. the /proc has
+information about running processes. There is much more to see besides the file
+descriptors, but thats the only example I'm going to provide.
+
+{\color{red} \textbf{/root}} - the home direcotry for the root user. The root
+user doesn't get a directory in /home.
+
+{\color{red} \textbf{/sbin}} - programs for booting and maintaining the system,
+but not used by regular users. 
+
 \begin{enumerate}
-\item set up apache webserver
-\item set up a git server
-\item Linux and Text encodings
-\item xxd, everyone's favorite binary packet analyzer
-\item The AWK programming language
-\item The hows and whys of formatting harddrives, usb sticks, solid state drives, etc.
-\item Encryption with gpg + pgp. How it relates to ssh and other pub/priv key schemes.
+\item \url{https://ma.ttias.be/understanding-the-bin-sbin-usr-bin-and-usr-sbin-split/}
+\item \url{http://landley.net/writing/hackermonthly-issue022-pg33.pdf}
 \end{enumerate}
+
+the difference between sbin and bin has history behind it, and I've linked a few
+quick and interesting reads explaining the differences.
+
+Do take a moment to 
+
+\begin{lstlisting}
+user@machine$ ls -l /sbin 
+\end{lstlisting}
+
+ and notice that many of the commands there are actually links to the commands
+in /bin. What's a link? In general it's like a windows shortcut. The actual
+program isn't in /sbin, it's in /bin, but when you call the one in /bin, it
+calls the one in /sbin. `bash` isn't linked, however, bash is in /bin you'll
+see. 
+
+\begin{lstlisting}
+$ which bash /bin/bash
+$ ls -l /sbin/b*
+# bash is not there
+\end{lstlisting}
+
+doesn't matter, just showing you.
+
+{\color{red} \textbf{/srv}} - I haven't ever used this. It might be relevant to
+you, I don't know
+
+{\color{red} \textbf{/sys}} - don't worry about it
+
+{\color{red} \textbf{/tmp}} - temporary files. Depending on the distro you use
+these might or might not be deleted on reboot. They might be cleaned up before
+reboot. They are temporary files, and the longevity and uses of them differs and
+depends on you.
+
+For example, 
+
+\begin{lstlisting}
+
+ls /tmp
+# some stuff about ssh
+\end{lstlisting}
+
+that's temporary info about your ssh login. Don't worry about the details. 
+
+{\color{red} \textbf{/usr}} - another location for executables, libraries, etc,
+typically read-only stuff that isnt essential to booting the system. There's
+alot of argument about what goes in here. If you're a sysadmin or linux
+application developer you will work on this.
+
+Notice that tmux isn't essential to your system. 
+
+\begin{lstlisting}
+$apt-get install tmux 
+$which tmux #/usr/bin/tmux
+\end{lstlisting}
+
+If you want to feel confused for a bit, look at this post:
+
+\url{https://unix.stackexchange.com/questions/8656/usr-bin-vs-usr-local-bin-on-linux}
+
+people discuss the uses of /bin, /sbin, /usr/bin, /usr/sbin, /usr/local/bin,
+~/bin, etc.
+
+It hasn't mattered to me in my career what goes where, but depending on the
+depth you go into Linux you may develop a passionate opinion.
+
+\subsection{Need your help}
+Many of you likely have tmux installed already. What
+are some other fun packages we can install that will serve for the above
+example?
+
+\subsection{Want to learn more?}
+
+There is a popular youtube channel called
+'Engineer man' or the like. The videos feature a guy sitting in the lower right
+corner of the screen talking about interesting Linux/Programming stuff with his
+terminal taking up most of the screen so you can see what stuff he's typing.
+There is a good video about the filesystem hierarchy standard.
+
+
+\section{Drives, Partitions, Mounting, and Partitioning.}
+
+ The idea of this part
+of the lecture is that sometimes you want to add storage space to your machine.
+You might have a 250GB SDD and you just bought a 1TB drive and you want to add
+it to your machine so you can download more movies, save more pictures, store
+more code, whatever.
+
+\subsection{Look at what storage space you already have.}
+
+\begin{lstlisting}
+
+$lsblk
+sda      disk
+--sda1   part 
+\end{lstlisting}
+
+sda is a physical drive on your computer, like a harddrive connected to the
+machine. sda1 is a partition of the drive, it's a chunk of memory you formatted
+in a particular way to become useable by your machine.
+
+\subsection{ Now we will add another drive}
+Heres how you do it on digital ocean. the process is the same on your laptop
+with a usb stick, ssd, hdd, or whatever persistent storage device you use. We'll
+all just use digital ocean to make the experience easy and avoid acidentally
+destorying something on the laptop.
+
+Images/addVolume01
+Images/addVolume02
+Images/addVolume03
+
+Note that there are instructions on digital ocean about how to format. Ignore
+that. I'm going to explain how formatting and partitioning work and then you can
+go back and see what digital ocean is telling you to do and youll understand and
+maybe want to modify what theyve asked you to do.
+
+\begin{lstlisting}
+$lsblk
+# theres an unpartitioned disk called sda ( or something else! )
+\end{lstlisting}
+
+Windows normally gives your drives names like 'C:/', 'D:', 'E:', right? I'm not
+a Windows expert but I know that this is what it looks like on a Windows
+computer.
+
+
+\section{What is a Filesystem} 
+They are fantastically interesting things. There
+are many different types of them. A filesystem is a very lowlevel thing that
+described the layout of a physical disk in terms of where the ones and zeros go
+on the disk and what they mean when they are in different locations. You will
+work mostly with ext3 and ext4 in your life on Linux, but there are others. We
+could discuss the differences between them, compare performance of different
+file systems, but I feel like that would take away from the flow of this
+lecture. 
+
+{\LARGE\textit{Write on board: Do not confuse the Linux filesystem hierarchy (
+which we have described above ) with a filesystem, which is more low level
+concept of where 1s and 0s are stored on a physical disk.} Some filesystems are
+ext3 and ext4, fat. We will use refer to filesystems in this class, you now know
+that it is a thing. It is your responsibility to go read about them because we
+simply dont have time here and it isn't just a linux concept - it is a computer
+concept. Windows, BSD, Linux, etc. all use filesystems.}
+
+\begin{center}
+\textbf{After this class, go out and research what ZFS, EXT4,
+EXT3, FAT32, etc. are for yourself. It will be enlightening for you as a
+computer professional.}
+\end{center}
+
+Have a look at the file systems your disks use with:
+
+\begin{lstlisting}
+user@machine$ df -TH
+\end{lstlisting}
+
+
+\section{Looking at Partitions, Partitioning and Mounting}
+
+\subsection{Introduction}
+
+Lets look at the two drives we added, the one had a partition on it, the other
+one didn't. What does that mean??
+
+lsblk -h shows us options for showing information about our drives. There's alot
+to take in. Let's focus on this command:
+
+
+\subsection{parted}
+
+If you happen to miss class and are reading these notes, here's a good reference
+to get you started
+
+\url{https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-storage-devices-in-linux}
+
+These notes ought to be good, but sometimes it helps to have another reference.
+
+You may notice that drive sda is 10G and the partition sda1 takes up the full
+10G, whereas sda2 takes up only 4XX GB of the 500GB on the disk, and then sdc is
+a 500GB drive with no partition. There are some weird things happening here and
+I'm going to explain the basics to you.
+
+We are going to format and add some space to our machine under /mnt, just to do
+it as an exercise.
+
+\begin{lstlisting}
+# below I refer to /dev/sdc. The added disk will likely have a different name
+# like sda or sdb on your machine! Be careful!
+sudo parted /dev/sdc mklabel gpt # sdc is the name of hte drive, not a
+partition.
+sudo parted /dev/sdc mkpart primary ext4 0% 100% # same as above
+lsblk
+# now its there
+sudo mkfs.ext4 /dev/sdc1
+sudo mkdir -p /mnt/newdrive
+sudo mount /dev/sdc1 /mnt/newdrive
+lsblk
+# now the partition is mounted
+lsblk --output  NAME,FSTYPE,SIZE,MOUNTPOINT
+\end{lstlisting} 
+
+You can also unmount the drive
+
+\begin{lstlisting}
+# note the command is umount, NOT unmount!
+user@machine$ #sudo umount mountpoint
+user@machine$ sudo umount /mnt/newdrive
+\end{lstlisting}
+
+\subsection{ Again step by step}
+
+\begin{lstlisting}
+sudo parted /dev/sdc mklabel gpt
+\end{lstlisting}
+
+We first label the disk. This layouts the structure of the disk. There are other
+names for the label - partition table and partition map are other names. The
+disk has some metadata about the partitions it contains and how they are
+structured, that's what this is for. You will mainly be interested in mbr/msdos
+or gpt partition tables. There's plenty to be said about mbr vs gpt partition
+tables. If you want to leave class knowing something, though maybe not
+understanding it fully - MBR is good for drives up to 2TB. Past that you need
+GPT. GPT is associated with UEFI whereas MBR is associated with BIOS. If you're
+confused, keep studying. In the meantime, just use gpt on Linux.
+
+
+\begin{lstlisting}
+root@machine$ parted -l
+# you can look through here to verify that you have labeled your disk as gpt.
+# The label is also refered to as a Partition table!
+\end{lstlisting}
+
+Now to add a partition to the labeled disk. So far the disk is  not useable
+for storage.
+
+\begin{lstlisting}
+sudo parted /dev/sdc mkpart primary ext4 0% 100%
+\end{lstlisting}
+
+This command puts a partition on the labeled disk. The partition can be
+extended/logical or primary. For us we will make a primary partition. We also
+tell parted what file system type we are going to put in the partition. We will
+use ext4. There are many file system types, and you can read in depth about them
+if you're interested. ext4 is "the best file system type in Linux" in some
+senses, and not as good as file system types in other senses. It's up to you how
+much you want to know. Here's a reference to get you started:
+
+\begin{enumerate}
+\item\url{https://opensource.com/article/17/5/introduction-ext4-filesystem}
+\item\url{https://askubuntu.com/questions/44908/what-is-the-difference-between-ext3-ext4-from-a-generic-users-perspective}
+\end{enumerate}
+
+We also made the partition start at 0\% and go all the way to the end of the
+drive.
+
+\begin{lstlisting}
+sudo mkfs.ext4 /dev/sdc1 
+\end{lstlisting}
+
+This puts the ext4 filesystem on the partition you created. A good question to
+ask yourself is "why did we type ext4 in the command to create the partition?"
+We'll ignore that question for now and continue on our quest to add some more
+disk space to our machines.
+
+\begin{lstlisting}
+sudo mkdir -p /mnt/newdrive
+\end{lstlisting}
+
+create a mount point for your new disk. You can put it in mnt for now.
+
+\begin{lstlisting}
+sudo mount /dev/sdc1 /mnt/newdrive
+\end{lstlisting}
+
+Now mount your disk. 
+
+You can see it with 
+
+\begin{lstlisting}
+lsblk
+\end{lstlisting}
+
+or also with
+
+\begin{lstlisting}
+user@machine$ df
+\end{lstlisting}
+
+Now mount/unmount the drive a few times to check it out.
+
+Add some stuff to the partition, unmount it, remount it. see stuff is still
+there.
+
+unmount it and mount it somewhere else. 
+
+see the stuff you created is still there under the mount point.
+
+\subsection{Restarting machine makes this go away}
+
+\begin{lstlisting}
+user@machine$ sudo reboot
+#new terminal
+user@machine$ lsblk
+#mounted disk not there anymore. 
+\end{lstlisting}
+
+to make the disk permanently mounted, update /etc/fstab. You know it makes sense
+for this information to be in /etc, because of our previous discussion of the
+purpose of /etc.
+
+\begin{verbatim}
+# part         mounnt_point fstype ignore   ignore ignore
+UUID goes here /mnt/data    ext4   defaults 0      2
+\end{verbatim}
+
+Here's a good reference. It explains what the last three parameters are. Not
+relevant to us now, but they are important. We won't discuss them because that
+would take us off track.
+
+\url{https://help.ubuntu.com/community/Fstab}
+
+\subsection{How to get the UUID to add to \textit{/etc/fstab} ?}
+
+\begin{lstlisting}
+user@machine$ sudo blkid
+# outputs all the blkids along with UUIDs for some of them.
+user@machine$ cat /etc/fstab
+# you should see some of those UUIDs already there I havent tested this on
+# digital ocean yet, but that's how it needs to be I've checked this on my
+# laptop and pc and that is how it is.  If digital ocean does this a different
+# way that is some cloud machine weirdness and not indicative of a standard
+# linux experience.
+\end{lstlisting}
+
+To modify your fstab file as shown above to remember your new disk, open
+/etc/fstab with vim from a sude privileges. 
+
+Or you can use this shorthand:
+
+\begin{lstlisting}
+user@machine$ sudo -e /etc/fstab
+# opens in editor note the editor might not be vim
+\end{lstlisting}
+
+To change the editor to vim, use update-alternatives like this:
+
+\begin{lstlisting}
+user@machine$ sudo update-alternatives --config editor
+# and chose vim.  if vim isn't offered, cancel.  then apt install vim then try
+# again.  vi should always be there on any linux/bsd/*nix system, I'm putting
+# this note here just in case.
+\end{lstlisting}
+
+\subsection{Verify the Partition Now Mounts Automatically}
+
+TO SEE that it is now mounted even after reboot, reboot your machine!
+
+\begin{lstlisting}
+sudo reboot
+\end{lstlisting}
+
+Log back in and see the partition is present using \textit{lsblk}.
+
+\subsection{Move opt to separate partition}
+
+\begin{lstlisting}
+root@machine$ mkdir -p /mnt/tmpLocation
+root@machine$ sudo mount /dev/sdc1 /mnt/tmpLocation
+root@machine$ cp -aR /opt/* /mnt/tmpLocation
+root@machine$ umount /mnt/tmpLocation
+root@machine$ mount /dev/sdc1 /opt 
+# now the stuff that was in /opt is stored on /dev/sdc1, which is mounted at
+# /opt.
+root@machine$ lsblk
+\end{lstlisting}
+
+Note that /dev/sdc1 is now mounted at /opt. Notice that the contents of that
+partition are now visible under /opt.
+
+Unmount the drive. Put some stuff in /opt. Remount the drive. Notice that the
+stuff you put in opt are hidden, but the drive stuff is there.  The stuff is
+still there, if you unmount the drive you will see the files there - but when
+you mount the partition there those files are hidden by the stuff in the
+partition.
+
+There may be ways to change this behavior, but that's not the way Linux works. 
+
+\subsection{What does cp -aR do?}
+This command means that the copy retains all
+privileges and permissions as they were in the original. If you run cp without
+these options, it will give the ownership to the user performing the copy. We
+don't want that, because there might be files that belong to certain users in
+/opt that we don't want to assign to the user making the copy.
+
+Note that when I was taught I learned -aR, but it seems to me by reading the man
+page that cp -aR is redundant because -a means -dR, so -aR is like -dRR which is
+redundant
+\section{fdisk \& gparted}
+There are a bunch of popular tools for doing what we
+have done today. Two of the popular ones are fdisk and gparted. You should learn
+and use them.
+
+\section{Swap Space}
+
+Now we know a bit about formatting disks and what a partition is. Let's look at
+an interesting thing called Swap Space.
+
+
+What is swap space? Your computer has RAM, Random access memory, where programs
+are loaded in and run from. This is volatile memory, as soon as you power off
+your machine everything in RAM is gone. This is different from non volatile
+memory, like a HDD or SDD, where files are permanently stored - things like your
+pictures, etc. We've seen in this class how to add more non volatile memory to
+your system, now we're going to ask the question - "what happens if you run out
+of RAM??" What if you want to have 10000 browser tabs open and not just 5, but
+your measly 8GB RAM stick in your laptop won't handle that kind of abuse? What
+if you want to run chrome, pycharm, vscode, inkscape, blender, steam, and a few
+other things at one time?? You can add more memory as swap space!
+
+Swap space is some space on disk - on your HDD or SDD or USB or whatever that
+the OS uses to store data from RAM when  there is no more space! Collectively
+you refer to the swap space + the ram space on your system as the virtual
+memory.
+
+\subsection{Overloading the memory on your system}
+We're going to use a stress
+testing utility to fill up the memory on the system. I could also have written a
+little program to fill memory, but this tool exists so we'll just use it.
+
+\begin{lstlisting}
+apt-get install stress
+\end{lstlisting}
+
+Run tmux, split the pane. Run this 
+
+\begin{lstlisting}
+stress --vm-bytes $(awk '/MemAvailable/{printf "%d\n", $2 * 0.9;}' < /proc/meminfo)k --vm-keep -m 1
+\end{lstlisting}
+
+in one pane and run `top` in the other. Watch how the memory is filled up. When
+youve had enough fun looking at your computer's ram get filled up, then kill the
+process and move on to the next section. Now you have a new tool! The
+\textit{stress} command is super userful when you just want to beat your machine
+up and see if it crashes. This is a thing you do alot in software testing.
+Perhaps you wrote a desktop application and you want to make sure that it
+doesn't crash if some other process starts gobbling up memory.
+
+Make sure to kill the stress process and lets move on. We'll use that tool
+later.
+
+\subsection{ Lets add some swap space.}
+Is there any swap space yet?
+
+\begin{lstlisting}
+sudo swapon --show
+# no
+free -h
+# only ram is shown
+\end{lstlisting}
+
+Shouldnt be. By default you don't get any in your debian 9 google cloud vm.
+
+
+\begin{lstlisting}
+sudo fallocate -l 1G /swapfile
+\end{lstlisting}
+
+Install fallocate if it isn't installed.
+
+This just allocates 1GB for a file called "swapfile" located at "/". Then change
+permissions and configure it as swap.
+
+\begin{lstlisting}
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo swapon --show 
+# you will see that you have swap space now
+free -h
+# you will see you have swap space
+\end{lstlisting}
+
+You can play with this a few times to see for yourself how easy it is to add /
+remove swapspace.
+
+\begin{lstlisting}
+sudo swapoff /swapfile
+free -h
+sudo swapon /swapfile
+free -h
+# do this a few times to develop muscle memory
+\end{lstlisting}
+
+
+\subsection{Playing around with swap space a bit}
+
+Notice that
+
+\begin{lstlisting}
+cat /proc/meminfo | grep MemAvailable 
+\end{lstlisting}
+
+reports available RAM, and not swapspace. Lets try and allocate more memory than
+fits in RAM, by trying to put more than "MemAvailable" bytes into memory. We'll
+get the MemAvailable from /proc/meminfo and then multiply it by 1.1, and then
+try to stress our system by allocating that much memory. Then we'll look at top
+and see that some swap space was used.
+
+BTW - if you want to see swap space in /proc/meminfo you can grep for Swap
+
+
+Run two vertical tmux panes, in the left put `top` in the right, run this
+command. Notice that swap space is used.
+
+\begin{lstlisting}
+stress --vm-bytes $(awk '/MemAvailable/{printf "%d\n", $2 *
+1.1;}' < /proc/meminfo)k --vm-keep -m 1 
+\end{lstlisting}
+
+Try to turn swap off and notice that the OS yells at you because it can't
+allocate the memory to bring the stuff out of swap back to RAM.  Then kill the
+stress test with CTRL C. Look at top. Notice that alot of stuff has stayed in
+swap space. That's an operating system thing. It could have been programmed to
+detect when there is space in RAM and always bring the swap stuff back to ram
+when possible, but it doesnt. You can force it to now by turning swap off. Maybe
+the OS does eventually pull it back to RAM I don't know. Maybe it waits an hour,
+or maybe there's another trigger, you'd have to look at the guts of the code to
+know for sure.
+
+{\LARGE\textit{Use top and htop when showing these memory examples}}
+
+\subsection{Making the swap space permanent between reboot}
+
+You know how to do this! Which file must we edit to make the swap space endure?
+You have to edit `/etc/fstab` just like with adding disks / partitions.
+
+\begin{lstlisting}
+/swapfile swap swap defaults 0 0 
+\end{lstlisting}
+
+\subsection{Swap space can be on it's own partition too}
+Add a disk to your machine.
+
+\begin{lstlisting}
+parted /dev/sdX mklabel gpt
+mkpart primary linux-swap 0% 100%
+sudo mkswap /dev/sdXN
+sudo swapon /dev/sdXN 
+\end{lstlisting}
+
+Then play with the swap space as we did with the swap file, you can update fstab
+too.
+
+Assuming you had a drive called `sdc' and the partition you create is called
+`/dev/sdc1' you would type the above commands as:
+
+\begin{lstlisting}
+parted /dev/sdc mklablel gpt
+mkpart primary linux-swap 0% 100%
+mkswap /dev/sdc1
+swapon /dev/sdc1
+\end{lstlisting}
+
+You need to make the swap space last between reboots on your computer, so you
+need a UUID for it to put in your /etc/fstab.
+
+
+\subsection{How much swap space to use?} 
+
+Note that above we used hundreds of
+gigabytes for swap space. Do not do this. Typically you give a few Gigabytes.
+There are a few rules of thumb out there about swap space and to be honest I've
+never had the time to do any performance testing to see the effects of different
+amounts of swap space. Since I have no expertise in swap space, and you can read
+the manuals just as good as I can, you can go out and read opinions about how
+much swap space to use ( if any at all ) and then make your own expert
+judgement.
+
+
+I've had you use a ridiculous amount of swap space because I want us to go in
+depth into disk partitioning in a coming lecture and tell you about partition
+alignment and boot sectors. 
+
+I hope your brains feel sufficiently stimulated by these few exercises we've
+done using swap space so that you don't mind that I've omitted some information.
+
+\section{Warning}
+Make sure to delete the drive you allocated in class after you are done with it!
+It is only \$ a month, so even if you forget it for a year its still cheaper
+than lunch for 2 at mcdonalds - nevertheless, don't waste your hard earned
+money!
+
+\section{If Extra Time, Do The Homework}
+ If there is extra time in class, just
+start the homework with students.
+
+
+\section{Week 11 Homework - How to get a 100\%}
+I've run through and done the homework. As you can see by the time stamps on the
+images ( my laptop clock is in the center-top of most images ) I did the work,
+took screen shots, and typed up this document in about 15 minutes. If you are
+confused about the assignment, make sure to look at what I've done in each image
+carefully and reproduce the steps on your own machine.
+
+\subsection{Go to the `Volumes' page on your digital ocean account}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/00_addVolume.png}
+\end{center}
+
+\subsection{Add a Tiny Volume for Swap Space}
+\begin{center}
+   \includegraphics[width=0.95\textwidth]{Images/01_addSwapVolume.png}
+\end{center}
+
+\subsection{Add a Tiny Volume for \textit{/home}}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/02_createVolumeHome.png}
+\end{center}
+
+\subsection{Make Sure You Have Two Disks}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/03_haveTwoDisks.png}
+	\textit{Note I have disks /dev/sda and /dev/sdb in my \textbf{lsblk}
+results. Those are the two disks added in the previous step.}
+\end{center}
+
+\subsection{Format one disk for \textit{/home}}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/04_formattedDiskForHome.png}
+	\textit{I chose to use /dev/sda for my home partition. It makes no difference
+which you chose.}
+\end{center}
+
+\subsection{Format one disk for swap space}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/05_formattedForSwap.png}
+	\textit{Format /dev/sdb for swap space and turn swap on so you can verify it
+worked.}
+\end{center}
+
+\subsection{Modify \textit{/etc/fstab}}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/06_fstab.png}
+	\textit{Edit /etc/fstab so that the new disks are mounted on reboot. Pay
+careful attention to the contents of this file - we already saw in class how a
+typo can be catastrophic!}
+\end{center}
+
+\subsection{To be thorough, lets add a user ( so \textit{/home} isn't empty )}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/07_addUser.png}
+	\textit{/home is empty. Let's add a user so there's some stuff in /home.}
+\end{center}
+
+\subsection{Let's add one more user for good measure}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/08_addUser.png}
+	\textit{Kind of boring to add just one user. Let's add another one so /home
+has two users' home directories.}
+\end{center}
+
+\subsection{Have a peek at \textit{/home} permissions before moving to new disk}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/09_homePermissions.png}
+	\textit{Now /home is more interesting.}
+\end{center}
+
+\subsection{Move \textit{/home} and verify permissions are still correct.}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/10_successfullyMovedHome.png}
+	\textit{Move the home directory to the new partition. Just take a quick peek
+to see that the move went successfully.}
+\end{center}
+
+\subsection{Reboot and verify that the swap space and home partition are still
+mounted}
+\begin{center}
+    \includegraphics[width=0.95\textwidth]{Images/11_done.png}
+	\newline\textit{voila! It worked! Note that now /dev/sda1 is the swap
+partition and /dev/sdb1 is the /home partition. This is because sda1 and sdb1
+are \textbf{NOT PERSISENT NAMES}. This is why we refer to our disks by their
+UUIDs in /etc/fstab instead of referring to disks by their names /dev/sdX}
+\end{center}
+
+
+\section{References} Follow these excellent online tutorials.: 1.
+https://linuxize.com/post/how-to-add-swap-space-on-debian-9/ 2.
+https://opensource.com/article/18/9/swap-space-linux-systems
 
 \end{document}

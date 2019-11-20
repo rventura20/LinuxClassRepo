@@ -1,0 +1,40 @@
+# Problem 1
+curl -X GET https://jsonplaceholder.typicode.com/users/1/posts | grep "userId" | uniq -c | wc -l
+
+This command outputs 10
+
+# Problem 2
+1) curl -d '{"userId": 1, "id": 2, "title": "Some title", "body": "Some content"}' -H "Content-Type: application/json" -X POST https://jsonplaceholder.typicode.com/users/1/posts
+
+2) curl -d '{"userId": 4, "id": 5, "title": "Some title", "body": "Some content"}' -H "Content-Type: application/json" -X POST https://jsonplaceholder.typicode.com/users/1/posts
+
+3) curl -d '{"userId": 4, "id": 5, "title": "different title", "body": "Some content"}' -H "Content-Type: application/json" -X POST https://jsonplaceholder.typicode.com/users/1/posts
+
+4) curl -d '{"userId": 4, "id": 5, "ttitle": "different title", "body": "different content"}' -H "Content-Type: appplication/json" -X POST https://jsonplaceholder.typicode.com/users/1/posts
+
+
+Ran above four commands each time returned data with change made as in below format, but id remained '101' without change.
+{
+  "userId": 4,
+  "id": 101,
+  "ttitle": "different title",
+  "body": "different content",
+  "userundefined": "1"
+}
+
+
+# Problem 3 
+The charset used in the response is utf-8
+
+
+# Problem 4
+curl -d "@data.json" -X POST https://jsonplaceholder.typicode.com/users/1/posts
+
+
+# Problem 5
+When I changed the Content-Type to 'application/txt', response ignored the data but returned id and userundifined as follow:
+
+{
+  "userundefined": "1",
+  "id": 101
+}
