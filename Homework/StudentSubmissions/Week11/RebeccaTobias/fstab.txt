@@ -1,0 +1,5 @@
+UUID=973385f7-0789-4ee0-933f-146b839c282a	/	ext4	errors=remount-ro	0	1
+UUID=bf95b62e-1d6c-4a15-b0b0-f93557f31776	/home	ext4	defaults	0	2
+UUID=7c313e81-7ee2-41fa-8d21-97679cdc8c79	swap	swap	defaults	0	0
+
+
