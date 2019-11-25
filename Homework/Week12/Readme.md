@@ -27,13 +27,13 @@ space-delimited. That just means you have to run the command instead of like
 this:
 
 ```
-awk 'pattern { action } file'
+awk 'pattern { action }' file
 ```
 
 do it like this
 
 ```
-awk -F";" 'pattern { action } file'
+awk -F";" 'pattern { action }' file
 ```
 
 ## Bonus points
