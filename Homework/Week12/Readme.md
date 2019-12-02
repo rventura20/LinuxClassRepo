@@ -1,28 +1,48 @@
 # Week 12 Homework
-In the 
+
+AWK is the best language you can learn. I'm sorry I wasn't in class to teach you
+about it, but I've done the next best thing. I've recorded a youtube video about
+AWK and it is here:
+
+https://www.youtube.com/watch?v=_q6Uj4X_knc
+
+You cannot leave our Linux class without knowing AWK! It's one of the coolest
+languages out there. If you open your mac book in class and type an little awk
+command you will be immediately praised as the smartest person the people around
+you have ever met.
+
+## The Assignment
+Run all of the 20 commands in section 1.8 "useful one liners" from here:
+https://ia802309.us.archive.org/25/items/pdfy-MgN0H1joIoDVoIC7/The_AWK_Programming_Language.pdf
+against the data file "homework.ssv" I've given you in this repository. 
+
+The reading assignment is only about 15 pages, and I've put a video on youtube
+to accompany the assignment. In case you get bored reading you can just watch
+the video.
+
+## Important!
+The homework.ssv file is semicolon delimited. That means the columns are
+separated with semicolons, but all the files in the tutorial and video are
+space-delimited. That just means you have to run the command instead of like
+this:
 
 ```
-LinuxFall2019ClassRepo/Lectures/Week11_FileSystems_And_DiskManagement/Images
+awk 'pattern { action }' file
 ```
 
-directory you will find a bunch of images names XX_title.png.
+do it like this
 
+```
+awk -F";" 'pattern { action }' file
+```
 
-Use what you know about various linux command line tools and awk to change the
-file names to XX.png. The output should be like this:
-
-*image of all the files called xx.png instead of xx_title.png*
-
-## Motivation
-I am preparing lecture notes for you. I took screenshots of how I added disks to
-my VM so that it would be easy for you to complete homework 11. I named the
-files XX_descriptivetitle.png. Then, when creating the LaTeX .tex file for the
-lecture notes, I thought it was annoying to keep adding my images into the
-markup because I needed to know not only the numeric index of the picture (00,
-01, etc. ) but also the title of hte picture ( xx_title.png ). How would you
-rename the files such that they are all just called XX.png instead of
-XX_title.png ? I did it! Let's see if YOU can!
+## Bonus points
+Do the assignment. If everyone does it I'll count it for 200 pts instead of 100.
+This will be my way of saying sorry I missed class.
 
 ## Submission guidelines
-Due via PR by November 27th 2019 at midnight. Put 1000000% effort and get this
-assignment done on time. Then enjoy your holiday feeling very proud of yourself!
+Due by December 1st 2019 at Midnight. 
+Submit screenshots of yourself running each of the 20 commands. ( Fingers crossed you
+won't submit 20 screenshots, reduce the number as much as possible ).
+
+As always, get it done on time! Reach out with any problems you may have.
