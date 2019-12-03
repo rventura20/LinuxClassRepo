@@ -42,3 +42,19 @@ Also, we won't have time for it in this class, but there's a great tutorial onli
 ## Additional Lecture Ideas
 Set up a database server? E.g. a lesson like this: https://stackoverflow.com/questions/15872543/access-mysql-remote-database-from-command-line . Access DB from command line, make a few sql queries.
 
+## TODO for self, ignore:
+Learn about different virtualization / containerization / jail techniques in Linux / BSD
+https://en.wikipedia.org/wiki/LXC
+https://www.infoworld.com/article/3204171/what-is-docker-the-spark-for-the-container-revolution.html
+http://daemonforums.org/showthread.php?t=7099
+https://www.geeksforgeeks.org/linux-virtualization-using-chroot-jail/
+https://blog.jessfraz.com/post/containers-zones-jails-vms/
+https://en.wikipedia.org/wiki/FreeBSD_jail
+https://unix.stackexchange.com/questions/254956/what-is-the-difference-between-docker-lxd-and-lxc/
+https://unix.stackexchange.com/questions/127001/linux-lxc-vs-freebsd-jail
+
+## TODO for self:
+difference between apache2 and httpd?
+https://httpd.apache.org/docs/2.4/programs/httpd.html
+https://www.thegeekdiary.com/linux-os-service-httpd/
+I think it's just a naming difference.
