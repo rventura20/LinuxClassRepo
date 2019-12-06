@@ -74,7 +74,8 @@ If time, put pictures here of the vm creation.
 We need to install some software, add a special user, and create an empty git
 repo to store our code.
 \begin{lstlisting}
-root@digitalocean-gitserver$ apt install git-core
+root@digitalocean-gitserver$ apt update
+root@digitalocean-gitserver$ apt install git-core curl
 root@digitalocean-gitserver$ adduser git
 #answer questions
 root@digitalocean-gitserver$ su - git
@@ -104,6 +105,7 @@ Create a repo
 Create ssh keys
 
 \begin{lstlisting}
+root@digitalocean-gitclient$ apt update
 root@digitalocean-gitclient$ apt install git
 root@digitalocean-gitclient$ adduser ashketchum
 root@digitalocean-gitclient$ su - ashketchum
