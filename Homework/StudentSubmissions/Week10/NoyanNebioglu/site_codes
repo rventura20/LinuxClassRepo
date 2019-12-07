@@ -1,0 +1,50 @@
+SITE 1
+
+ flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "you can delete lines from a particular file in a range or last line or nth line or by pattern matching in a file!"
+if __name__ == "__main__":
+    app.run()
+
+
+SITE 2
+
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "running sed command to paranthesize first character echo 'replace my first letter' | sed 's/\(\b[A-Z]\)/\(\1\)/g' "
+if __name__ == "__main__":
+    app.run()
+
+SITE 3
+
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "to replace or substituting string 'sed 's/w/v/' example.txt can be run"
+if __name__ == "__main__":
+    app.run()
+
+SITE 4
+
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "SED command stands for stream editor and handling fuctions on files like search, find, replace, insertion and deletion..."
+if __name__ == "__main__":
+    app.run()
+
+SITE 5
+
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "running the command 'sed -n along with /p like sed -n 's/his/her/p' exampleFile.txt will print only the replaced lines"
+if __name__ == "__main__":
+    app.run()
