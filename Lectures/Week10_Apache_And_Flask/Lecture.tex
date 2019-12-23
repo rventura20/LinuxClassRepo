@@ -1,5 +1,6 @@
 \documentclass[10pt]{article}
-\usepackage[breaklinks=true]{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
 \usepackage[margin=0.75in]{geometry}
 
 \usepackage{textcomp}
@@ -11,7 +12,8 @@
 \definecolor{pgrey}{rgb}{0.46,0.45,0.48}
 
 \usepackage{listings}
-\lstset{language=bash,
+\lstdefinestyle{term}{language=bash,
+  columns=fullflexible,
   showspaces=false,
   showtabs=false,
   breaklines=true,
@@ -26,7 +28,47 @@
   basicstyle=\small\ttfamily,
   frame=single,
   moredelim=[il][\textcolor{pgrey}]{$$},
-  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
+}
+\lstdefinestyle{sh}{language=bash,
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  numbers=left,
+  stepnumber=1,
+  basicstyle=\small\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
+}
+
+\lstdefinestyle{py}{language=python,
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  numbers=left,
+  stepnumber=1,
+  basicstyle=\small\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
 }
 
 \title{\textbf{Week 09} \\
@@ -90,7 +132,7 @@ together today. It will run on Linux using Python, Flask and Apache2}
 So let's begin building our Flask + Apache2 website. Get a debian 10 server on
 digital ocean. Then run these commands:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 root@machine$ apt update
 root@machine$ apt install apache2
 root@machine$ apt-get install libapache2-mod-wsgi-py3 python3-dev python3-pip
@@ -123,7 +165,7 @@ the default Apache webpage, then continue on. }
 \section{Creating a Flask application}
 The first thing we need to do is create a non root user for managing this stuff. We'll give the user sudo permission for the few root things we need to do to bring the website online. I've created user `webdeveloper'. You should do the same so you can copy and paste the code I've provided. If you create a different username, you'll need to make the minor modifications to make everyting match up.
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 root@machine$ adduser webdeveloper
 root@machine$ usermod -a -G sudo webdeveloper
 root@machine$ sudo su - webdeveloper
@@ -136,10 +178,10 @@ Inside the ExampleFlask directory, put the files described below. Note that thes
 This is an empty file
 
 \subsection{my\_flask\_app.py}
-\lstinputlisting{Example1/ExampleFlask/my_flask_app.py}
+\lstinputlisting[style=py]{Example1/ExampleFlask/my_flask_app.py}
 
 \subsection{my\_flask\_app.wsgi}
-\lstinputlisting{Example1/ExampleFlask/my_flask_app.wsgi}
+\lstinputlisting[style=py]{Example1/ExampleFlask/my_flask_app.wsgi}
 
 \subsection{Verify your configuration}
 By this point you should have these three files on your machine. I don't expect
@@ -147,7 +189,7 @@ you to know Python, so I've provided these files online in the class repo under
 the Example1/ExampleFlask directory. You can copy and paste, wget, etc. to get
 the files, whatever you like. In the end, you need to see this on your computer:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 webdeveloper@machine$ cd /home/webdeveloper/ExampleFlask
 webdeveloper@machine$ ls
 __init__.py  my_flask_app.py  my_flask_app.wsgi
@@ -156,7 +198,7 @@ __init__.py  my_flask_app.py  my_flask_app.wsgi
 \section{Connect Flask to Apache2}
 Now we need to wire up our Flask application to the Apache webserver software. You will need to know your machine's ip address. I showed you a website you can curl that will tell you your ipaddress
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 user@machine$ curl ipinfo.io/ip
 # returns your external ip address
 \end{lstlisting}
@@ -169,11 +211,11 @@ At this point, you need to create the file
 file are shown below. Make sure you change the ip address in the file to the
 ipaddress of your machine. 
 
-\lstinputlisting{Example1/ExampleFlask.conf}
+\lstinputlisting[style=sh]{Example1/ExampleFlask.conf}
 
 \subsection{Turn on and Test the Website}
 Run these commands as the user `webdeveloper'
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 webdeveloper@machine$ sudo a2ensite ExampleFlask
 webdeveloper@machine$ sudo a2enmod wsgi
 webdeveloper@machine$ sudo service apache2 restart
@@ -204,7 +246,7 @@ I'm also not sure about all the details of the ExampleFlask.conf file. There are
 \section{About the code for Example 1}
 This isn't a Python class as we said, but I'll just mention a few things about the Python code so you get some sense of how it's working. You will see the line
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[style=py]
 @app.route("/")
 def hello():
 	return "some string here"
@@ -214,7 +256,7 @@ This says that when we GET the location "/" in our domain name, the webserver wi
 
 We have to go to "ipaddress/testFlask" to see this data because in our config file we have the line
 
-\begin{lstlisting}
+\begin{lstlisting}[style=sh]
 ...
 WSGIScriptAlias /testFlask /home/webdeveloper/ExampleFlask/my_flask_app.wsgi
 ...
@@ -238,13 +280,13 @@ To do this
 
 \subsection{New /etc/apache2/sites-available/ExampleFlask.conf}
 Note that this file now serves two webpages! You can host multiple websites on one webserver.
-\lstinputlisting{Example2/ExampleFlask.conf}
+\lstinputlisting[style=sh]{Example2/ExampleFlask.conf}
 
 \subsection{my\_flask\_app.py}
-\lstinputlisting{Example2/ExampleFlask2/my_flask_app.py}
+\lstinputlisting[style=py]{Example2/ExampleFlask2/my_flask_app.py}
 
 \subsection{my\_flask\_app.wsgi}
-\lstinputlisting{Example2/ExampleFlask2/my_flask_app.wsgi}
+\lstinputlisting[style=py]{Example2/ExampleFlask2/my_flask_app.wsgi}
 
 \subsection{\_\_init\_\_.py}
 Blank as before. To be honest I haven't given it thought if this is required or not. Just put the file. If you know python you can remove it and then meditate on why it works / doesn't work if you remove this file.
@@ -278,7 +320,7 @@ Just as we did in example 2, set up your server with Example3 now. Get the Examp
 \subsection{The Flask Application: my\_flask\_app.py}
 You can skim the code to see what it does. It has some code for handling the GET and POST requests. A GET request will echo back to you the entire contents of the TODOS data it's maintaining. A POST request will add to the TODOS data set. You can verify after POSTing that your data was added by sending a GET request.
 
-\lstinputlisting{Example3/ExampleFlask3/my_flask_app.py}
+\lstinputlisting[style=py]{Example3/ExampleFlask3/my_flask_app.py}
 
 \subsection{Accessing Our REST API}
 Then you can get JSON data in the browser as shown below:
@@ -300,7 +342,7 @@ Then, on your laptop, make a GET request with cURL
 
 And, you should also be able to make the following POST request:
 
-\lstinputlisting{curlExample.sh}
+\lstinputlisting[style=sh]{curlExample.sh}
 
 And then look, after POSTing data, when you GET data you will see the data that you POSTed!
 
@@ -333,7 +375,7 @@ sed stands for ``stream editor" and is a simple little programming language ( or
 Sed can be used to replace all occurences of a string in a file.
 See sedExamples/01.
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 user@machine$ cat oldFile
 user@machine$ sed 's/hello//' oldFile
 # will replace first occurences of 'hello' with nothing\
@@ -346,7 +388,7 @@ user@machine$ sed 's/hello/HELLO/' oldFile
 
 these changes were done in place. If you want to create a new file you can do it like this
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 user@machine$ sed 's/hello/HELLO' <oldFile >newFile
 user@machine$ sed 's/hello/HELLO' oldFile >newFile
 user@machine$ sed 's/hello/HELLO' 0<oldFile >newFile
@@ -355,7 +397,7 @@ user@machine$ sed 's/hello/HELLO' 0<oldFile >newFile
 
 or you can change the input file in place
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 sed -i  's/HELLO/hewwo/' newFile
 \end{lstlisting}
 
@@ -364,7 +406,7 @@ the -i means `in place'.
 \subsection{What to do with sed \#2}
 We saw sed can do search and replace first occurence per line. It can also replace all occurrences in a file.
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 user@machine$ sed 's/hello/HELLO/g' oldFile
 #note all occurences of hello now say HELLO
 \end{lstlisting}
@@ -374,7 +416,7 @@ by adding the g after the search/replace pattern you can replace all occurences.
 \subsection{What to do with sed \#3}
 Sed can do regular expressions. If you want to capitalize any 'h' at the start of a line, you can do this:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 user@machine$ sed 's/\(^[h]\)//' oldFile
 ello world
 ello world world
@@ -386,7 +428,7 @@ You can also extract patterns. This is a weird thing that you can't always do wi
 
 the same command as before remembers and stores the search pattern in a variable called \textbackslash1. You can do the same thing with \textbackslash2, \textbackslash3, etc for subsequent search patterns. \textbf{The search patterns are the regexs enclosed in \textbackslash( and \textbackslash)}. In the example above, my regex was looking for a line that starts with h. If you scroll down a bit youll see a regex for a line that starts with an ASCII letter.
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 sed 's/\(^[h]\)/\1\1\1/' oldFile
 hhhello world
 hhhello world world
@@ -397,7 +439,7 @@ You may not be mentally prepared to appreciate what I've just shown you? Maybe o
 
 Check out this interesting example too!
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 user@machine$ sed 's/\(^[a-zA-Z]\)/\1\1\1/' oldFile
 hhhello world
 hhhello world world
@@ -406,7 +448,7 @@ wwworld hello hello world
 
 If I want to wrap the first letter of every line with smileys, for example, I can do this:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 user@machine$ # emojis!
 user@machine$ sed 's/\(^[a-zA-Z]\)/\xF0\x9F\x98\x82\1\xF0\x9F\x98\x82/' oldFile
 # look what comes out! Depending on your laptop, the output will be different from the output I have as can be seen in the figure below
