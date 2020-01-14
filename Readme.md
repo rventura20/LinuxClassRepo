@@ -6,9 +6,8 @@ In this repo you'll find lecture notes, homework assignments, and other course m
 
 The class discord is:
 
-https:///SERVER.gg/gkQUCPz
+TODO TODO TODO
 
-but replace 'SERVER' with 'discord'
 
 ## Recommended reading/viewing:
 In general there is an overabundance of reading material on the internet about Linux/Unix and, as we discussed, you sometimes don't even need to go anywhere to learn - right there in your terminal you have `--help` and `man COMMAND` to get answers about different linux tools. 
