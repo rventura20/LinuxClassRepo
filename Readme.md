@@ -57,3 +57,9 @@ difference between apache2 and httpd?
 https://httpd.apache.org/docs/2.4/programs/httpd.html
 https://www.thegeekdiary.com/linux-os-service-httpd/
 I think it's just a naming difference.
+
+## Maybe fun activity 
+how to make an encrypted USB stick
+https://dev.to/fdoxyz/tying-lets-encrypt-and-docker-swarm-together-4j16
+https://linux.tips/tutorials/how-to-encrypt-a-usb-drive-on-linux-operating-system
+https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup
