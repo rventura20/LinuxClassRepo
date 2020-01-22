@@ -1,5 +1,12 @@
 # Week 04 Homework
 
+WATCH THIS VIDEO
+https://www.youtube.com/watch?v=wlR5gYd6um0
+
+and GIVE screenshots of what you've learned.
+
+
+
 1. Create a new user named 'Grifflesnoots' on your machine
 2. Verify that Grifflesnoots cannot install software using `sudo apt-get install XX`
 3. Verify that YOU can install software using `sudo apt-get install XX`
