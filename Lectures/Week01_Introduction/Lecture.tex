@@ -184,12 +184,13 @@ this cheap machine.
 
 
 \section{8:05 - 8:30 Bash commands part 2}
+
 \begin{multicols}{4}
 \begin{enumerate}
 \item cat \$file1
 \item cat \$file2 \$file3
-\item echo "hello"
-\item echo "my path: \$PATH"
+\item echo ``hello"
+\item echo ``my path \$PATH"
 \item man
 \item wc
 \item wc -c \$fileName
@@ -220,7 +221,11 @@ Note about cut: cut -c is just like cut -b on every machine I've seen. In the fu
 As you've seen a major part of working on Linux is doing stuff on the command line. 
 If you're on your laptop, you might use other graphical tools. You can create a directory, for example, by right clicking and going to 'create directory' or whatever as you do on windows, but you'll often work on the command line, or create directories in your code, and things like 'mkdir' are useful for that. 
 If you are a web developer maintaining a website, youll often connect to a command line interface and do things there, because you won't have a monitor in front of you. 
-If you remotely connect to a computer, you'll maybe need to edit a file. for this you'll need a command line editor. Here's your first dose of linux/unix/bsd culture! There is alot of playful fighting in the \*nix world about the best way to edit files on the command line. Mainly the war is around two editors, https://en.wikipedia.org/wiki/Editor_war, emacs and vim. I like vim. Some folks like emacs. I started on emacs a decade ago, but when I learned vim I found that I liked it more and I haven't looked back in about 10 years. I'm going to teach you vim, and if you want to learn Emacs you'll have to do it on your own time. 
+If you remotely connect to a computer, you'll maybe need to edit a file. for
+this you'll need a command line editor. Here's your first dose of linux/unix/bsd
+culture! There is alot of playful fighting in the \*nix world about the best way
+to edit files on the command line. Mainly the war is around two editors,
+\url{https://en.wikipedia.org/wiki/Editor_war, emacs and vim}. I like vim. Some folks like emacs. I started on emacs a decade ago, but when I learned vim I found that I liked it more and I haven't looked back in about 10 years. I'm going to teach you vim, and if you want to learn Emacs you'll have to do it on your own time. 
 If you get a job and have to edit a file on a server, and you fire up vim and edit it smoothly you'll instantaneously become the celebrity of the office. You'll be one of the cool cats. Emacs would also get you cool points.
 
 But vim is featured in every standard linux distro, while emacs is not! 
@@ -234,7 +239,7 @@ want to complain that they can't even remember the following:
 
 To open a file with vim type
 
-\begin{lstlisting}[type=term]
+\begin{lstlisting}[style=term]
 melvyn@computer$ ls
 filename otherfilename dirname otherstuff
 melvyn@computer$ vim filename
@@ -249,7 +254,7 @@ Type :wq to save and quit.
 Thats 99\% of what you'll do in this class.
 
 \subsection*{ 8:40 - 9:00 More vim commands to make your work better.}
-\section{itemize}
+\begin{itemize}
 \item h, j, k, l
 \item I prefer to just use the arrow keys
 \item modes i, esc
@@ -281,22 +286,27 @@ that it can start to develop in your subconscious.
 Now is your time to try allthe things I've shown you and ask me questions if you
 don't get it.
 
-\section*{ Bash Part 3 }
+\section*{ 9:05 - 9:10 Bash Part 3 }
 
-1. Return value of last command $?. Play with 'echo $?' vs '$?'.
-Explain the output of
+Return value of last command is : \$?. All these linux commands I've shown you
+return information to the terminal. They tell the terminal if the command was
+successful or not. To check the return code you type `echo \$?'.
 
+\begin{lstlisting}[style=term]
 melvyn@machine$ echo "hello world"
 hello world 
-melvyn@machine$ $?
-0: command not found
-melvyn@machine$ $?
-127
 melvyn@machine$? echo $?
 0
+melvyn@machine$ ehco "aksljdg"
+# error
+melvyn@machine$ echo $?
+127
+#the 127 indicates an error. There was an error because ehco is not a command,
+echo is.
+\end{lstlisting}
 
-
-2. The coupe de gras. Registers in vim. Vim remembers the things you've yanked in the past. Type :reg
+\section{ 9:10 - 9:30 More vim and the inevitable questions }
+The coupe de gras. Registers in vim. Vim remembers the things you've yanked in the past. Type :reg
 See that vim remembers the stuff you've put on your clipboard in the past.
 Exercise
 Type:
@@ -318,6 +328,6 @@ Look at :reg and see what it remembers. I think it remembers the dd stuff but on
 Paste the things from your registers with <reg id>p e.g. ( when  in normal mode, not insert mode ) "1p, see what happens. 
 
 
-\section*{ 9:35 - 9:45 Homework Discussion }
+\section*{ 9:30 - 9:45 Homework Discussion and further questions and answers }
 Look at and discuss homework.
 \end{document}
