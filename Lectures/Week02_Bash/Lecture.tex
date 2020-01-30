@@ -1,0 +1,273 @@
+\documentclass[10pt]{article}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage[margin=0.75in]{geometry}
+
+\usepackage{multicol}
+\usepackage{textcomp}
+\usepackage{color}
+\usepackage{graphicx}
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+
+\usepackage{listings}
+\lstdefinestyle{term}{language=bash,
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  numbers=left,
+  stepnumber=1,
+  basicstyle=\small\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
+}
+\lstdefinestyle{sh}{language=bash,
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  numbers=left,
+  stepnumber=1,
+  basicstyle=\small\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
+}
+
+\lstdefinestyle{py}{language=python,
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  numbers=left,
+  stepnumber=1,
+  basicstyle=\small\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
+}
+
+\lstdefinestyle{txt}{
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  numbers=left,
+  stepnumber=1,
+  basicstyle=\small\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
+}
+
+\title{\textbf{Week 02} \\
+More about the command line and shell scripting} 
+\author{
+	Melvyn Ian Drag
+}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For tonight's class we'll learn more about the Linux command line and shell
+scripting.
+\end{abstract}
+
+\section*{Working on the Linux Command Line}
+You know some commands already:
+\begin{multicols}{4}
+\begin{enumerate}
+\item cat
+\item ls
+\item cd
+\item cp
+\item cut
+\item cut -c
+\item cut -b
+\item echo
+\item touch
+\item \textbf{What else?}
+\end{enumerate}
+\end{multicols}
+
+Here are some more commands that are useful:
+\begin{multicols}{4}
+\begin{enumerate}
+\item sort
+\item uniq
+\item tee
+\item history
+\item grep 
+\end{enumerate}
+\end{multicols}
+
+these commands are particularly useful in the context of \textbf{pipes}. Pipes
+are one of the defining features of Unix systems, they are one of the things
+that make unix great. A major tenet of Unix philosophy is that programs should
+be very simple and do one thing - just one simple thing - but do it incredibly
+efficiently and always get the correct result. Then these simple
+programs can be strung together to make more interesting programs that are fast
+and correct, because the tiny programs  (like cat and sort and ls and cd, etc. )
+are fast and correct.
+
+\section*{Pipes}
+Consider the following file:
+
+\lstinputlisting[style=txt]{Code/NumbersPipeExample/numbers.txt}
+
+There are many things you can do with this file. By the way, I have it saved in
+my current working directory as `numbers.txt' - you should do the same.
+
+\begin{lstlisting}[style=term]
+melvyn@laptop$ cat numbers.txt | sort
+melvyn@laptop$ cat numbers.txt | sort -n
+melvyn@laptop$ cat numbers.txt | sort -g
+melvyn@laptop$ cat numbers.txt | sort | uniq
+melvyn@laptop$ cat numbers.txt | uniq # note that this does not work.
+\end{lstlisting}
+
+So you see the idea of pipes? We used a few linux commands together, separated
+by a `|' to achieve a cool result. I showed you above a few ways to sort, and
+then the correct and the wrong way to find the uniq numbers in a file. 
+
+Let's continue with this discussion of pipes:
+
+\begin{lstlisting}[style=term]
+melvyn@laptop$ echo hello | cut -b1-2
+melvyn@laptop$ echo hello | cut -c1-4
+melvyn@laptop$ echo "hello world" | cut -d" " -f1
+melvyn@laptop$ te how cut with d and f is finicky
+melvyn@laptop$ echo "hello      world" | cut -d" " -f2 # many spaces between hello and world.
+melvyn@laptop$  default cut uses TAB ( \t ) as delimiter.
+melvyn@laptop$ cat file  | md5sum
+melvyn@laptop$ md5sum file
+melvyn@laptop$ cat file | sha256
+melvyn@laptop$ history | grep "that cool command I can only remember part of" # I do this at least 50 times a day
+\end{lstlisting} 
+
+...this bit about `cut' is super important.... let's play with it more to make
+sure you understand it... heck... to make sure \textit{I} understand it.
+
+
+\textbf{Spend 5 minutes playing with cut and pipes to extract various bits of
+information}
+
+\section*{stdin, stdout, stderr}
+
+What a great time to be in a class. In the next few minutes you're going to hear
+about what all the Linux people know. If you don't know what I'm about to say,
+then you're a N00b and you'll probably ask annoying questions on the internet
+that no one will want to answer.  
+
+
+
+\subsection*{ 8:40 - 9:00 More vim commands to make your work better.}
+\begin{itemize}
+\item h, j, k, l
+\item I prefer to just use the arrow keys
+\item modes i, esc
+\item quit with :q. To save and quit you use :wq or :x. If you want to know the difference, google the diff between :wq and :x. there is a slight difference, but it doesnt matter.
+\item dd to delete a line
+\item y is copy.
+\item p is paste after the cursor
+\item shift p is paste before the cursor
+\item u is undo
+\item CTRL + r is to redo.
+\end{itemize}
+
+Here is some more functionality that is so powerful and unique to vim that it
+will make you feel scared. You've never had this power before and this is going
+to make you think vim is hard. It's not. You can ignore the following for now,
+but within 2 weeks when you've mastered the above you'll be ready to appreciate
+how great the below commands are. I'm just showing you now to plan the seed so
+that it can start to develop in your subconscious.
+
+\begin{itemize}
+\item w to go forward a word
+\item e to go to the end of the next word
+\item b to go to the previous word beginning.
+\item to go forward 5 words, 5w
+\item To go back 5 words, 5b.
+\end{itemize}
+
+\section*{ 9:00 - 9:05 Experiment with Vim}
+Now is your time to try allthe things I've shown you and ask me questions if you
+don't get it.
+
+\section*{ 9:05 - 9:10 Bash Part 3 }
+
+Return value of last command is : \$?. All these linux commands I've shown you
+return information to the terminal. They tell the terminal if the command was
+successful or not. To check the return code you type `echo \$?'.
+
+\begin{lstlisting}[style=term]
+melvyn@machine$ echo "hello world"
+hello world 
+melvyn@machine$? echo $?
+0
+melvyn@machine$ ehco "aksljdg"
+# error
+melvyn@machine$ echo $?
+127
+#the 127 indicates an error. There was an error because ehco is not a command,
+echo is.
+\end{lstlisting}
+
+\section{ 9:10 - 9:30 More vim and the inevitable questions }
+The coupe de gras. Registers in vim. Vim remembers the things you've yanked in the past. Type :reg
+See that vim remembers the stuff you've put on your clipboard in the past.
+Exercise
+Type:
+Hello
+World
+Foo
+Bar
+Baz
+dd Hello
+dd World
+highlight and yank the other three
+Then look at clip board.
+Paste world
+Paste Baz
+Foo
+Bar
+Baz
+Look at :reg and see what it remembers. I think it remembers the dd stuff but only remembers the latest yanked stuff.
+Paste the things from your registers with <reg id>p e.g. ( when  in normal mode, not insert mode ) "1p, see what happens. 
+
+
+\section*{ 9:30 - 9:45 Homework Discussion and further questions and answers }
+Look at and discuss homework.
+\end{document}
