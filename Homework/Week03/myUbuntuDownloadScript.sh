@@ -28,11 +28,21 @@
 # TODO: use wget to download the .iso
 wget #TODO
 
+# Use an if to make sure the return code was equal to zero
+# remember to use $? like retCode=$?
+# Then say if retCode.equals(0) - but use the bash syntax I
+# showed you for doing the if.
+
 # TODO: use wget to download the md5sum file
 wget #TODO
+
+# Use an if to make sure the return code was equal to zero
+# Remember to use $? like retCode=$?
  
 # TODO: compute the md5sum of the .iso
 computedMD5SUM=$(md5sum #TODO | cut #TODO)
+#cut out the first 32 characters of the md5sum to get just the md5sum. 
+
 
 # Write a command to extract the md5sum from the file you downloaded above
 expectedMD5SUM=$(#TODO put that command here)
