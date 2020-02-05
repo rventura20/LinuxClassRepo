@@ -107,7 +107,8 @@ how if statements work in bash, we'll see a tidy way to write bash commands, and
 you'll use a cool tool called ssh.
 \end{abstract}
 
-\section{ssh}
+\section{7:00 - 8:00 ssh}
+\subsection{7:00 - 7:40 Connect to rpi}
 Let's start with the coolest thing. We'll make a remote connection to a remote
 pc. At my house I have a raspberry pi running. 
 
@@ -225,7 +226,7 @@ laptop - there will be subtle differences that will be a pain i the neck for us.
 Lets all just use a debian 10 server. Debian 10 is the operating system.
 
 
-\subsection{For your homework}
+\subsection{ 7:40 - 8:00 For your homework}
 
 So, for your homework I want you to set up your own cloud machine using digital
 ocean. It should be free - my students last semester registered for everything
@@ -253,8 +254,8 @@ but at least you see its there and popular. You see Atom there - but we aren't
 using atom in this class, we're using Vim}
 
 
-\section{grep revisited}
-
+\section{8:00 - 8:45 Grep}
+\subsection{8:00 - 8:10 grep revisited}
 Now lets look at some more advanced pattern matching used in Linux via the grep command. 
 Grep stands for Global regular expression print, it uses regular expressions to search for strings. "What's a regular expressions???" - we'll get to those nasty things in a second, but first we'll take a peek at grep.
 
@@ -320,8 +321,8 @@ woods.txt
 A reference for later:
 \url{https://opensourceforu.com/2012/06/beginners-guide-gnu-grep-basics/}
 
-\section{grep exercises 7:40 - 7:50  Exercises}
-
+\section{8:10 - 8:15 Grep Exercises}
+ 
 Use the above patterns on the file `hamletSolilquy.txt`. See what patterns you can extract. Make sure you test all of the patterns above, as you need to understand grep very well for your homework!
 
 Convince yourself that the flags I've just shown you work:
@@ -339,7 +340,7 @@ Convince yourself that the flags I've just shown you work:
 
 then we'll move on to another interesting part of grep.
 
-\section{Grep and regular expressions 7:50 - 8:20  Grep and Regexes!}
+\section{8:15 - 8:35 Grep and regular expressions}
 
 Ah, but we have yet to get to regular expressions! Grep stands for
 \textbf{Global Regular Expression Print} or \textbf{Generic Regular Expresion
@@ -399,8 +400,8 @@ Some more syntax:
 \begin{enumerate}
 \item \textasciicircum (Caret)   =   match expression at the start of a line, as
 in \textasciicircum\,A will match an A at the beginning of a line.
-\item $ (Question)    =   match expression at the end of a line, as in A$.
-\item \ (Back Slash)  =   turn off the special meaning of the next character, as in \^.
+\item $ (Dollar sign)    =   match expression at the end of a line, as in A$.
+\item \textbackslash (Back Slash)  =   turn off te special meaning of the next character, as in \^.
 \item [ ] (Brackets)  =   match any one of the enclosed characters, as in [aeiou]. Use Hyphen "-" for a range, as in [0-9].
 \item . (Period)  =   match a single character of any value, except end of line.
 \item * (Asterisk)    =   match zero or more of the preceding character or expression.
@@ -428,19 +429,29 @@ $ grep "a\{2,\}" a.txt # find lines with 2 or more "a"s
 \end{lstlisting}
 
 
-\subsection{ Grep exercises [ 8:20 - 8:30 ] }
+\subsection{ 8:35 - 8:45 Grep exercises } 
 Change a.txt and change some of the grep patterns and verify that they work as expected on your system. You might have a weird version of grep installed, so let's make sure grep works the same for all of us.
 
 
-\section{ 7:30 - 8:00  if/test/comparisons}
+\section{ 8:45 - 9:30 if/test/comparisons}
+\subsection{8:45 - 9:05 Introduction to if in bash}
+Lots of programming languages have `ifs'. Java has them, python, C, C++,
+javascript, and beyond. So does bash. It is a standard thing to do in
+programming to check if a variable equals something.
+
 The bash syntax for if is 
 
 \begin{verbatim}
-if [ condition ]
+if CONDITION
 then
  command
 fi
 \end{verbatim}
+
+The tricky bit is getting the CONDITION part right, because it is different in
+different situations, with different data types. I'll show you a little bit
+about it right now. And, as always, I'll encourage you to go read more if you
+want the full story. A good link is somewhere down below.
 
 One more useful piece of information is that bash generally interprets values as strings, unless they can be used as numbers, in which case it assumes they are numbers. https://www.tldp.org/LDP/abs/html/untyped.html.
 
@@ -470,6 +481,8 @@ for more information see here
 melvyn@thinkpad$ cat myFirstScript.sh
 #!/bin/bash
 
+
+#x1 and x2 are integers, though they could also be interpreted as strings.
 x1=1
 x2=2
 if [ $x1 -lt $x2 ]        
@@ -510,7 +523,7 @@ OR
 
 \textbf{Tip:} The old bash advice is to double quote all variables in bash to make sure they are interpreted as a single value.
 
-\subsection{Exercise!}
+\subsection{9:05 - 9:15 Exercise!}
 
 There are many different shell languages. Among them are:
 
@@ -531,7 +544,7 @@ that right now.
 fi they work. If they do not, it is likely because you are not using bash. Try
 running the scripts like  : `bash scriptName.sh' and then `sh scriptName.sh'}
 
-\subsection{Final thoughts about bash}
+\subsection{9:15 - 9:20 Final thoughts about bash}
 notice the difference between how this script runs with bash and with sh
 
 sh is the bourne shell, bash is the bourne again shell
@@ -545,9 +558,23 @@ STRINGS. Whenever a variable can be treated as an integer, that is bash making a
 special exception for you. And BASH cannot do decimals. So everything in bash is
 a string. If it can think about a quantity as an int, it might if you ask nicely
 . But it will never interpret 1.1 as a number. 
-\subsection{Another exercise?}
+
+\subsection{9:20 - 9:30 Another exercise?}
 Write an if statement to find which is bigger 1.1 or 1.2. You will find you
 can't do it with the numeric operators, only the string operators.
 
+\section{9:30 - 9:35 What did we learn today?}
+Discussion
+
+
+\section{9:35 - 9:45 Discuss homework}
+Look through the homework assignment and discuss it.
+
+Remember in the homework that \textbf{uniq} only works with sorted input, so
+when you go to use \textbf{uniq} you need to first do something like this:
+
+\begin{lstlisting}[style=term]
+melvyn@thinkpad$ STUFF | sort | uniq
+\end{lstlisting}
 
 \end{document}
