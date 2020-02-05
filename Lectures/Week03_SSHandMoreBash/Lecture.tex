@@ -577,4 +577,51 @@ when you go to use \textbf{uniq} you need to first do something like this:
 melvyn@thinkpad$ STUFF | sort | uniq
 \end{lstlisting}
 
+\section{Fluff}
+In case extra time, I solved a little problem today using tools you know.
+
+I'm programming a little AVR microcontroller, and the tool you use to program it
+is avrdude. If you type 
+\begin{lstlisting}[style=term]
+melvyn@laptop$ avrdude -c ?
+\end{lstlisting}
+
+it will list all the available hardware programmers out there. I wanted ot see
+if my mkii was supported by this tool so I ran
+
+\begin{lstlisting}[style=term]
+melvyn@laptop$ avrdude -c ? | grep mkii
+\end{lstlisting}
+
+No results. Well I didn't know if avrdude uses upper or lower case, so I just
+said like this:
+
+\begin{lstlisting}[style=term]
+melvyn@laptop$ avrdude -c ? | grep -i mkii
+\end{lstlisting}
+
+Still no results. Weird. But then I thought, how many types are there?
+
+\begin{lstlisting}[style=term]
+melvyn@laptop$ avrdude -c ? | wc -l
+\end{lstlisting}
+
+No results. But the command definitely outputs results. Do you know how to fix
+the above commands?
+
+ANSWER: avrdude -c ?  writes to stderr, not stdout ( for some reason ). So I
+just route my stderr to stdout and then use the piped commands ( pipes work on
+stdout, not stderr:
+
+\begin{lstlisting}[style=term]
+melvyn@laptop$ avrdude -c ? 2>&1 | grep -i mkii
+# It comes out!
+\end{lstlisting}
+
+
+
+
+
+
+
 \end{document}
