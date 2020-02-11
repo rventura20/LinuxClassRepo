@@ -1,5 +1,15 @@
 # Week 04 Homework
 
+Make a PR on the class repo with file LinuxClassRepo/Homework/Week04/YourName/Readme.md.
+
+Readme.md should say:
+
+"My name is X and I'm learning Linux because Y"
+
+This is due by Sunday, February 16th.
+
+Then by Tuesday, February 18th you must resync your fork with my repo. Send a screenshot of your fork containing all the homework assignmnets from your friends.
+
 WATCH THIS VIDEO
 https://www.youtube.com/watch?v=wlR5gYd6um0
 
