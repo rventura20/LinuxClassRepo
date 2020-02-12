@@ -2,6 +2,10 @@
 
 In this repo you'll find lecture notes, homework assignments, and other course materials.
 
+## TODO
+Check this video, this might be a fun exam problem:
+https://www.youtube.com/watch?v=QCZl0eNzMTs
+
 ## Keep in touch:
 
 The class discord is:

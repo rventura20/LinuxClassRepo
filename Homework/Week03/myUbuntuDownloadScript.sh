@@ -26,7 +26,11 @@
 
 
 # TODO: use wget to download the .iso
-wget #TODO
+wget http://releases.ubuntu.com/19.10/ubuntu-19.10-desktop-amd64.iso
+if [ $? -ne 0 ]
+then
+	echo "error"
+fi
 
 # Use an if to make sure the return code was equal to zero
 # remember to use $? like retCode=$?
@@ -40,7 +44,7 @@ wget #TODO
 # Remember to use $? like retCode=$?
  
 # TODO: compute the md5sum of the .iso
-computedMD5SUM=$(md5sum #TODO | cut #TODO)
+computedMD5SUM=$(md5sum  | cut #TODO)
 #cut out the first 32 characters of the md5sum to get just the md5sum. 
 
 

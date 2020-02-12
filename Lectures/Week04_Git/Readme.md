@@ -263,6 +263,8 @@ https://github.com/KirstieJane/STEMMRoleModels/wiki/Syncing-your-fork-to-the-ori
 
 guide
 
+SO Important, definitely go over this!
+
 ## Another example of syncing fork with the original
 https://stackoverflow.com/questions/7244321/how-do-i-update-a-github-forked-repository
 
