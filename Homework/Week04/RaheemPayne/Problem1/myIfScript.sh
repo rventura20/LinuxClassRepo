@@ -1,17 +1,14 @@
 #!/bin/bash
-
-
-if [ x1 \< x2 ]
+if [[ 1 < 2 ]]
 then 
-	echo "x1 is less than x2"
+	echo "1 is less than 2"
 
 fi
-
-
-if [[newNumber == oldNumber]]
+newNumber=20
+oldNumber=21
+if [[ $newNumber = $oldNumber ]]
 then
 	echo "Numbers are the same"
 else
 	echo "Numbers are not the same"
 fi
-
