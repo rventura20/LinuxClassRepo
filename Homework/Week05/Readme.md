@@ -18,7 +18,7 @@ The PR must contain your file
 
 I will attempt to ssh in a little after midnight on February 25th like ssh melvyn@youripaddress and I'll attempt to modify /home/yourname/modifyme.txt
 
-If I can do this + you submit the indicated screenshots, you get 100 points.
+If I can do this you get 100 points.
 
 ## Result
 You have created a user, added a public ssh key, and changed permissions on a file correctly!
