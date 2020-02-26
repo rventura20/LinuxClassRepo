@@ -3,6 +3,7 @@
 \usepackage[margin=1in]{geometry}
 
 \usepackage{color}
+\usepackage{graphicx}
 
 \definecolor{pblue}{rgb}{0.13,0.13,1}
 \definecolor{pgreen}{rgb}{0,0.5,0}
@@ -25,6 +26,81 @@
   moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
 }
 
+\lstdefinestyle{term}{language=bash,
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  basicstyle=\small\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
+}
+\lstdefinestyle{sh}{language=bash,
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  numbers=left,
+  stepnumber=1,
+  basicstyle=\small\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
+}
+
+\lstdefinestyle{py}{language=python,
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  numbers=left,
+  stepnumber=1,
+  basicstyle=\small\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
+}
+
+\lstdefinestyle{txt}{
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  numbers=left,
+  stepnumber=1,
+  basicstyle=\small\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
+}
+
+
 \title{\textbf{Week 06} \\
 \Large Signals, C Programs, SetUID, SetGID, and Fun Stuff }
 \author{
@@ -40,22 +116,132 @@
 We'll learn about signal handling, C Programs, ssh, setuid, setgid, and talk about the exam.
 \end{abstract}
 
-\section{SIGTSTP and SIGINT}
-In \*nix a common thing you do is send signals to processes. You will sometimes want to send information to a running program to make it do things. Signals are how we do that. 
+\section{Machine Configuration 7:00 - 7:15}
+For this lecture we will be using a \textbf{Debian 10 Digital Ocean server}.
+Make sure you have one. Also, when you start the server, run the following
+commands to make sure you can complete the exercises in this document.
 
-The most common signals you'll want to send are \textbf{SIGINT} and \textbf{SIGTSTP}
+\begin{lstlisting}[style=term]
+root@machine$ apt update
+root@machine$ apt install python3-dev vim git
+# if prompted, say yes to everything.
+root@machine$ git clone https://github.com/melvyniandrag/LinuxClassRepo.git
+# now you have all the class stuff
+\end{lstlisting}
 
-We'll see what these do by running a small python program. Create this program and run it on your computer:
+{\Large Hurry and do this now! Don't ask me how to install python3 a half hour
+from now. Don't ask how to clone the class repo at 8PM! It is important that you
+keep up as we have alot to cover today!}
+
+\section{Intro 7:15 - 7:20}
+
+\textit{Start a podcast on Android phone, have someone call me during while the
+podcast is playing and show that Android stops the podcast and starts the phone
+call. When we hang up what happens? Either the podcast will start again or it
+will not, this depends on how the phone is programmed.}
+
+In \*nix a common thing you do is send signals to processes. You will sometimes
+want to send information to a running program to make it do things. To get an
+idea of what a signal is, imagine you are watching a youtube video on your
+cell phone. If a phone call comes in, the video will pause, the phone app will
+be opened, and you will be prompted to accept the call ( Other phones may
+handle the situation differently, this is just a simple example ). How does your
+phone ( which is a computer ) do this? I don't know, but in general when you
+want to communicate with a running program you use signals. Maybe Android uses
+signals when it makes programs communicate, maybe it doesn't.
+
+ Signals are one important way we do \textbf{Interprocess Communication ( IPC )} on
+Linux/BSD/Unix. The most common signals you'll want to send as an everyday Linux
+user are \textbf{SIGINT} and \textbf{SIGTSTP}
+
+\section{7:20 - 7:35 SIGTSTP and SIGINT}
+
+\textit{The programs used throughout this lecture are in the Week06 Lecture directory in
+the class repository that we  cloned at the beginning of class. }
+
+\subsection{SIGINT}
+We'll see what these do by running a small python program. Create this program
+and run it on your computer ( note you don't need to create this program if you
+have the class repo - it's there in the week 06 lecture directory ):
 
 \lstinputlisting[language=Python]{runForever.py}
 
-This program will run forever and hog up our terminal. How do we make it stop? We can send the \textbf{SIGINT} signal by typing "CTRL+C". Note that it stops. Another thing you might want to do is just pause the program for a bit. You pause the program by sending it a \textbf{SIGTSTP}. This is done by typing CTRL+Z. To restart the program that you paused you can send it a \textbf{SIGCONT} command. To send a \textbf{SIGCONT} command is a little different, you must type
+You run the program by typing:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
+root@machine$ python3 runForever.py
+# the prompt will become unresponsive as the python program runs.
+\end{lstlisting}
+
+This program will run forever and hog up our terminal. How do we make it stop? We can send the \textbf{SIGINT} signal by typing "CTRL+C". Note that it stops. 
+
+That may have been your first Python program. If you want to do the same thing
+with bash, try running this program and seeing that it is ended with CTRL+C:
+
+\lstinputlisting[language=bash,caption={runForever.sh}]{runforever.sh}
+
+You have to ways to run this program:
+
+\begin{lstlisting}[style=term]
+user@machine$ bash runforever.sh
+# interesting output
+# end it by typing CTRL+C
+\end{lstlisting}
+
+Or you can use the "executable" permission I showed last week:
+
+\begin{lstlisting}[style=term]
+user@machine$ chmod +x runforever.sh
+user@machine$ ./runforever.sh
+# interesting output
+# end it by sending the SIGINT signal with CTRL+C
+\end{lstlisting}
+
+{\Large Question for class: do you remember another way to make the script
+executable? How to do it with numbers? e.g. chmod 700 or chmod 777 or chmod 500,
+etc.}
+
+\subsection{SIGTSTP}
+Another thing you might want to do is just pause the program for a bit. We saw
+sometihng like this with Android already - if you receive a phone call, the
+podcast application is paused, not closed. In Linux you pause a program by sending it 
+a \textbf{SIGTSTP}. This is done by typing CTRL+Z. To restart the program that you
+ paused you can send it a \textbf{SIGCONT} command. To send a \textbf{SIGCONT}
+ command is a little different. There is no keyboard shortcut like CTRL+XYZ to
+send the SIGCONT signal. You must type:
+
+\begin{lstlisting}[style=term]
 user@machine$ kill -18 $PYTHON_PID # where $PYTHON_PID is the PID of the process you stopped.
 \end{lstlisting}
 
+To verify this works, run the python program, but this time stop and restart it
+in the following way:
+
+\begin{lstlisting}[style=term]
+user@machine$ python3 runForever.py
+# running 
+# then type CTRL+Z
+# should say the process was stopped.
+user@machine$ pidof python3
+1123 1345 7899 9999
+# a list of numbers comes out - these are all the python processes on your
+# computer. We want to restart the newest one, the one that you just stopped.
+# The smaller numbers are programs that Linux is running for some reason or
+# other.
+# Dont worry about those. In this example, the stopped process id ( pid
+# ) is 9999. 
+user@machine$ kill -18 9999
+user@machine$ jobs
+[1] Stopped        python3 runForever.py
+user@machine$ fg 1
+# you will see the python process come to life.
+# Do this a few more times until bored. Then type CTRL+C to kill the process
+# with SIGINT once and for all.
+\end{lstlisting}
+
 \subsection{Verify the signals}
+See figure ~\ref{fig:pythonsignals} for a screenshot of me running these
+commands.
 
 \begin{enumerate}
 \item type \textit{pidof python} ( or \textit{python3} )
@@ -73,16 +259,61 @@ user@machine$ kill -18 $PYTHON_PID # where $PYTHON_PID is the PID of the process
 \item Kill the process so it doesn't hog memory.
 \end{enumerate}
 
-\section{jobs}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\textwidth]{signals.png}
+	\caption{Look at home I send to python3}
+	\label{fig:pythonsignals}
+\end{figure}
+
+\section{7:45-7:50 jobs vs processes}
 Note I used the \textit{jobs} command above. That command lists the processes started by the current shell. If you start a new shell and type \textit{jobs} there will be no output, because your new shell didn't do anything yet.
+There are two similar things happening here. The commands I've been using a bit
+are \textit{pidof} and \textit{jobs}, and they both seem to report back some
+number corresponding to a running program. All running programs are processes,
+and they all get a system-wide \textit{pid} ( as always I'm not 100\% sure what
+that stands for. \textit{process identifier} ? Or maybe \textit{process
+identification} ? Whatever, pid is good enough). Every program that has been
+started in the current bash session gets a job id tied to it. This job id will
+not be visible to other bash sessions. The pid will be visible to everyone,
+however.
+
+Remember:
+\begin{itemize}
+\item all running programs are called processes and have a pid
+\item all running programs are called processes and have a pid
+\item all running programs are called processes and have a pid
+\item all running programs are called processes and have a pid
+\end{itemize}
+
+never forget:
+
+\begin{itemize}
+\item all programs started by my shell are called jobs and have a job id.
+\item all programs started by my shell are called jobs and have a job id.
+\item all programs started by my shell are called jobs and have a job id.
+\item all programs started by my shell are called jobs and have a job id.
+\end{itemize}
 
 \section{ kill }
-You use the \textit{kill} command to send a signal to a process. I showed you one example wherein we sent an 18 to a process. You can see all of the signals available to send by typing 
+You use the \textit{kill} command to send a signal to a process. Did you read
+that last sentence? If you go on a job interview and the interviewer asks you:
+
+\begin{verbatim}
+Hello job candidate, do you know how to send a signal to a process on Linux?
+\end{verbatim}
+
+You had better know how to answer. I showed you one example wherein we sent an 18 to a process. You can see all of the signals available to send by typing 
 
 \begin{lstlisting}
 user@machine$ kill -l
 \end{lstlisting}
 
+You will see in the list are two of the signals I already showed you - the ones
+I called `the most important signals'. Those are SIGINT and  SIGTSTP. Ask the
+lass what the corresponding numbers are. These signals are known by the numbers
+you just told me, SIGINT, INT, SIGTSTP and TSTP. The signal
+18 is also known as SIGCONT or simply CONT. 
 Using the kill command you can send these signals in three ways:
 
 \begin{itemize}
@@ -99,7 +330,6 @@ In this lecture we're going to focus on the following signals:
 \item SIGTERM
 \item SIGSTOP
 \item SIGTSTP
-\item SIGSEGV
 \end{enumerate}
 
 though there are more signals, this should be enough to get you started. And if you want to learn more you of course can go get a book. We're going to look at when you use each one of the above and how programs handle them when they are received. I think these are the most interesting of the 64 signals.
@@ -139,13 +369,36 @@ user@machine$ fg 1
 user@machine$ [type ctrl + z]
 \end{lstlisting}
 
+\section{An example of a pesky program}
+Before I told you that there are programs that just won't stop. Even though you
+say SIGINT, the program will ignore you. Here is an example of such a program. I
+use a tool called pdflatex to compile the \LaTeX source code for these lecture
+notes into pretty pdfs for you. The \LaTeX compiler will refuse to respond the
+the CTRL+C command when you try to make it stop.
+
+TODO show students how to install pdflatex, get them a little sample .tex file
+to compile, and show them how the compiler, when it encounters a bug in the
+source code, will not exit even if you say CTRL+C.
+
 \section{fg and bg}
 You'll note I've used \textit{fg} a bit. This command takes a job id and puts it in the foreground. When you continue a job with \textbf{SIGCONT} it starts in the background. You have to bring it back into the foreground with \textit{fg} so you can interact with it e.g. send it a \textbf{SIGINT}. \textit{bg} has the opposite effect of putting a job in the background, like we did with \textit{\&}
 
 \section{INT, TERM, KILL}
-\textbf{INT} is sent when you hit `CTRL+Z` on your keyboard. It interupt the process and makes it stop. `SIGINT` can also be sent will \textit{kill}. \textbf{SIGTERM} and \textbf{SIGINT} are approximately the same thing, differences in their behavior are left up to the application developer. You should now send \textbf{INT} and \textbf{TERM} to the \textit{runForever} program and you will see that both end the process. \textbf{KILL} is like \textbf{INT} or \textbf{TERM} but it cannot be ignored.
+\textbf{INT} is sent when you hit `CTRL+Z` on your keyboard. It interupt the
+process and makes it stop. `SIGINT` can also be sent will \textit{kill}.
+\textbf{SIGTERM} and \textbf{SIGINT} are approximately the same thing,
+differences in their behavior are left up to the application developer. I'll
+show you more about this later when we write some little C programs that will
+ignore signals. You should now send \textbf{INT} and \textbf{TERM} to the \textit{runForever} program and you will see that both end the process. \textbf{KILL} is like \textbf{INT} or \textbf{TERM} but it cannot be ignored.
 
-A special signal is signal 9. This signal cannot be blocked or ignored. You can always send signal -9, no matter what is happening this signal will work. It cannot be blocked or ignored! In any Linux system administration book you read you will see thei \textbf{warning: `NEVER USE -9!`}. We have just seen that processes can deliberately ignore or block signals if interruption would cause some serious system harm. But sometimes, we just want the darned process to stop! You can use SIGKILL under very dire circumstamstances, because issuing tihs signal could cause file corruption!
+The number for KILL aka SIGKILL is 9. Remember, this signal cannot be blocked or
+ignored. You can always send signal -9, no matter what is happening this signal
+will work. It cannot be blocked or ignored! In any Linux system administration
+book you read you will see thei \textbf{warning: `NEVER USE -9!`}. We have just
+seen that processes can deliberately ignore or block signals if interruption
+would cause some serious system harm. But sometimes, we just want the darned
+process to stop! You can use SIGKILL under very dire circumstamstances, because
+issuing this signal could cause file corruption!
 
 Actually, thats what they say. I use \textbf{SIGKILL} sometimes and don't worry about it. My reason for doing so is boring to explain. I encourage you to read the following posts to develop your own opinion of whether or not to use SIGKILL/KILL/9
 
@@ -164,13 +417,11 @@ user@machine$ kill -9 $pid
 
 when you are in the office make sure you use \textbf{SIGINT} and \textbf{SIGTERM} first or your colleagues might look down on you as a reckless person.
 
-
-\section{Exercise}
-
-Have students experiment sending the different signals to runForever.py until I'm sure they can send them all.
-Try to send signals with CTRL+C, CTRL+Z and then on the command line with \textit{kill}
-
-\section{C Programming}
+\section{{\color{red} EXERCISE: C Programming Warmup + A Break}}
+{\color{green} Allow students to go to bathroom, talk amongst themselves for a
+few minutes. The task during these few minutes is to get the helloworld.c file
+using wget or whatever other means they want, then compile and run it as shown
+below. After the break we'll move on to the signal handlers}.
 
 We are going to write some C programs now. C is a language that is very intimately related to Linux. It looks and feels somewhat like other languages like 
 \begin{enumerate}
@@ -185,9 +436,12 @@ Example program:
 
 \lstinputlisting[language=C]{helloworld.c}
 
-To compile and run this code you:
+To compile and run this code you need to install the C compiler gcc, and then
+compile and run the code.:
 
 \begin{lstlisting}
+user@machine$ sudo apt update
+user@machine$ sudo apt install build-essential
 user@machine$ gcc helloworld.c -o helloworld # compile the code
 user@machine$ ./helloworld # run the code
 \end{lstlisting}
@@ -254,29 +508,29 @@ IPC might also be used if you have two processes on a device - maybe you have on
 
 There are many ways to do IPC, even on Linux there are a bunch of IPC mechanisms. Signals is just one of them.
 
-\section{ssh and break}
-ssh is a command line tool you use to access remote machines. This tool has many uses, and I use it every day. I'm very surprised that so many of you don't know it, but that's fine, it's a pleasure to show you!! I can't imagine how life was before ssh! It's truly one of the most common protocols/tools that Linux people use. 
+\section{Discussion of homework}
+Look at the cool shell scripts book. I told you about signal handlers today.
+Then I showed you how to do signal handling in C. Then I showed you how various
+programs handle various signals. Now I want you to read a little article I found
+online that explains how to handle signals in bash, and I want you to write some
+code. The article may be gone from the internet. 
 
-I'm going to show you how to connect to my raspberry pi at my house.
+If you look here:
 
-Take 20 minutes for everyone to do the following. Students need to install software, create an ssh key, the fork and pr my repo. Should take a while. Then they need to connect to the server.
+\url{linuxjournal.com} you'll see a notice that the company is dead, there
+wasn't enough money to support the magazine. So the articles are on the internet
+until they don't feel like paying for the webserver anymore. That could happen
+at any moment. Very sad that they couldnt get enough money to stay afloat, the
+magazine had many good articles. 
 
-\begin{center}
-\begin{enumerate}
-\item have students install openssh-client
-\item have students generate an ssh key with ssh-keygen
-\item create a repo called ssh-keys
-\item have students make a pr with their ssh keys to that repo - add the contents of your id\_rsa.pub to the Readme.md
-\item create a user on the rpi
-\item put all the public ssh  keys in the authorized\_keys file
-\item have students try to connect with username@ip\_for\_rpi
-\item have the students make a text file on the raspberry pi
-\end{enumerate}
-\end{center}
+Anyway, the one you need to read is / was here:
 
-For your midterm you're going to use ssh to connect to a remote machine and configure a postgres database on it.
-Next week in Lecture I'll show you how databases work.
+\url{https://www.linuxjournal.com/article/10815} 
 
+and in the event that it disappears it's in the Homework/Week06\_XX directory of
+this repo.
+
+You must read that article 
 
 \section{SetUID and SetGID}
 \subsection{TL;DR}

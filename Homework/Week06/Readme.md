@@ -24,18 +24,10 @@ Notice that this game depends on a file called long-words.txt. So far as I can t
 is dead. Just make your own file containing some words. Nothing vulgar or inappropriate, just 5 or so words, each on it's own
 line.
 
-## Problem 3
-Get your wallet and your laptop! Create a $5 per month digital ocean debian server and connect to it over ssh.
-
-!!!! Achtung !!!!
-Debian. Not Fedora. Not Ubuntu. Not FreeBSD. Not CentOS. Debian!!!!!
-
-!!!! Attention !!!!
-Choose the $5 option unless for some reason you want to spend more! I'm running 3 websites, file storage, and a proxy server on my $5 instance. Do you need more?
-
-We'll use this a few times throughout the semester. Your midterm relies on thi server. Also we'll be making websites so you'll host the site on the server.
-
-In total it will cost you about 10-15 bucks and then you can cancel it. This will be linked to your credit card, so if you decide you don't want your own $5 cloud server anymore, at the end of the semester you can cancel it. You might just want to keep it though! For just a few bucks I have a cloud machine that I can connect to from any computer and do linux stuff, I store files there, and I have a few websites running on it. Not bad for a few dollars.
+# Problem 3
+Install `cowsay' on your machine and make it say something. Figure out what
+cowsay is and how to use it. Look on youtube for cowsay, a million results will
+come up.
 
 ## Submission Guidelines
 Due: Before 7:00 PM on October 16th. Fork and pull request the class repository. 
