@@ -31,3 +31,10 @@ minutes ( I dunno, maybe 5-10 minutes ).
 * You make 3 interesting questions, submit a proper pull request, and then
   answer all of the exam questions right = 100 on the exam.
 
+## Should I Withdraw?
+We're doing the midterm a bit late because of spring break and usually this exam
+is used to help decide whether you withdraw from class or not. The class should get
+easier as the semester goes on. I'm showing you exactly what your exam will be.
+But if you are terrified of this exam and you still have no idea what the difference
+between mv, rm and cp is, and you don't know how to ssh into a Linux machine,
+maybe then you should start working much harder or else take that W. 
