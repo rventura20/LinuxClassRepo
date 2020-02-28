@@ -1,11 +1,5 @@
-# Midterm. October 24th 2019
+# Midterm!
 
-Reset your Digital Ocean Droplet to the Default Debian Config.
+March 18th 2020. See the Code in this directory.
 
-Configure a Postgres SQL server on your computer. Add two tables:
-
-A) Students. Columns: First Name, Last Name, ID# 
-
-B) Favorite Movie. Columns: ID#, Favorite Movie Name
-
-Allow me to connect to your server and perform an inner join on the table on the key "ID#".
+![examInAction](Images/examInAction.png)
