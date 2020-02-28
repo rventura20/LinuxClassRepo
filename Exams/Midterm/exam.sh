@@ -11,8 +11,16 @@ run_melvyns_questions(){
 	question3
 }
 
+run_julians_questions(){
+	source JulianAureliano/examQuestions.sh
+	question1
+	question2
+	question3
+}
+
 run_exam(){
 	run_melvyns_questions
+	run_julians_questions
 }
 
 print_results(){
