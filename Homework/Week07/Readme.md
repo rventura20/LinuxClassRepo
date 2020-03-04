@@ -11,8 +11,20 @@ Have a look at the schema image so you know what columns are in the table:
 
 Write each of your sqlite3 queries in files called queryNameXYZ.sql.
 You'll probably need to write 10 or so queries. I don't see you needing more
-than 20. I explained how to write the queries in .sql files and pass them to
-sqlite3 in section 6 of the lecture notes.
+than 20.
+
+A sample query file would contain:
+
+```
+SELECT * FROM person LIMIT 1;
+```
+
+and you run it like:
+
+```
+user@machine$ sqlite3 sql-murder-mystery.db < sqlQuery1.sql
+# output comes out here
+``` 
 
 ## Submission:
 
