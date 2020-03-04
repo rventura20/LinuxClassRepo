@@ -79,3 +79,9 @@ question3(){
 			;;
 	esac
 }
+
+run_melvyns_questions(){
+	question1
+	question2
+	question3
+}
