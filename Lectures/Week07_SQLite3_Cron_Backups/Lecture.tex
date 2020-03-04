@@ -114,8 +114,8 @@
 \let\footnote\thanks 
 {\LARGE \@title \par }
 \vskip 0.5em
-{\large \@author \par}
-\vskip 0.5em
+%{\large \@author \par}
+%\vskip 0.5em
 {\large \@date \par}
 \end{minipage}
 \vskip 1em \par
@@ -126,8 +126,8 @@
 \begin{document}
 %
 %title and author details
-\title{\textbf{cron, tar, SQL, and exam}}
-\author[1]{Melvyn Ian Drag}
+\title{\textbf{Week07 - cron, tar, SQL, and exam}}
+%\author[1]{Melvyn Ian Drag}
 \date{\today}
 %
 \maketitle
@@ -155,7 +155,9 @@ Plan for the evening:
 
 Create a NEW \$5 Debian 10 server and add your ssh key so you can get in.
 
-{\LARGE MAKE SURE ITS A FRESH NEW SERVER! }
+{\LARGE MAKE SURE ITS A FRESH NEW SERVER! You might have files on your old
+machine that will cause errors in today's lecture. Just delete your old machine
+and create a new one to avoid problems.}
 
 Then:
 \begin{lstlisting}[style=term]
@@ -163,6 +165,13 @@ root@machine$ apt update
 root@machine$ apt install sqlite3 # well use this later.
 root@machine$ git clone https://github.com/melvyniandrag/LinuxClassRepo.git
 #\end{lstlisting}
+
+We'll be looking at the materials in the following directories
+
+\begin{itemize}
+\item Lectures/Week07\_SQLite\_cron\_Backups
+\item Homework/Week07
+\end{itemize}
 
 \section{Review}
 
@@ -681,6 +690,9 @@ I wrote while experimenting with Android:
 
 Your homework will be to solve the murder mystery and send me all the .sql
 scripts you wrote to figure it out.
+
+\section{Break}
+Another 5 minute break before we move on to discussing the exam.
 
 \section{Exam}
 
