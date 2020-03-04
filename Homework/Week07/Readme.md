@@ -32,4 +32,5 @@ user@machine$ sqlite3 sql-murder-mystery.db < sqlQuery1.sql
 * screenshot of you running a query on your computer
 * solution.txt telling me who the murderer is!
 
-Due via pull request by 11:59 PM of Monday, March 16th.
+Due via pull request by 11:59 PM of Monday, March 16th. Please put your
+submission in Homework/Week07/StudentSubmissions/YourName.
