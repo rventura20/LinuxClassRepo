@@ -144,10 +144,11 @@ Plan for the evening:
 \setlength\itemsep{0em}
 \item \schedule{7:00 - 7:20}{get setup}
 \item \schedule{7:20 - 7:30}{morale boosting review}
-\item \schedule{7:30 - 8:00}{backups with cron + tar}
+\item \schedule{7:30 - 7:55}{backups with cron + tar}
+\item \schedule{7:55 - 8:00}{Break}
 \item \schedule{8:00 - 9:00}{sqlite3 murder mystery}
-\item \schedule{9:00 - 9:35}{prepare for exam}
-\item \schedule{9:35 - 9:45}{coming up this semester}
+\item \schedule{9:00 - 9:05}{Break}
+\item \schedule{9:05 - 9:45}{prepare for exam}
 \end{itemize}
 
 \section{Setup}
@@ -205,8 +206,9 @@ There's more to know, I just spent a minute thinking about the semester - the
 definitive source of what you should know is in the lecture materials from the
 previous six weeks.
 
-\section{Cron}
-Cron is used for scheduling jobs on your computer. You can modify a thing called a crontable to tell your computer to do thing at certain time(s) in the future.
+\section{cron}
+\textbf{cron} is used for scheduling jobs on your computer. You can modify a
+thing called a \textbf{crontable} to tell your computer to do thing at certain time(s) in the future.
 
 All you have to do is add some command(s) to the crontable and then yuou're good
 to go! The computer will do the rest of the work! Pretty cool stuff. Your phone
@@ -230,7 +232,10 @@ root@digitalOcean$ update-alternatives --config editor
 
 Now we are ready.
 
-View your cron table with \textit{crontab -l}, edit the crontab with \textit{crontab -e}. Choose vim if prompted to  select which text editor to use.
+View your cron table with \textit{crontab -l}, edit the crontab with \textit{crontab -e}.
+Choose vim if prompted to  select which text editor to use. It may say vim.tiny,
+vim.basic. To be honest in all these years I've just chosen a random one. I
+should learn the distinction.
 
 To schedule jobs, you add rows of the form
 \begin{lstlisting}
@@ -250,7 +255,9 @@ where the above represent:
 
 For example, to echo "hello" into a file on March 4th, every minute of the 19th
 hour of the day, you will add the following line to your crontab, as the root
-user. 
+user. \lectnote{Maybe belabor this point a bit. The m h dom etc. stuff can be
+confusing at first. Take a few minutes to discuss it with students to try and
+clarify it a bit.}
 
 \begin{lstlisting}[style=sh]
 * 19 4 3 * echo "hello" >> /root/hello.txt
@@ -277,11 +284,11 @@ crontable entry.}}}
 \end{figure}
 
 \section{Backups with Cron}
-This was a silly example that I just gave you. More commonly you'll sue cron to
+This was a silly example that I just gave you. More commonly you'll use cron to
 back up your computer.
 
 \subsection{tar}
-Tar is used for creating archives, i.e. a single file containing a bunch of
+\textbf{tar} is used for creating archives, i.e. a single file containing a bunch of
 files. It's similar to a zip or rar file you may have seen at some time in your
 life. Heck, you may be using tar files everyday too, I don't know. Some folks
 were submitting me homeworks in the beginning of class as an archive - I can't
@@ -308,24 +315,24 @@ you do it:
 \begin{lstlisting}[style=term]
 root@machine$ ls
 a
-root@machine$ tar -cvf a.zip a
+root@machine$ tar -cvf a.tar a # create a.tar from directory a. 
 root@machine$ ls 
-a a.zip 
+a a.tar
 \end{lstlisting}
 
 To verify that it worked, let's unpack the archive in another directory.
 
 \begin{lstlisting}[style=term]
 root@machine$ ls
-a a.zip
+a a.tar
 root@machine$ mkdir NewDirectory
 root@machine$ mv a.zip NewDirectory
 root@machine$ cd NewDirectory
 root@machine$ ls
-a.zip
-root@machine$ tar -xvf a.zip
+a.tar
+root@machine$ tar -xvf a.tar
 root@machine$ ls
-a.zip a 
+a.tar a 
 \end{lstlisting}
 
 In the above examples you've seen how to create a .tar archive and how to unpack
@@ -335,6 +342,9 @@ it. For the record, let's just see where the tar executable is on our system:
 root@machine$ which tar
 /usr/bin/tar
 \end{lstlisting}
+
+This output may vary. It might say `/bin/tar' or `/usr/bin/tar' or something
+else. This doesn't matter. Just make a mental note of what it says.
 
 \subsection{backup}
 
@@ -350,11 +360,21 @@ ways to do this, but I'm going to show you this way to give your fingers some
 practice. To learn more about this, go on youtube, or talk to me when we both
 have free time. 
 
+Create a user for the coming example:
+
+\begin{lstlisting}[style=term]
+root@machine$ adduser YOURNAMEHERE
+# then follow the instructions as last time
+\end{lstlisting}
+
 Add the following line to root's crontab to back up /home/melvyn every day at
 midnight.
 
 NOTE: BELOW I PUT /USR/BIN/TAR - you need to put the output of `which tar'. I
-don't know where tar will be on your system.
+don't know where tar will be on your system. \lectnote{Change the cron schedule
+to one that will be useful in class so students can see it in action. The time
+is probably around 7:40 pm. So set the time stamp to 42 19 * * * so that the tar
+command will run at 7:42 PM.}
 
 \begin{lstlisting}
 0 0 * * * /usr/bin/tar -cvf /root/melvyn-home.tar /home/melvyn
@@ -397,6 +417,10 @@ me about it or whatever.
 
 Moving on, now we'll plant some seeds of knowledge that we'll see blossom next
 week. Let's talk about SQL.
+
+\section{Intermezzo}
+
+Potty break and discussion before we learn SQL.
 
 \section{SQL}
 \subsection{Intro}
@@ -588,11 +612,15 @@ or so. So the above commands can be run as
 \item SELECT * FROM table WHERE column="value";
 \item SELECT * FROM table WHERE column="value" AND column2="value2";
 \item SELECT * FROM table WHERE column LIKE "\%value\%";
-\item SELECT * FROM table LIMIT 5; # or any number
+\item SELECT * FROM table LIMIT 5; \# or any number
 \item SELECT * FROM table ORDER BY column;
 \item SELECT * FROM table ORDER BY column ASC;
 \item SELECT * FROM table ORDER BY column DESC;
 \end{enumerate}
+
+In case I didn't mention it before - ASC means ascending, or the numbers get
+bigger as you go on. DESC means descending, or the numbers get smaller as you go
+on.
 
 \subsection{Running sqlite3 commands from a script}
 You don't have to use the command line to type in commands slowly. You can pass
@@ -634,8 +662,32 @@ Also, if you have Android you can download a crappy implementation of the game
 I wrote while experimenting with Android:
 \url{https://play.google.com/store/apps/details?id=com.ballofknives.sqlmurdermystery}
 
+Your homework will be to solve the murder mystery and send me all the .sql
+scripts you wrote to figure it out.
+
 \section{Exam}
-See the
 
+Let's wrap things up with a discussion of the exam. \lectnote{Show the class the
+sketch of the exam I've been working on in the Midterm/SketchOfMidterm
+directory.}.
 
+Your midterm will be half programming and half multiple choice exam. You all
+will write the exam! I want you all to write 3 good multiple choice Linux
+questions as I've sketched out in the exam directory. Questions about the
+various commands you know. The thing is, I need you all to make sure that your
+questions are unique. We learned alot in this class. 
+
+I don't want any duplicate questions, but orchestrating a software project
+between 30 people is very difficult. So just follow the test instructions and
+I'll look through your PRs and whatever duplicate questions I see I'll just fix
+them up myself. \lectnote{To make this easier, assign topics to people in
+class. For example, assign Lesly chmod, Jackie ls, Raheem vim, etc.}
+
+In class look over the exam with the class, make sure the instructions are clear
+and take questions or leave early.
+
+\section{Did anyone get the PR?}
+Did anyone make a PR on the wicked cool shell scripts repo? It's an easy target.
+If anyone wants it, raffle it off in class. It would be annoying if the repo
+maintainer got a flood of PRs about the same issue out of the blue.
 \end{document}
