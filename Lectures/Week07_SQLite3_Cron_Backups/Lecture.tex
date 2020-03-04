@@ -500,7 +500,22 @@ so we see that the table `crime\_scene\_report' has columns `date', `type',
 `description', and `city'. \lectnote{SQL students learned so far is SELECT *
 FROM tableName LIMIT \#}
 
-Now we want the reports that happened on January 15th 2018 and looking at the
+Now, you might want to know what all is in this database. So I'll give you a
+picture. See figure ~\ref{fig:schema} to see the tables and the columns they
+contain. There are arrows and keys in the image. If you know what those mean,
+great. If you don't, it doesn't matter. Ignore them for now and next lecture
+when we set up a proper database server I'll explain it to you. 
+
+\begin{figure}[h]
+\centering
+	\includegraphics[width=0.8\textwidth]{Images/schema.png}
+	\caption{{\small \texttt{Murder mystery database schema. \textbf{schema} is
+a fancy nerd word that means "the layout of the database" i.e. the columns and
+tables in it and the relationships between them.}}}
+	\label{fig:schema}
+\end{figure}
+
+We want the reports that happened on January 15th 2018 and looking at the
 date format can you guess how the date Jan 15th 2018 is written in the
 table?\lectnote{wait for students to guess 20180115}
 
