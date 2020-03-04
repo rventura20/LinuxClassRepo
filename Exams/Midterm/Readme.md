@@ -5,17 +5,14 @@ March 18th 2020. See the Code in this directory.
 ![examInAction](Images/examInAction.png)
 
 ## Part 1
-You must make a PR on this repo containing your three exam questions by March
-16th at Midnight. Your code must work! Test it before giving me a PR. Talk to
-your friends and to me to make sure your code is good, or do the PR well in
-advance of the due date so we can sort it out.
-
-Sending me junk at 11:45 pm is a sure way to get a zero for this part of the
-exam.
+**You must make a PR on this repo containing your three exam questions by March
+16th at Midnight**. Your code must work! This is time sensitive, and the whole
+class needs you to make these good questions on time so I have a few days to
+polish it and work out any kinks before giving the exam on the 18th.
 
 ## Part 2 
 Come to class and complete the exam you and your peers created in under XYZ
-minutes ( I dunno, maybe 5-10 minutes ).
+minutes, probably 15 minutes at the end of class. 
 
 ## Grading
 50% for making good exam questions
