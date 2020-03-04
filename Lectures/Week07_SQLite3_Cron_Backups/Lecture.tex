@@ -18,6 +18,27 @@
 \newcommand{\lectnote}[1]{\marginpar{\texttt{{\small{ #1 } }}}}
 
 \usepackage{listings}
+\lstdefinestyle{java}{
+  language=Java,
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  basicstyle=\small\ttfamily,
+  numbers=left,
+  stepnumber=1,
+  frame=shadowbox,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
+}
+
 \lstdefinestyle{term}{language=bash,
   columns=fullflexible,
   showspaces=false,
@@ -211,6 +232,20 @@ time! In this class we're learning vim.
 \item what's the sudo group?
 \item who is root?
 \item how to install software on debian with apt?
+\item what is the keyboard shortcut to send SIGINT ( terminate a process, not
+pause it )?
+\item keyboard shrtcut to send SIGTSTP ( stop aka pause a process )?
+\item signal to restart a process?
+\item grep
+\item basic notion of a regular expression. Could you find this pattern in a
+file: letter,number,letter,number,letter,number? e.g.could you use grep to find
+``a1b2c3" and ``z8t5r2"?
+\item difference between a job and a process?
+\item what is your favorite version control software?
+\item what is a pipe?
+\item to ssh into a server you need to put your ssh key in which file?
+\item purpose of setuid programs? ( Allow a non root user to run a program as if
+he/she were root ).
 \end{enumerate}
 \end{multicols}
 There's more to know, I just spent a minute thinking about the semester - the
@@ -270,7 +305,7 @@ user. \lectnote{Maybe belabor this point a bit. The m h dom etc. stuff can be
 confusing at first. Take a few minutes to discuss it with students to try and
 clarify it a bit.}
 
-\begin{lstlisting}[style=sh]
+\begin{lstlisting}[style=term]
 * 19 4 3 * echo "hello" >> /root/hello.txt
 \end{lstlisting}
 
@@ -387,12 +422,43 @@ to one that will be useful in class so students can see it in action. The time
 is probably around 7:40 pm. So set the time stamp to 42 19 * * * so that the tar
 command will run at 7:42 PM.}
 
-\begin{lstlisting}
+\begin{lstlisting}[style=term]
 0 0 * * * /usr/bin/tar -cvf /root/melvyn-home.tar /home/melvyn
 \end{lstlisting}
 
 AND OF COURSE YOU MUST HAVE CREATED A USER `melvyn' for this to work otherwise
 there won't be any /home/melvyn to backup.
+
+If you want to backup /home/jacqueline/importantfiles every tuesday at noon you
+would add the following to your crontab:
+
+\begin{lstlisting}[style=term]
+0 12 * * 2 /bin/tar -cvf /root/jackie.tar /home/jacqueline/importantfiles
+\end{lstlisting}
+
+The above line in the cron table says to run the  tar command when:
+\begin{itemize}
+\item minute = 0
+\item hour = 12
+\item day of the month = any
+\item month of the year = any
+\item day of the week = 2 ( Tuesday, because Sunday is 0, Monday is 1, etc. )
+\end{itemize}
+
+and note, once again, that we must provide the path to \textit{tar} as
+\textit{cron} doesn't know
+where \textit{tar} is. \textit{cron} did know where \textit{echo} was in an earlier example, and I told you
+that this is because \textit{echo} is a \textbf{builtin}. This is an important
+concept to know but there probably won't be any time to discuss more about
+builtins. If you want a list of all the commands you can use with cron without
+providing the path ( as we do with tar ), just type `help' at the command
+prompt. 
+
+\begin{lstlisting}[style=term]
+user@machine$ help
+# a list of all shell builtins is provided. 
+# you will see echo in the list, but not tar.
+\end{lstlisting}
 
 \subsection{Going Further}
 That's all you need to know to get started! If you want to go further you might
@@ -457,16 +523,37 @@ question to the class. have students name some database programs they know.
 Access, MySQL, PostgreSQL, etc. Any others that you all know about? }.
 
 \subsection{Murder Mystery}
-A while back I came across a cool link. Let's have a look at it. It's a database
+A while back I came across a cool game that is played with a little sqlite3
+database. Let's have a look at it. It's a database
 that contains all the data you need, as an investigator ,to solve a murder
 mystery! Let's do it.
 
 The Murder Mystery database is found in the class repository  we cloned at the
 beginning of lecture. It is the sql-murder-mystery.db file in the Week07 lecture
-directory. The only clue we
+directory. 
+
+
+\begin{center}
+{\color{red}
+\vline width 3pt
+\hspace{1em}
+\vline width 2pt
+}
+\hspace{1em}
+\begin{minipage}{0.7\textwidth}
+\textsc{The only clue we
 have to start with is that a murder occured on Jan 15th, 2018 in SQL City and
 that we must start by looking at the crime scene reports from the police
-department's database.
+department's database.}
+\end{minipage}
+{\color{red}
+\hspace{1em}
+\vline width 2pt
+\hspace{1em}
+\vline width 3pt
+}
+\end{center}
+
 
 Open the database like this:
 
@@ -590,8 +677,8 @@ sqlite> select * from person where address_street_name="Northwestern Dr"
 # we want the last house on the street! This is too much work to look through!
 \end{lstlisting}
 
-If we were stupid we could scroll through all this data and find the biggest
-house number. But we can do better than that! What if there were one million
+If we were not clever people we would scroll through all this data and find the biggest
+house number. But we can do better than that because we are clever! What if there were one million
 rows  here?!?! We would be searching for days. I'll show you one last SQL
 command.
 
@@ -610,6 +697,37 @@ sqlite> select * from person where address_street_name="Northwestern Dr" order
 by address_number desc limit 1;
 id|name|license_id|address_number|address_street_name|ssn
 14887|Morty Schapiro|118009|4919|Northwestern Dr|111564949
+\end{lstlisting}
+
+So now we've found the two witnesses. Now we need to find more information about
+the murder. Well, if you look at the schema image I've provided or you review
+the tables in the database by typing `.tables' as shown above, you will see
+there is an `interview' table. Maybe the next thing to do is look there and see
+what the witnesses said about the crime. Solving this mystery will be your
+homework, so I'll leave it at that.
+
+\subsection{Play more with SQLite3}
+Let's run a few more queries before moving on, just so you get more practice.
+
+\textbf{Is there anyone named John in the person table?}
+
+\begin{lstlisting}[style=term]
+sqlite> select * from person where name like "%John%";
+#look at results
+\end{lstlisting}
+
+\textbf{Is there anyone driving a Ford?}
+\begin{lstlisting}[style=term]
+sqlite> select * from drivers_license where car_make="Ford";
+#look at results
+# if that doesn't work type
+# select * from drivers_license where car_make like "%ord%";
+\end{lstlisting}
+
+\textbf{What is the largest date in the database?}
+\begin{lstlisting}[style=term]
+sqlite> select * from crime_scene_report order by date desc limit 1;
+#look at result
 \end{lstlisting}
 
 \subsection{Recap}
@@ -647,6 +765,17 @@ or so. So the above commands can be run as
 In case I didn't mention it before - ASC means ascending, or the numbers get
 bigger as you go on. DESC means descending, or the numbers get smaller as you go
 on.
+
+\subsection{End SQL Statements with ;}
+In the many SQL statements we've run so far you'll have noticed that they all
+end with a semicolon. This is obligatory. 
+
+Don't do this:
+\begin{lstlisting}[style=term]
+sqlite> select * from person
+\end{lstlisting}
+
+sqlite will sit and wait for you to provide a semicolon.
 
 \subsection{Running sqlite3 commands from a script}
 You don't have to use the command line to type in commands slowly. You can pass
@@ -712,8 +841,66 @@ I'll look through your PRs and whatever duplicate questions I see I'll just fix
 them up myself. \lectnote{To make this easier, assign topics to people in
 class. For example, assign Lesly chmod, Jackie ls, Raheem vim, etc.}
 
-In class look over the exam with the class, make sure the instructions are clear
-and take questions or leave early.
+I've done a few things in this script. Let's make sure to discuss them as we
+look through the exam.
+
+\subsection{bash functions}
+bash is a programming language and has functions just like all the other
+languages you know.
+
+In bash a function looks like this:
+\begin{lstlisting}[style=sh]
+run_exam(){
+	echo "the function body goes here"
+}
+\end{lstlisting}
+
+this is very similar to a java function that looks like this:
+
+\begin{lstlisting}[style=java]
+public void run_exam(){
+	System.out.println("the function body goes here");
+}
+\end{lstlisting}
+
+a surprising thing is that you call the function without parentheses. for
+example consider the following:
+
+\begin{lstlisting}[style=sh]
+#!/bin/bash
+
+run_exam(){
+	echo "function body here"	
+}
+
+# call the function. 
+# Note I say run_exam and not run_exam()
+run_exam
+\end{lstlisting}
+
+this is different from languages like Java - in those kind of languages you need
+parentheses.
+
+\subsection{read}
+If you want to read user input to a bash program you can use \textit{read}. Look
+at MelvynDrag/examQuestions.sh to see my use of read ( this is how you will use
+read ).
+
+\subsection{source}
+If you want to import one script into another in bash you type \textit{source
+scriptName.sh}. In Java you would say \textit{import java.util.Scanner} or
+something like this. Well, in bash you say `source'.
+
+\subsection{case}
+bash has a \textit{case} statement. This is like Java's \textit{switch/case}.
+Look at MelvynDrag/examQuestions.sh to see how it's used. Pretty cool how you
+end a \textit{case} with \textit{esac}. This is like how bash ends if statements
+- \textit{fi}.
+
+\subsection{final note to lecturer}
+I guess those are the few new things I've had to use in the exam. In class look over the exam with the class, make sure the instructions are clear
+and take questions. If time, wait and make sure every student can write at least
+one exam question.
 
 \section{Did anyone get the PR?}
 Did anyone make a PR on the wicked cool shell scripts repo? It's an easy target.
