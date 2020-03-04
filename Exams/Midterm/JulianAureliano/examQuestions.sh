@@ -1,13 +1,13 @@
 question1(){
-	echo "todo"
+	echo "Julians todo"
 }
 
 question2(){
-	echo "todo"
+	echo "Julians todo"
 }
 
 question3(){
-	echo "todo"
+	echo "Julians todo"
 }
 
 run_julians_questions(){
