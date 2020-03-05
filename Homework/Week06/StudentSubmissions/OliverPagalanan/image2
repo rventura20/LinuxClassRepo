@@ -1,0 +1,48 @@
+root@myFirstServer:~# whoami
+root
+root@myFirstServer:~# bash states
+
+What city is the capital of Hawaii?
+Answer: Honolulu
+
+*** Absolutely correct!  Well done! ***
+
+What city is the capital of Texas?
+Answer: Austin
+
+*** Absolutely correct!  Well done! ***
+
+What city is the capital of Indiana?
+Answer: Indianapolis
+
+*** Absolutely correct!  Well done! ***
+
+What city is the capital of Iowa?
+Answer: ^C - Ctrl-C ignored
+Des Moines
+
+*** Absolutely correct!  Well done! ***
+
+What city is the capital of Connecticut?
+Answer: ^C - Ctrl-C ignored
+Hartford
+
+*** Absolutely correct!  Well done! ***
+
+What city is the capital of Kentucky?
+Answer: Frankfort
+
+*** Absolutely correct!  Well done! ***
+
+What city is the capital of New York?
+Answer: Albany
+
+*** Absolutely correct!  Well done! ***
+
+What city is the capital of North Dakota?
+Answer: quit
+
+Bismarck is the capital of North Dakota.
+You got 7 out of 8 presented.
+root@myFirstServer:~#
+
