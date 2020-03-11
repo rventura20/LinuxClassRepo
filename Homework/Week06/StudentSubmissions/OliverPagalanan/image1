@@ -1,0 +1,43 @@
+root@myFirstServer:~# gcc execve_setuid.c -o example
+root@myFirstServer:~# chown root:root example
+root@myFirstServer:~# chmod 6777 example
+root@myFirstServer:~# ls -l example
+-rwsrwsrwx 1 root root 8704 Mar  2 03:07 example
+root@myFirstServer:~# whoami
+root
+root@myFirstServer:~# ./example
+My UID is: 0. My GID is: 0
+My UID is: 0. My GID is: 0
+My UID is: 0. My GID is: 0
+Hello Its Me
+root@myFirstServer:~# su opagalanan
+opagalanan@myFirstServer:/root$ sudo ls -l 
+example[sudo] password for opagalanan:
+-rwsrwsrwx 1 root root 8704 Mar  2 03:07 example
+opagalanan@myFirstServer:/root$ whoami
+opagalanan
+opagalanan@myFirstServer:/root$ sudo ./example
+My UID is: 0. My GID is: 0
+My UID is: 0. My GID is: 0
+Hello Its Me
+My UID is: 0. My GID is: 0
+opagalanan@myFirstServer:/root$ sudo chmod 6744 example
+opagalanan@myFirstServer:/root$ sudo ls -l 
+example-rwsr-Sr-- 1 root root 8704 Mar  2 03:07 example
+opagalanan@myFirstServer:/root$ sudo ./example    
+My UID is: 0. My GID is: 0
+My UID is: 0. My GID is: 0
+Hello Its Me
+My UID is: 0. My GID is: 0
+opagalanan@myFirstServer:/root$ sudo chown root:opagalanan example
+opagalanan@myFirstServer:/root$ sudo ls -l example
+-rwxr-Sr-- 1 root opagalanan 8704 Mar  2 03:07 example
+opagalanan@myFirstServer:/root$ sudo ./example
+My UID is: 0. My GID is: 0
+My UID is: 0. My GID is: 0
+Hello Its Me
+My UID is: 0. My GID is: 0
+opagalanan@myFirstServer:/root$ exit
+exit
+root@myFirstServer:~#
+
