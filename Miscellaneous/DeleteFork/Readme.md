@@ -7,7 +7,7 @@ for explaining now. As a work around, just delete your old fork.
 It's pretty easy, look at the pictures I took below.
 
 ## Step 1 - Notice your fork is very out of date
-See how the folders in JulianAureliano/LinuxClassRepo are different from melvyniandrag/LinuxClassRepo? That's no good, the fork is way out of date.
+See how the folders in JulianAureliano/LinuxClassRepo are different from melvyniandrag/LinuxClassRepo? For example, notice that the Week07 and Week08 directories are different? That's no good, the fork is way out of date.
 
 ![step 1](01_forkOutOfDate.png)
 
