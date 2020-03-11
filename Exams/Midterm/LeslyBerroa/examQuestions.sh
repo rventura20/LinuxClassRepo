@@ -10,8 +10,6 @@ question3(){
 	echo "todo"
 }
 
-
-
 run_leslyberroas_questions(){
 	question1
 	question2
