@@ -5,10 +5,20 @@ fork a long time ago. Later in the semester I'll explain why; there is no time
 for explaining now. As a work around, just delete your old fork. 
 
 It's pretty easy, look at the pictures I took below.
+
+## Step 1 - Notice your fork is very out of date
 ![step 1](01_forkOutOfDate.png)
+
+## Step 2 - Click on Settings for your Fork
 ![step 2](02_clickSettingsForFork.png)
+
+## Step 3 - Scroll to the Bottom of the Settings
 ![step 3](03_scrollToBottomOfSettings.png)
+
+## Step 4 - Click the Delete Button and Do What It Says
 ![step 4](04_deleteYourFork.png)
+
+## Step 5 - Now You can Make a New Fork and Do a Successful Pull Request
 
 Then you can create a pull request [as explained
 here](https://www.youtube.com/watch?v=OyN39W7P4Mc).
