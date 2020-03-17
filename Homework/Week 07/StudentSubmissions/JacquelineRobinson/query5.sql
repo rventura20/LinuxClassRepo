@@ -1,1 +1,1 @@
-SELECT * FROM person WHERE address_street_name = "Franklin Ave";
+SELECT transcript FROM interview WHERE person = 14887;
