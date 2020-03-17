@@ -1,1 +1,1 @@
-SELECT * FROM person WHERE name = "Annabel" and address_street_name = "Franklin Ave";
+Select * FROM person WHERE address_street_name = northwestern drive ORDER BY address_street_number DESC LIMIT 1;
