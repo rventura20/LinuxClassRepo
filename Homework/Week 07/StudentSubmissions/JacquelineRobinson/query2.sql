@@ -1,1 +1,1 @@
-SELECT * FROM person WHERE name = "Annabel" and address_street_name = "Franklin Ave" and city = "SQL City";
+SELECT * FROM person WHERE name = "Annabel" and address_street_name = "Franklin Ave";
