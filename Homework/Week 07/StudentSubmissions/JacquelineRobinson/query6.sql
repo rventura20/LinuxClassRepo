@@ -1,1 +1,1 @@
-SELECT * FROM get_fit_now_check_in WHERE check_in_date = 20180109;
+SELECT transcript FROM interview WHERE person_id = 16371;
