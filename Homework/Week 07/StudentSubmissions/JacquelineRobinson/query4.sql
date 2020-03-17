@@ -1,1 +1,1 @@
-sqlite> SELECT * FROM person WHERE address_street_name = "Northwestern Dr" and address_number = 4919;
+SELECT * FROM person WHERE name = "Annabel Miller";
