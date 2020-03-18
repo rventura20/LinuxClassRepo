@@ -1,1 +1,1 @@
-SELECT transcript FROM interview WHERE person_id = 14887;
+SELECT transcript FROM interview JOIN person ON person_id = id WHERE name = "Morty Schapiro"
