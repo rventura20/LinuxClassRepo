@@ -2,7 +2,7 @@
 
 question1(){
 	echo "todo"
-	echo "Using a command line, How to move file across directory?"
+	echo "Using a command line, How to move file across multiple directory?"
 	echo "a) mv /home/ghost/textFile /home/ghost/directoryFile"
 	echo "b) mv /home/ghost/currentFile directoryFile"
 	echo "c) MV currentFilename  nextDirectoryname"
