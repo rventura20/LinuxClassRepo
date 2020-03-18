@@ -1,1 +1,1 @@
-> INSERT INTO solution VALUES (1, 'Jeremy Bowers');
+INSERT INTO solution VALUES (1, 'Jeremy Bowers');
