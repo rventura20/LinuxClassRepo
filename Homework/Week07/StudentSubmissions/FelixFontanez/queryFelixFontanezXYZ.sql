@@ -1,0 +1,10 @@
+SELECT * FROM crime_scene_report WHERE DATE="20180115" AND city="SQL City" AND TYPE="MURDER";
+SELECT * FROM person WHERE address_street_name="Northwestern Dr" ORDER BY address_number DESC limit 1;
+SELECT * FROM get_fit_now_member WHERE membership_status="gold" AND id LIKE "%48Z%";
+SELECT * FROM interview WHERE person_id="67318";
+INSERT INTO solution VALUES (1, 'Jeremy Bowers');
+SELECT value FROM solution;
+SELECT * FROM drivers_license WHERE hair_color="red" AND car_make="Tesla";
+SELECT * FROM person WHERE license_id="202298";
+INSERT INTO solution VALUES (1, 'Miranda Priestly');
+SELECT value FROM solution;
