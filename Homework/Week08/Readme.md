@@ -20,7 +20,7 @@ Due via pull request March 24th at midnight.
 
 ## Sample Submission
 
-![Image1](StudentSubmissions/MelvynDrag/digitalOcean.png)
+![Image1](https://github.com/melvyniandrag/LinuxClassRepo/blob/master/Homework/Week08/StudentSubmissions/MelvynDrag/digitalOcean.PNG)
 
 ## Conclusion
 If you do the above, you will have **conquered databases on Linux**. You'll have experimented with sqlite and postgres, compared syntax, solved a murder mystery, and done some SQL joins. Good for you, I'm proud of you.
