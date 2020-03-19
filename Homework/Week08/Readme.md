@@ -1,25 +1,20 @@
 # Week 08 Homework
 
-Modify your cron table such that every hour a cowsaying the current time is appended to the file ~/cowsayingTime.txt
+Configure two digital ocean machines - one as a postgres server as described in sections 1-7.3 in the lecture notes. The other one configure as a client machine as described in section 7.4.
 
-```
-date | cowsay >> ~/cowsayingTime.txt
-``` 
+For 95% credit:
+Add store and warehouse tables as your server as I did in lecture. Then, connect from your client machine and perform the inner join as I did in the video.
 
-Note what we saw in class. You'll probably need to specify the full path to `date` and the full path to `cowsay` in the command you enter in the crontab. Instead of `date`, for example, put `/path/to/date`, which you can find by typing `which date`.
+For 100% credit:
+Add an extra Boolean Not Null column `is_gucci` to the store table. Include it in your inner join result from the client machine.
 
-As always, if you don't have `cowsay` on your machine, `apt install` it.
+## Submit
+* screenshot of your digital ocean page showing your two machines running and displaying the ip addresses.
+* screenshot of a terminal session showing you a) ssh into your "laptop" b) connect to the sql server via the `psql -h ... ` command c) run the inner join described above
 
-Submit:
-* mycrontab.txt ( get this with crontab -l > `mycrontab.txt` )
-* your cowsayingTime.txt file containing >= 5 hours of time stamps 
+Submit your images under Homework/Week08/StudentSubmissions/YourName.
 
-## Reference
-I showed you a crontab and mentioned how to add lines to it. Here are a couple of good youtube references:
-* https://www.youtube.com/watch?v=7MFMnsnfBJs
-* https://www.linuxjournal.com/article/1189 
+As always, this assignment will take time, but I've given you a video in which I did *exactly* what I'm asking you to do. Grading is 0/95/100 - either do the assignment or don't, there's really no space for partial credit in this. If the above requirements are not clear make sure to contact me or a friend for help with a reasonable amount of buffer space. Be careful to include all of the required information in your screenshots.
 
-## Submission Guidelines
-
-Submit all the indicated things on github via pull request. Put your content in StudentSubmissions/Week08/YourName.
-Make sure you put it in the right directory! 
+## Conclusion
+If you do the above, you will have **conquered databases on Linux**. You'll have experimented with sqlite and postgres, compared syntax, solved a murder mystery, and done some SQL joins. Good for you, I'm proud of you.
