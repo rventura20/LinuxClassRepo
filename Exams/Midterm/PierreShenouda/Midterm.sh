@@ -7,16 +7,16 @@ question1(){
 	read answer
 	case $answer in
 		"a") 
-			echo "melvyn question 1 right" >> $ANSWER_FILE
+			echo "pierre question 1 right" >> $ANSWER_FILE
 			;;
 		"b")
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "pierre question 1 wrong" >> $ANSWER_FILE
 			;;
 		"c")
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "pierre question 1 wrong" >> $ANSWER_FILE
 			;;
 		"d") 
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "pierre question 1 wrong" >> $ANSWER_FILE
 			;;
 		*)
 			echo "Please enter a valid selection from a-d"
@@ -34,16 +34,16 @@ question2(){
 	read answer
 	case $answer in
 		"a") 
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "pierre question 1 wrong" >> $ANSWER_FILE
 			;;
 		"b")
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "pierre question 1 wrong" >> $ANSWER_FILE
 			;;
 		"c")
-			echo "melvyn question 1 right" >> $ANSWER_FILE
+			echo "pierre question 1 right" >> $ANSWER_FILE
 			;;
 		"d") 
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "pierre question 1 wrong" >> $ANSWER_FILE
 			;;
 		*)
 			echo "Please enter a valid selection from a-d"
@@ -62,16 +62,16 @@ question3(){
 	read answer
 	case $answer in
 		"a") 
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "pierre question 1 wrong" >> $ANSWER_FILE
 			;;
 		"b")
-			echo "melvyn question 1 right" >> $ANSWER_FILE
+			echo "pierre question 1 right" >> $ANSWER_FILE
 			;;
 		"c")
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "pierre question 1 wrong" >> $ANSWER_FILE
 			;;
 		"d") 
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "pierre question 1 wrong" >> $ANSWER_FILE
 			;;
 		*)
 			echo "Please enter a valid selection from a-d"
