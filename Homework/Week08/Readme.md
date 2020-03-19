@@ -19,8 +19,10 @@ As always, this assignment will take time, but I've given you a video in which I
 Due via pull request March 24th at midnight.
 
 ## Sample Submission
-
+### digitalOcean.png
 ![Image1](https://github.com/melvyniandrag/LinuxClassRepo/blob/master/Homework/Week08/StudentSubmissions/MelvynDrag/digitalOcean.PNG)
+### innerJoin.png
+![Image2](https://github.com/melvyniandrag/LinuxClassRepo/blob/master/Homework/Week08/StudentSubmissions/MelvynDrag/innerJoin.PNG)
 
 ## Conclusion
 If you do the above, you will have **conquered databases on Linux**. You'll have experimented with sqlite and postgres, compared syntax, solved a murder mystery, and done some SQL joins. Good for you, I'm proud of you.
