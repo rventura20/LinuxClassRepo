@@ -1,9 +1,19 @@
-\documentclass[12pt]{article}
-\usepackage[breaklinks=true]{hyperref}
-\usepackage[margin=1in]{geometry}
+\documentclass[12pt,a4paper]{article}
+\usepackage{lipsum}
+\usepackage{authblk}
+\usepackage[marginparwidth=1.5in,top=2cm, bottom=2cm, left=2cm, right=2.5in,
+marginparsep=1cm]{geometry}
+
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+
+\newcommand{\lectnote}[1]{\marginpar{\texttt{{\small{ #1 } }}}}
 
 \usepackage{color}
 
+\usepackage{multicol}
+\usepackage{textcomp}
+\usepackage{color}
+\usepackage{graphicx}
 \definecolor{pblue}{rgb}{0.13,0.13,1}
 \definecolor{pgreen}{rgb}{0,0.5,0}
 \definecolor{pred}{rgb}{0.9,0,0}
@@ -25,19 +35,91 @@
   moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
 }
 
-\title{\textbf{Week 07} \\
-\Large Prepare For Exam: Create a PostgreSQL Server }
-\author{
-	Melvyn Ian Drag
+\lstdefinestyle{term}{language=bash,
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  basicstyle=\small\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
 }
-\date{\today}
+\lstdefinestyle{sh}{language=bash,
+  columns=fullflexible,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  numbers=left,
+  stepnumber=1,
+  basicstyle=\small\ttfamily,
+  frame=single,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  upquote=true
+}
 
 
+\usepackage[T1]{fontenc}
+
+\newcommand{\schedule}[2]{\textbf{#1} \textit{#2}}
+
+\usepackage{fancyhdr}
+%
+\pagestyle{fancy}
+%
+\renewenvironment{abstract}{%
+\hfill\begin{minipage}{0.95\textwidth}
+\rule{\textwidth}{1pt}}
+{\par\noindent\rule{\textwidth}{1pt}\end{minipage}}
+%
+\makeatletter
+\renewcommand\@maketitle{%
+\hfill
+
+\begin{minipage}{0.95\textwidth}
+\vskip 1em
+\let\footnote\thanks 
+{\LARGE \@title \par }
+\vskip 0.5em
+%{\large \@author \par}
+%\vskip 0.5em
+{\large \@date \par}
+\end{minipage}
+\vskip 1em \par
+}
+
+\makeatother
+%
 \begin{document}
+%
+%title and author details
+\title{\textbf{Week08 Create a PostgreSQL Server}}
+%\author[1]{Melvyn Ian Drag}
+\date{\today}
+%
 \maketitle
 
 \begin{abstract}
-These notes describe the procedure for configuring a PostgreSQL Database Server on a Debian 10 Server. We will learn what a DB is, what are some basic things it can do, and how to make it accessible over the internet.
+In the last lecture we played around with a lightweight database; it's aptly
+called `sqlite'. This week we'll configure a database server running PostgreSQL.
+You'll have to use some of your Linux skills to get the server configured, and
+then you'll see that this database is similar - though not identical - to
+sqlite3. After successfully completing this week's homework you can slap
+`PostgreSQL' next to `sqlite3' in the \textit{skills} section of your resume.
 \end{abstract}
 
 \section{Warning!}
@@ -104,7 +186,15 @@ test=# \password
 
 Your database is installed an functioning! Now we can move on.
 
-\section{ Perform an inner join }
+\section{ Play With Your Database }
+
+\subsection{Introduction}
+Last week I gave you a prepopulated sqlite3 database that I found on the
+internet. This week we're creating tables inside a new database. I \textit{think}
+all you know about SQL at this point is \textbf{SELECT} along with some
+conditions. Now we'll learn how to Create tables, add rows to tables and do a
+join.
+
 
 \subsection{Create Table store}
 Create the table like this:
@@ -131,14 +221,35 @@ INSERT INTO store ( store_id, price, about_item ) VALUES ( 3, 20, 'another shirt
 
 Server says:
 \begin{verbatim}
-Hello
+TODO. THE SERVER WILL GIVE AN ERROR HERE FOR THE REASON DESCRIBED BELOW
 \end{verbatim}
 
-That's because the PRIMARY KEY column - in this case store\_id - should uniquely identify a product. Verify the stuff in your table with this command:
+That's because the PRIMARY KEY column - in this case store\_id - should uniquely
+identify a product. Verify the stuff in your table using the SELECT command that
+we learned last week.
+
+\subsection{SELECT}
+Let's look in the store table.
 
 \begin{lstlisting}
 SELECT * FROM store;
 \end{lstlisting}
+
+See? This command above is like the one in sqlite. You can also try the other
+things you know:
+
+\begin{itemize}
+\item ORDER BY ( ASC/DESC )
+\item LIMIT
+\item WHERE
+\item OR
+\item AND
+\end{itemize}
+
+As I'm writing these notes I'm not sure exactly how these ideas are written in
+PostgreSQL. Keep in mind these operations are supported across different
+databases ( e.g. Access, mySQL, Postgres, sqlite3, etc. ) but the SQL syn tax
+may vary slightly across the different databases.
 
 \subsection{ Create Table warehouse }
 
@@ -156,10 +267,22 @@ And then we'll put some stuff in the table
 \begin{lstlisting}
 INSERT INTO warehouse ( uniq_id, quantity, warehouse_id ) VALUES ( 1, 10, 1 );
 INSERT INTO warehouse ( uniq_id, quantity, warehouse_id ) VALUES ( 2, 30, 2 );
+INSERT INTO warehouse ( uniq_id, quantity, warehouse_id ) VALUES ( 3, 15, 3 );
 SELECT * FROM warehouse;
 \end{lstlisting}
 
-\subsection{ Do the thing }
+\subsection{BTW}
+By the way, these sql databases are called \textbf{Relational Databases}. The
+idea behind them is, as we saw last week, to store data in tables kind of like
+excel spreadsheets. We say relational, because the tables are related! Look at
+the schema image I gave you last week for the murder mystery db. There are
+``keys'' and lines connecting certain columns in the database. These describe
+how tables are related. 
+
+\subsection{ Your First Inner Join }
+
+There are a few types of joins in SQL. One is an inner join. This is when you
+join two tables together based on values in a table
 
 \begin{lstlisting}
 SELECT 
@@ -185,6 +308,11 @@ Output should look like this:
         2 |            2 |    40 | reasonable shirt  |       30
         3 |            3 |    40 | branded tshirt    |       15
 \end{verbatim}
+
+\section{Case sensitivity}
+Is the SQL dialect used in Postgres case insensitive? We can check and find out.
+I think it is, but just to be sure we can look on google and then do a few
+experiments to make sure.
 
 \section{ Configure server to be accessible on the internet }
 At this point, we have a database on our computer with some interesting tables in it. We've been able to add and manipulate data in the database. Now we just want to configure our server such that we can access the database remotely from the terminal on another computer.
@@ -250,10 +378,11 @@ user@laptop$ sudo apt install postgresql-client-common postgresql-client
 Gather your server ip address, database user name, database user password, and run the following command:
 
 \begin{verbatim}
-psql -h 67.205.173.100 -p 5432 -U melvyn
+psql -h 67.205.173.100 -p 5432 -U test
 \end{verbatim}
 
-But supply your server's ip address and postgres username.
+But supply your server's ip address and postgres username, if it's different
+from test.
 
 Enter your password when prompted.
 
@@ -265,71 +394,46 @@ user# \dt
 
 You should see the tables you created. You can now rerun your inner join command, select commands, whatever database things you want to do, remotely.
 
-\section{A bit More Info}
+\section{Column datatypes}
 There is so much to know about databases. When we created tables I made the column types int, varchar, foreign key, primary key, small int. You can read more about this here:
 \url{http://www.postgresqltutorial.com/postgresql-data-types/}
 
 Let's create tables with some other datatypes in it. ( 10 minute exercise or so )
 
 \section{ What's a Primary Key and Do I need One?}
+Yes, all tables should have a primary key. Want more information? Read this
+link.
 \url{https://dba.stackexchange.com/questions/190674/can-a-database-table-not-have-a-primary-key}
 
 \section{ Questions }
-As I've said before, I'm sort of in the dark about how these things work. A few things I need to know but don't are :
+You should feel confused a bit. At this point there are more questions than
+answers - there is much much more to know about SQL. I think  this bit of
+knowledge is enough to get you started - now go forth and look  for more
+answers! There are tons of great youtube references and books about sqlite3 and
+PostgreSQL that will fill in many of the cracks left by this lecture.
 
-\begin{itemize}
-\item in setting up the server we did 'sudo -i -u \$username'. Need to look at that more carefully. It passes authentication later by routing you through some shells. 
-\item Why do we need a linux user the same name as the postgres user the same name as the database? Just default postgres settings. Should play with that and see what breaks.
-\item When you createuser --interactive, what is the default password? Does it ask for a password? I can't remember.
-\end{itemize}
+\section{One More Thing}
 
-\section{Your exam}
-Next week you will come in, reset your droplet, and then configure it as we did. Then you will come to my laptop and show me you can execute an inner join on the server you created.
+Jackie, one more thing ~\ref{fig:jackie}.
 
-\section{A few bash commands}
+\begin{figure}[h]
+\centering
+	\includegraphics[width=0.8\textwidth]{Images/jackie.png}
+	\caption{{\small \texttt{One more thing! We'll use curl next week. I don't
+want next week to be the first time you've heard of it.}}}
+	\label{fig:jackie}
+\end{figure}
+
 \subsection{curl}
-We'll talk more about curl at a later date. It's a powerful tool you use for sending commands over different network protocols to different servers. Generally you use it for web requests. More on that later. I've been using it to check your ip address. In the browser you can go to this website:
-
-\begin{verbatim}
-ipinfo.io/ip
-\end{verbatim}
-
-And it will tell you your ip address. I use curl to get that info on the command line, when a browser isn't available.
+We'll talk more about curl at a later date. It's a powerful tool you use for
+sending data over the internet. You can use curl to check your ipaddress like
+this:
 
 \begin{lstlisting}[language=bash]
 user@machine$ curl ipinfo.io/ip
 a.bb.c.ddd
 \end{lstlisting}
 
-\subsection{tmux}
-Now you are ready to appreciate the power of tmux! When you are ssh-ed into another machine, you can't open another tab, or popup another window - all you have is one terminal connection to that machine. That's when tmux ( and screen ) become useful. You can split the screen into windows and use them to do stuff simultaneously. I showed you these tmux tricks:
-
-CTRL B +:
-\begin{itemize}
-\item \% = vertical split
-\item " = horizontal split
-\item ( arrow keys ) = move around splits
-\item x = kill current pane ( note in the bottom of the screen it asks if you want to close the pane )
-\end{itemize}
-
-Here's another cool thing you can detach a shell and come back later.
-
-\begin{enumerate}
-\item start tmux
-\item start a runForever program.
-\item detach tmux
-\item disconnect from ssh
-\item log back in with ssh
-\item reattach tmux
-\item process still going!
-\end{enumerate}
-
-\subsection{ ssh }
-
-Guard your id\_rsa with your life! The .pub can be distributed, but if you leak you r id\_rsa youre in deep doo doo. People can hack you if they have access to that file.
-
-alot to be said - and then again, very little. You are now using ssh to connect to a remote machine. And you saw that if you put an id\_rsa.pub file on that machine you can login without even giving a password! Pretty cool stuff. How it works is elegant, we'll get to it later. It involves cryptography. ssh will be a tool you use every day if you keep working with linux.
-
-You can use putty on windows. If time, just try to ssh with putty using a linux id\_rsa key. This will take some time.
-
+The ipaddress should be the same as the one you used when you connected to the
+server with ssh.
 \end{document}
