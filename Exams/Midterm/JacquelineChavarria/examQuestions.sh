@@ -1,5 +1,4 @@
 question1(){
-        echo "todo"
         echo "How do you pause a process?"
         echo "a) ctrl + z"
         echo "b) pause + enter"
@@ -22,7 +21,6 @@ question1(){
 }
  
 question2(){
-        echo "todo"
         echo "Which of the following is not an ignorable signal"
         echo "a) SIGINT"
         echo "b) SIGTERM"
@@ -46,7 +44,6 @@ question2(){
 }
  
 question3(){
-        echo "todo"
         echo "Which of the following signals kills a process and cannot be ignored"
         echo "a) SIGINT"
         echo "b) SIGTERM"

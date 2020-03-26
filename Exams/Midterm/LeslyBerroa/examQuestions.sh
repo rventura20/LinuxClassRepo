@@ -1,5 +1,4 @@
 question1(){
-        echo "todo"
         echo "What command do you use to remove a file in linux?"
         echo "a) remove filename.txt"
         echo "b) rm -r filename.txt"
@@ -27,7 +26,6 @@ question1(){
 }
 
 question2(){
-        echo "todo"
         echo "How to remove a directory"
         echo "a) quit! name"
         echo "b) remove -r name"
@@ -57,7 +55,6 @@ question2(){
 }
 
 question3(){
-        echo "todo"
         echo "What can rm NOT do"
         echo "a) It allows you to remove any file from anyone even without their permission"
         echo "b) It allows you to remove a file"

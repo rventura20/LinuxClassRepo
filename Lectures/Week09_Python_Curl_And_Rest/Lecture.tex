@@ -31,7 +31,7 @@
 }
 
 \title{\textbf{Week 09} \\
-\Large How Does The Internet Work? Python, cURL and a REST API}
+\Large How Does The Internet Work? Playing with Python3 and cURL}
 \author{
 	Melvyn Ian Drag
 }
@@ -45,9 +45,16 @@
 This Lecture is preamble to the next one in which we will set up an apache webserver. We'll take a peek at Python, revisit cURL, and make some web requests.
 \end{abstract}
 
-
-\section{Exam Make Up}
-Folks who missed the exam last week can come early and work until 7:15 to get it done. Lecture starts promptly at 7:15.
+\section{Goal today}
+\begin{itemize}
+\item add GET and POST to your vocabulary
+\item know that http requests have headers and bodies
+\item know how to do GET and POST with curl
+\item know how to send data with curl and POST
+\item know that Python is whitespace sensitive
+\item be able to complete a mildly interesting homework assignment. 
+\item know that localhost and 127.0.0.1 are synonyms ( pseudonyms? )
+\end{itemize}
 
 \section{Python Webserver}
 \subsection{What is Python?}
@@ -62,13 +69,26 @@ In the case of either a GET or POST request, the request goes to a webserver, wh
 
 In this class we will write the server code in Python.
 
-\subsection{Install Python 3.}
+\subsection{Set up machine}
 
-Install it with 
+Install Python3.
 
 \begin{lstlisting}
-user@machine$ sudo apt install python3-dev
+root@machine$ apt install python3-dev
 \end{lstlisting}
+
+Also install a couple of other things, create a new sudoer, and download the class
+notes.
+\begin{lstlisting}
+root@machine$ apt install git curl # we'll need git and curl tonight
+root@machine$ adduser yourname
+root@machine$ usermod -a -G yourname sudo # or sudo yourname, I can't remember
+the order
+root@machine$ su - yourname
+yourname@machine$ git clone https://github.com/melvyniandrag/LinuxClassRepo.git
+\end{lstlisting}
+
+The code we'll use tonight is in the class repo.
 
 \subsection{Don't install Python 2}
 Python 2 is being deprecated next year. The Python language maintainers have been telling the Python community to move to Python3 for about 10 years now. If you are new to Python, use Python 3. If you are old to Python, hurry up and port your code to Python 3!

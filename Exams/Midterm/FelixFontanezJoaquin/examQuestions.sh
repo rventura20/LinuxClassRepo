@@ -1,7 +1,6 @@
 #!/bin/bash
 
 question1(){
-	echo "todo"
 	echo "Using a command line, How to move file across multiple directory?"
 	echo "a) mv /home/ghost/textFile /home/ghost/directoryFile"
 	echo "b) mv /home/ghost/currentFile directoryFile"
@@ -31,7 +30,6 @@ question1(){
 }
 
 question2(){
-	echo "todo"
 	echo "Command to move files within the same dictory?"
 	echo "a) mv .curentFile nextdictory"
 	echo "b) mv currentFile"
@@ -61,9 +59,6 @@ question2(){
 }
 
 question3(){
-	
-	echo "todo"
-}
 	echo "What commands is used to move file to pervious directory?"
 	echo "a) mv textFile ../../"
 	echo "b) mv textFile"
