@@ -1,53 +1,31 @@
 # Homework 9
 
-At the end of this homework, you'll have a good 
-
-There is great website that serves dummy JSON data. This is there for people who are learning to use cURL ( and related tools ).
-
-use curl to download the json from here:
-
-https://jsonplaceholder.typicode.com/users/1/posts
-
 ## Problem 1
-pipe the output of the curl command to another command(s) to determine how many unique userIds there are in the JSON response.
+Configure a machine as in the Week 9 Lecture notes and as presented in the youtube lecture. 
 
-*Note*: of course the answer is 10. But what if the file was 100 million lines long and you couldn't just scroll through it. That's why you're writing
-the linux command.
+Then, run the following curl request and submit a screenshot of the output.
+
+```
+curl -X POST \
+	-H "Content-Type: application/text" \
+	-H "Content-Length: 10" \
+	-d"myname=melvyn" \
+	localhost:8000
+```
+
+Feel free to change the data and the Content-Length
 
 ## Problem 2
-The above command performs a GET request. You can also perform a POST request. 
 
-```
- curl -X POST \
-      --header "Content-Type: application/json" \
-      -d'{"userId": 10222, "id": 0, "title": "helloWorld", "body": "this is a body"}' \
-      jsonplaceholder.typicode.com/posts
-```
+Run the two curl commands shown in the second youtube lecture as described in the "A Real World Curl Example" section of the class notes. Take a screenshot showing that you requested a one time password, and then show that you supply the password to your second curl command.
 
-Create 4 different POST requests, changing the userId, id, title, and body in each. Verify that the userId, title, and body all change, but
-API doesn't ever update the id.
+The two commands are in the lecture notes and shown in the youtube video, so I'll omit them here for fear of making a typo.
 
-## Problem 3
 
-Run the command from problem 2 again, but this time supply the --verbose flag to curl. In the output you will find a line indicating the
-"charset" that curl is sending data in. What is the name of the charset?
+# Submission Guidelines
 
-## Problem 4
-You can send json data from a file with curl. Google "how to send json data from a file with curl" and then issue the POST request from
-problem2, but this time using a data file. Note how to do it here: https://gist.github.com/ungoldman/11282441 and here: https://stackoverflow.com/questions/18611903/how-to-pass-payload-via-json-file-for-curl
+Submit 2 Screenshots via Pull Request by 11:59 PM 4/3/2020!
 
-## Problem 5 
-What happens if you change the content-type to 'application/txt' in the header from the command in Problem 2?
+Submit your images in the Homework/Week09/StudentSubmissions/YourName directory.
 
-# Submission guidelines
-Pull Request featuring two files
-* homework9.txt
-* data.json
-
-placed in the directory Homework/StudentSubmissions/Week09/YourName
-
-No two submissions may be identical. If you work with a friend, make sure your submissions aren't the same.
-
-See my sample submission for tips on how to format your homework.
-
-20 pts per problem.
+Sorry to get you the lecture a day late, so I'm giving a few extra days to complete the assignment.
