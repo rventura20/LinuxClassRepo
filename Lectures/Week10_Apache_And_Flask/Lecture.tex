@@ -162,7 +162,7 @@ So we've installed all the software we need! That was easy. Now we can build a l
 you haven't, you won't be able to do the rest of the exercises. If you can see
 the default Apache webpage, then continue on. }
 
-\section{Creating a Flask application}
+\section{Example 1: Deploying Your First Flask Application}
 The first thing we need to do is create a non root user for managing this stuff. We'll give the user sudo permission for the few root things we need to do to bring the website online. I've created user `webdeveloper'. You should do the same so you can copy and paste the code I've provided. If you create a different username, you'll need to make the minor modifications to make everyting match up.
 
 \begin{lstlisting}[style=term]
@@ -229,7 +229,7 @@ Then, open a browser on your laptop or the NJCU PC in front of you and go to
 
 You should see a message saying you've made your first website with Linux, flask, apache and python. You can share the link to show off your website to your friends and family! You could now also go to godaddy or namecheap, buy a domain name, and wire that up to your server so people can go to website.com instead of a scary looking ip address.
 
-\section{Additional Considerations for Example 1}
+\subsection{Additional Considerations for Example 1}
 So we have a simple flask app running on apache now. As you've probably seen by now, Linux servers are very particular about groups and permissions. I'm not sure about all of the ins and outs of the permissions for Flask and Apache. I'm showing the permisisons and groups I've set up on my machine. If you do something else I'm not sure it will work, and I don't know why it owuld be broken. We could experiment with permissions if you have something else.
 
 
@@ -243,7 +243,7 @@ I'm also not sure about all the details of the ExampleFlask.conf file. There are
 
 {\LARGE Wait for class to all be caught up and have their servers running}
 
-\section{About the code for Example 1}
+\subsection{About the code for Example 1}
 This isn't a Python class as we said, but I'll just mention a few things about the Python code so you get some sense of how it's working. You will see the line
 
 \begin{lstlisting}[style=py]
@@ -289,10 +289,14 @@ Note that this file now serves two webpages! You can host multiple websites on o
 \lstinputlisting[style=py]{Example2/ExampleFlask2/my_flask_app.wsgi}
 
 \subsection{\_\_init\_\_.py}
-Blank as before. To be honest I haven't given it thought if this is required or not. Just put the file. If you know python you can remove it and then meditate on why it works / doesn't work if you remove this file.
+Blank as before. To be honest I haven't given it thought if this is required or
+not. Just put the file. If you know python you can remove it and then meditate
+on why it works / doesn't work if you remove this file. I should have spent more
+time researching, but this code works, I'm not too invested in web development,
+so I'm happy enough that this just works.
 
 \subsection{ Results }
-Here are some images showing my new site in action. The /testFlask endpoint still works, but now so do /somewhereElse and /somewhereElse/returnsHTML.
+Here are some images showing your new site in action. The /testFlask endpoint still works, but now so do /somewhereElse and /somewhereElse/returnsHTML.
 
 \begin{figure}[h]
   \centering
@@ -310,7 +314,31 @@ Here are some images showing my new site in action. The /testFlask endpoint stil
 
 \section{Example3: A Rest API}
 {\LARGE Only do this section if the class is caught up and it's before 9 PM}
+\subsection{Introduction}
+You've seen a REST API in class. Last week's homework involved making a couple
+of HTTP requests to api.github.com, and you saw that it returned some stuff
+between curly braces. That was JSON, and the github api you were making requests
+to was a REST API. Now go google to make sure I haven't messed up - I think REST
+means ``Representational State Transfer''. What does that mean? At this point we
+don't care about this important CS concept of \textbf{state}, so just forget
+about it. At some point in your CS life this topic will be important to you, but
+for now we just want to get a website running that returns some JSON. 
 
+JSON looks like this:
+
+\begin{verbatim}
+{
+	"name": {
+		"first": "melvyn",
+		"last": "drag"
+	},
+	"profession": "programmer",
+	"favoriteLanguages": ["C++", "Python"]
+}
+\end{verbatim}
+
+
+\subsection{Let's get started}
 So far we've returned plain text and text formatted as HTML from our website. A popular thing to do now is to pass around JSON data. JSON is used all over. I showed it to you last week just to wet your feet, but you'll see it everywhere. You'll use it for web programming, internally in Python code, passing data between applications running on a laptop, for exchanging data files with scientists - everywhere. I avoided JSON for a while because I thought it was just a stupid buzz word that the nerds used to show off, but it truly is an ubiquitous data format. Now you've seen it. You'll see it again, mark my words. 
 
 So we'll just see how to return json from a Flask application.
