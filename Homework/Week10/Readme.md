@@ -28,6 +28,7 @@ So far in this class you have:
 * learned the basics of git
 * learned to use a major linux cloud service (digital ocean)
 * learned about ssh
+* learned a bit about vim
 * configured 2 types databases
 * configured 2 types of webservers
 
