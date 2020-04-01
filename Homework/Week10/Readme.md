@@ -5,7 +5,7 @@ Change the HTML string inside the my_flask_app.py file by modifying the lines
 that say TODO XYZ. For each of the 3 todos, visit the website:
 https://www.grymoire.com/Unix/Sed.html
 and learn something about sed. Write a little sentence describing what you
-learned in place of the TODO filler I put between the "<p></p>" tags.
+learned in place of the TODO filler I put between the "\<p\>\</p\>" tags.
 
 ## Submission guidelines
 
