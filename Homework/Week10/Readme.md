@@ -1,20 +1,35 @@
 # Homework 10
 
-Create a Flask application with five end points that contain some HTML that explains how to use sed. Send me a pull request with your code in the properly formatted directories and a Readme containing the endpoints for your website that I can check. 
-
-Here is a great tutorial about sed:
-http://www.grymoire.com/Unix/Sed.html
-
-For example, your website should have endpoints
-167.12.1.289/sed1
-167.12.1.289/sed2
-167.12.1.289/sed3
-167.12.1.289/sed4
-167.12.1.289/sed5
-
-and each one should have a little bit of information about sed.
-
-This is a pretty free-form assignment. Make your website as beautiful or as basic as you want in line with how passionate you are for web development.
+Modify the ExampleFlask2 example from class. The one that returns HTML. 
+Change the HTML string inside the my_flask_app.py file by modifying the lines
+that say TODO XYZ. For each of the 3 todos, visit the website:
+https://www.grymoire.com/Unix/Sed.html
+and learn something about sed. Write a little sentence describing what you
+learned in place of the TODO filler I put between the "<p></p>" tags.
 
 ## Submission guidelines
-Pass/Fail. Get the website to work, send me a link to it, and the code via github. If I can access your website and see some interesting info about how to use sed, I'll be happy.
+
+Submit:
+* your my_flask_app.py file
+* a screenshot of your digital ocean page showing the ip address for your server
+* a screenshot of your website open in a browser window on your computer
+* a screenshot of yourself running curl -X GET YOUR_IP_ADDRESS. This will show
+	the html from your website in a terminal. You cannot do this from the
+	webserver machine!
+
+Leave your digital ocean server on until at least April 9th so I can access it and verify
+it works.
+
+Due by 11:59PM of April 8th by pull request in the Homework/Week10/StudentSubmissions/YourName
+
+## Congratulations
+So far in this class you have:
+* learned the basics of command line usage
+* learned the basics of git
+* learned to use a major linux cloud service (digital ocean)
+* learned about ssh
+* configured 2 types databases
+* configured 2 types of webservers
+
+Not bad for just 2 months. And we still have a month left to cover a few more
+interesting topics!
