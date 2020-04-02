@@ -13,14 +13,13 @@ Submit:
 * your my_flask_app.py file
 * a screenshot of your digital ocean page showing the ip address for your server
 * a screenshot of your website open in a browser window on your computer
-* a screenshot of yourself running curl -X GET YOUR_IP_ADDRESS. This will show
-	the html from your website in a terminal. You cannot do this from the
-	webserver machine!
 
 Leave your digital ocean server on until at least April 9th so I can access it and verify
 it works.
 
 Due by 11:59PM of April 8th by pull request in the Homework/Week10/StudentSubmissions/YourName
+
+Theres a sample submission in here under StudentSubmissions/MelvynDrag
 
 ## Congratulations
 So far in this class you have:
