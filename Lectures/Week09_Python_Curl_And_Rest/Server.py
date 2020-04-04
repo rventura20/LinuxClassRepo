@@ -32,7 +32,7 @@ class MyFirstServer(BaseHTTPRequestHandler):
 if __name__ == "__main__":
 		addr = "127.0.0.1"
 		#addr = "localhost"
-		port = 80
+		port = 8000
 		server_address = (addr, port)
 		httpd = HTTPServer(server_address, MyFirstServer)
 
