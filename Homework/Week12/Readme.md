@@ -35,6 +35,17 @@ note that the columns are aligned with the first output column left-aligned and 
 
 ## Grading
 
+### Less than 90
+This assignment might take you 3 hours. 4 hours. 6. I don't know?!?! Just learn awk, you're in a Linux
+class so take a few hours and learn Linux! It might take a few days, but it will be good for you and your
+brain to learn it! In the video I show you
+* printf
+* awk 'PATTERN {ACTION} file'
+* awk -F";" etc
+
+what more do you need?!? Let me know if there is a hole in my teaching. I think this instruction is enough for you
+to put the lego bricks together, but maybe not. You earning less than 90 is an undesirable outcome for both you and me.
+
 ### 90
 You can produce the following output
 
