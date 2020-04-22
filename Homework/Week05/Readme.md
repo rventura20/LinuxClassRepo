@@ -1,21 +1,25 @@
 # Week 05 Homework
 
-In this assignment you will exercise your knowledge of git.
+In this assignment you will test your knowledge of adding users and modifying permissions.
 
 ## Requirements
 
-* Create a git repo containing a single file - Readme.md
-* In this file put a header next to a hash tag like this: "# Names"
-* Then below that put your name next to a hashtag like this: "\* Melvyn Drag"
-* Fork all of your classmates' repos.
-* Add your name ( alphabetical, by last name ) to their Readme.md file.
-* Create a pull request.
-* Merge all of your pull requests such that your repo has everyone's name in the Readme.md.
-* Add me as a collaborator on your repo
+* Add the user "melvyn" to a digital ocean machine.
+* Add my ssh public key to your machine so that I can access it.
+* Add a user account for yourself to your machine.
+* Put a file 'modifyme.txt' in /home/yourname that I have permission to modify.
 
 ## Submission guideline
-Have everything merged by Midnight on Wednesday, October 9th. As usual, this is a Pass/Fail assignment. 100/0. Coordinate with your peers to make sure you can get this done.
+Submit a PR containing your ip address ( call the file myip.txt )
+
+The PR must contain your file 
+
+`Homework/Week05/StudentSubmissions/YourName\myip.txt`
+
+I will attempt to ssh in a little after midnight on February 25th like ssh melvyn@youripaddress and I'll attempt to modify /home/yourname/modifyme.txt
+
+If I can do this you get 100 points.
 
 ## Result
-You now have a good understanding of how opensource software is built by a mass of people!
+You have created a user, added a public ssh key, and changed permissions on a file correctly!
 

@@ -1,19 +1,36 @@
-# Homework
-Create a website for free on github.
+# Homework 7
 
-I have one that I haven't maintained:
-melvyniandrag.github.io
+Solve the murder mystery we started exploring in class.
 
-I want you to get one up and running online. Should be a quick project, I think they say it takes only 10 minutes:
+I'd advise you to have pen and paper to note important info.
 
-official guide:
-https://guides.github.com/features/pages/
+Be prepared to spend an hour or two on this.
 
-another source I found on google:
-https://gist.github.com/TylerFisher/6127328
+Have a look at the schema image so you know what columns are in the table:
+![schemaImage](schema.png)
 
-you can look around google too if these two dont work for you. 
+Write each of your sqlite3 queries in files called queryNameXYZ.sql.
+You'll probably need to write 10 or so queries. I don't see you needing more
+than 20.
 
-By INSERT DATE I want to be able to go to yourusername.github.io and see something about XXXX what I want the student to show online.
+A sample query file would contain:
 
-In the future you can put your resume or pictures of your projects or whatever here
+```
+SELECT * FROM person LIMIT 1;
+```
+
+and you run it like:
+
+```
+user@machine$ sqlite3 sql-murder-mystery.db < sqlQuery1.sql
+# output comes out here
+``` 
+
+## Submission:
+
+* all of your query files
+* screenshot of you running a query on your computer
+* solution.txt telling me who the murderer is!
+
+Due via pull request by 11:59 PM of Monday, March 16th. Please put your
+submission in Homework/Week07/StudentSubmissions/YourName.

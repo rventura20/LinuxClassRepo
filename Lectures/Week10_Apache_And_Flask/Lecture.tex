@@ -87,34 +87,52 @@
 Last class we took a look at the toy `SimpleHTTPServer' in Python3. Tonight we'll use a real website backend - Flask - and we'll server content on a real server - Apache2. As before, we'll make \textbf{GET} and \textbf{POST} requests using the command line tool cURL.
 \end{abstract}
 
-\section{Meta Data}
-
-Still, we'll try and make tonight as `stand-alone' as possible. If you missed last week, you ought to read the notes to catch up on what curl is and how to use it.
-
 \section{What's a Webserver?}
-The term is overloaded. A server is a computer, connected to a network, that other computers can access. There may be more ways to define it, but that's what I think of. But for your midterm I had you install some postgresql server stuff. In that case I was referring to the database server software. And tonight I'm going to refer to Apache2 as a 'webserver' - it's actually software that runs \textit{on} a webserver, which is the machine. It's just that the terms are overloaded.
+The term is overloaded. A server is a computer, connected to a network, that
+other computers can access. It also refers to software than responds to client
+requests. 2 Weeks ago we saw a Postgres server. This week we'll make an Apache2
+webserver. So The word can refer to hardware ( the computer itself ) or software
+(the software that responds to client requests).
 
 \section{What's Flask?}
-Flask is what is called a \textbf{Back End Web Framework}. It is sort of like a
-\textbf{Library}. Libraries are bits of code that you can use in a
-language to solve a particular problem. For example, if you know Java you've
-probably used the \textit{java.util} library for things like
-\textit{ArrayList}s. In Python last week we used a library called
-\textit{SimpleHTTPServer} to serve up some webpages for us on the address
-\textit{localhost:8000}. A \textbf{Back End Web Framework} is like a library,
-but the purpose of this code is to respond to HTTP requests against a web
-server. If that sounds confusing, don't worry! Just continue through these notes
-and by the end you'll have a notion of what I'm trying to say here.
+Flask is what is called a \textbf{Back End Web Framework}. Its a bunch of code
+that some one smarter than us already wrote to handle GET and POST requests in a
+really pretty way. It's amazing that this stuff is free. You're about to get a
+professional website online in a few minutes thanks to a bunch of generous smart
+people giving us this Flask code.
 
-\section{What's a REST API}
-Too many buzzwords out there. REST is an acronym. You can read about it more if you want. For the rest of the lecture just understand that you usually pass JSON data back and forth over a REST API. We'll talk about JSON later.
+There are other backend frameworks. In Python lots of people use Django. In Java
+lots of folks use Play, Spring, and a bunch of others.
 
-\subsection{Job interview prep}
-\noindent\textit{\textbf{Interviewer:} I see you know a bit about Linux webserver maintenance. Do you know what a REST API is?}
+\section{What's a REST API? What's JSON? }
+REST is an acronym for a beautiful but complex
+topic. For the rest of the lecture just understand that if you get JSON from a
+webserver, you're probably talking to it's REST API. We saw a REST API last week
+when you made requests with curl to api.github.com and it responded with some
+stuff that looked like:
+ 
+\begin{verbatim}
+{
+	"name": {
+		"first": "melvyn",
+		"last": "drag"
+	},
+	"profession": "programmer",
+	"favoriteLanguages": ["C++", "Python"]
+}
+\end{verbatim}
 
-\noindent \textbf{You: } Honestly, not too much because I'm not a webdeveloper. But I do know that REST APIs are very popular now, and they typically involve the exchange of JSON data. JSON data is when the data is structured like a Python dicitonary, or a Java Hashmap  - its a bunch of key-value pairs in curly braces.
+That's what JSON looks like, and it's fantastic stuff.
 
-If you can give the above answer, you'll know enough for now.
+Too many acronyms in CS, right?
+
+\begin{itemize}
+\item JSON - JavaScript Object Notation
+\item API - Application Programming Interface
+\item REST - REpresentational State Transfer
+\end{itemize}
+
+Scary stuff to look at, but we'll take a peek today.
 
 \section{What we'll do today}
 Today we'll bring a real website online. Last week we made a trivial website with Python's SimpleHTTPServer, but today we're going to use a real, professional-grade server ( Apache2 ) and a real backend web framework ( Flask ). There are other servers like NGINX and there are other backend webframeworks like Django, Play, Spring, Ruby on Rails, etc., I've just chosen this pair because it's the easiest to code of the few things I know. Spring on NGINX would be considerably harder to configure.
@@ -128,16 +146,27 @@ together today. It will run on Linux using Python, Flask and Apache2}
 \end{figure}
 
 
+Plan for today:
+\begin{enumerate}
+\item Example 1: Boring website that just returns text
+\item Example 2: Little more interesting website that returns HTML
+\item Example 3: Even more interesting website that returns JSON.
+\end{enumerate}
+
 \section{Setting up server}
 So let's begin building our Flask + Apache2 website. Get a debian 10 server on
 digital ocean. Then run these commands:
 
 \begin{lstlisting}[style=term]
 root@machine$ apt update
-root@machine$ apt install apache2
-root@machine$ apt-get install libapache2-mod-wsgi-py3 python3-dev python3-pip
+root@machine$ apt install git apache2 libapache2-mod-wsgi-py3 python3-dev
+python3-pip curl
+# so now we have git for the class code
+# apache2 for the webserver
+# python3 for the backend framework
+# curl for making HTTP requests
 root@machine$ pip3 install flask flask-restful
-root@machine$ apt install curl
+# now that we have python3 we can install flask.
 root@machine$ service apache2 status
 # should report that apache2 is running
 root@machine$ curl localhost
@@ -162,54 +191,45 @@ So we've installed all the software we need! That was easy. Now we can build a l
 you haven't, you won't be able to do the rest of the exercises. If you can see
 the default Apache webpage, then continue on. }
 
-\section{Creating a Flask application}
+Congratulations!! You've set up your first Apache webserver! Wasn't that easy???
+Linux is good.
+
+\section{Example 1: Deploying Your First Flask Application}
 The first thing we need to do is create a non root user for managing this stuff. We'll give the user sudo permission for the few root things we need to do to bring the website online. I've created user `webdeveloper'. You should do the same so you can copy and paste the code I've provided. If you create a different username, you'll need to make the minor modifications to make everyting match up.
 
 \begin{lstlisting}[style=term]
 root@machine$ adduser webdeveloper
 root@machine$ usermod -a -G sudo webdeveloper
 root@machine$ sudo su - webdeveloper
-root@machine$ mkdir /home/webdeveloper/ExampleFlask
-\end{lstlisting}
-
-Inside the ExampleFlask directory, put the files described below. Note that these files are available in the Example1/ExampleFlask directory in the class Git repo.
-
-\subsection{\_\_init\_\_.py}
-This is an empty file
-
-\subsection{my\_flask\_app.py}
-\lstinputlisting[style=py]{Example1/ExampleFlask/my_flask_app.py}
-
-\subsection{my\_flask\_app.wsgi}
-\lstinputlisting[style=py]{Example1/ExampleFlask/my_flask_app.wsgi}
-
-\subsection{Verify your configuration}
-By this point you should have these three files on your machine. I don't expect
-you to know Python, so I've provided these files online in the class repo under
-the Example1/ExampleFlask directory. You can copy and paste, wget, etc. to get
-the files, whatever you like. In the end, you need to see this on your computer:
-
-\begin{lstlisting}[style=term]
-webdeveloper@machine$ cd /home/webdeveloper/ExampleFlask
+webdeveloper@machine$ cd ~
+webdeveloper@machine$ git clone https://github.com/melvyniandrag/LinuxClassRepo.git
+webdeveloper@machine$ cp -r
+LinuxClassRepo/Lectures/Week10_Apache2_And_Flask/Example1/ExampleFlask ExampleFlask
 webdeveloper@machine$ ls
-__init__.py  my_flask_app.py  my_flask_app.wsgi
+LinuxClassRepo ExampleFlask
+webdeveloper@machine$ ls ExampleFlask
+__init__.py my_flask_app.py my_flask_app.wsgi
 \end{lstlisting}
+
+{\Large TAKE SOME TIME TO INSPECT THE CONTENTS OF THESE FILES  WITH THE CLASS}
 
 \section{Connect Flask to Apache2}
 Now we need to wire up our Flask application to the Apache webserver software. You will need to know your machine's ip address. I showed you a website you can curl that will tell you your ipaddress
 
 \begin{lstlisting}[style=term]
-user@machine$ curl ipinfo.io/ip
+webdeveloper@machine$ curl ipinfo.io/ip
 # returns your external ip address
 \end{lstlisting}
 
-Then you need to create this file, and put the proper ip address. Note that you'll need to run vim with sudo as this is a privileged file.
+Then you need to create the file /etc/apache2/sites-available/ExampleFlask.conf, and put the proper ip address. Note that
+you'll need to run vim with sudo as this is a privileged file. This file is also
+provided in the class repo in Lectures/Week10*/Example1
 
 \subsection{/etc/apache2/sites-available/ExampleFlask.conf}
 At this point, you need to create the file
 \textit{/etc/apache2/sites-available/ExampleFlask.conf}. The contents of the
-file are shown below. Make sure you change the ip address in the file to the
-ipaddress of your machine. 
+file are shown below. \textbf{Make sure you change the ip address in the file to the
+ipaddress of your machine!!!!}
 
 \lstinputlisting[style=sh]{Example1/ExampleFlask.conf}
 
@@ -229,7 +249,7 @@ Then, open a browser on your laptop or the NJCU PC in front of you and go to
 
 You should see a message saying you've made your first website with Linux, flask, apache and python. You can share the link to show off your website to your friends and family! You could now also go to godaddy or namecheap, buy a domain name, and wire that up to your server so people can go to website.com instead of a scary looking ip address.
 
-\section{Additional Considerations for Example 1}
+\subsection{Additional Considerations for Example 1}
 So we have a simple flask app running on apache now. As you've probably seen by now, Linux servers are very particular about groups and permissions. I'm not sure about all of the ins and outs of the permissions for Flask and Apache. I'm showing the permisisons and groups I've set up on my machine. If you do something else I'm not sure it will work, and I don't know why it owuld be broken. We could experiment with permissions if you have something else.
 
 
@@ -243,7 +263,7 @@ I'm also not sure about all the details of the ExampleFlask.conf file. There are
 
 {\LARGE Wait for class to all be caught up and have their servers running}
 
-\section{About the code for Example 1}
+\subsection{About the code for Example 1}
 This isn't a Python class as we said, but I'll just mention a few things about the Python code so you get some sense of how it's working. You will see the line
 
 \begin{lstlisting}[style=py]
@@ -289,10 +309,14 @@ Note that this file now serves two webpages! You can host multiple websites on o
 \lstinputlisting[style=py]{Example2/ExampleFlask2/my_flask_app.wsgi}
 
 \subsection{\_\_init\_\_.py}
-Blank as before. To be honest I haven't given it thought if this is required or not. Just put the file. If you know python you can remove it and then meditate on why it works / doesn't work if you remove this file.
+Blank as before. To be honest I haven't given it thought if this is required or
+not. Just put the file. If you know python you can remove it and then meditate
+on why it works / doesn't work if you remove this file. I should have spent more
+time researching, but this code works, I'm not too invested in web development,
+so I'm happy enough that this just works.
 
 \subsection{ Results }
-Here are some images showing my new site in action. The /testFlask endpoint still works, but now so do /somewhereElse and /somewhereElse/returnsHTML.
+Here are some images showing your new site in action. The /testFlask endpoint still works, but now so do /somewhereElse and /somewhereElse/returnsHTML.
 
 \begin{figure}[h]
   \centering
@@ -308,9 +332,36 @@ Here are some images showing my new site in action. The /testFlask endpoint stil
 
 {\LARGE Wait for class to all be caught up and have their servers running again}
 
+
+{\LARGE for CoronaVirus lecture skip this part. just go on to sed }
+
 \section{Example3: A Rest API}
 {\LARGE Only do this section if the class is caught up and it's before 9 PM}
+\subsection{Introduction}
+You've seen a REST API in class. Last week's homework involved making a couple
+of HTTP requests to api.github.com, and you saw that it returned some stuff
+between curly braces. That was JSON, and the github api you were making requests
+to was a REST API. Now go google to make sure I haven't messed up - I think REST
+means ``Representational State Transfer''. What does that mean? At this point we
+don't care about this important CS concept of \textbf{state}, so just forget
+about it. At some point in your CS life this topic will be important to you, but
+for now we just want to get a website running that returns some JSON. 
 
+JSON looks like this:
+
+\begin{verbatim}
+{
+	"name": {
+		"first": "melvyn",
+		"last": "drag"
+	},
+	"profession": "programmer",
+	"favoriteLanguages": ["C++", "Python"]
+}
+\end{verbatim}
+
+
+\subsection{Let's get started}
 So far we've returned plain text and text formatted as HTML from our website. A popular thing to do now is to pass around JSON data. JSON is used all over. I showed it to you last week just to wet your feet, but you'll see it everywhere. You'll use it for web programming, internally in Python code, passing data between applications running on a laptop, for exchanging data files with scientists - everywhere. I avoided JSON for a while because I thought it was just a stupid buzz word that the nerds used to show off, but it truly is an ubiquitous data format. Now you've seen it. You'll see it again, mark my words. 
 
 So we'll just see how to return json from a Flask application.

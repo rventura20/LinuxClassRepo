@@ -1,0 +1,16 @@
+rm funcNames.txt
+
+while read studentName; do 
+	rm -r $studentName
+	mkdir $studentName
+	cp JulianAureliano/examQuestions.sh $studentName
+	echo -e "\n\n" >> $studentName/examQuestions.sh
+	funcName="run_$(echo $studentName | tr '[:upper:]' '[:lower:]')s_questions"
+	echo "$funcName(){" >> $studentName/examQuestions.sh
+	echo "	question1" >> $studentName/examQuestions.sh
+	echo "	question2" >> $studentName/examQuestions.sh
+	echo "	question3" >> $studentName/examQuestions.sh
+	echo "}" >> $studentName/examQuestions.sh
+	echo "source $studentName/examQuestions.sh" >> funcNames.txt
+	echo $funcName >> funcNames.txt
+done < noHyphenNames

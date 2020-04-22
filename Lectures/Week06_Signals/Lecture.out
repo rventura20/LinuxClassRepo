@@ -1,24 +1,30 @@
-\BOOKMARK [1][-]{section.1}{SIGTSTP and SIGINT}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Verify the signals}{section.1}% 2
-\BOOKMARK [1][-]{section.2}{jobs}{}% 3
-\BOOKMARK [1][-]{section.3}{ kill }{}% 4
-\BOOKMARK [1][-]{section.4}{fg and bg}{}% 5
-\BOOKMARK [1][-]{section.5}{INT, TERM, KILL}{}% 6
-\BOOKMARK [1][-]{section.6}{Exercise}{}% 7
-\BOOKMARK [1][-]{section.7}{C Programming}{}% 8
-\BOOKMARK [1][-]{section.8}{Writing Custom Signal Handlers With C}{}% 9
-\BOOKMARK [2][-]{subsection.8.1}{01\137signal\137handler.c}{section.8}% 10
-\BOOKMARK [2][-]{subsection.8.2}{How to compile?}{section.8}% 11
-\BOOKMARK [2][-]{subsection.8.3}{02\137ignore.c}{section.8}% 12
-\BOOKMARK [2][-]{subsection.8.4}{03\137block.c}{section.8}% 13
-\BOOKMARK [1][-]{section.9}{Summary}{}% 14
-\BOOKMARK [1][-]{section.10}{What are signals?}{}% 15
-\BOOKMARK [1][-]{section.11}{ssh and break}{}% 16
-\BOOKMARK [1][-]{section.12}{SetUID and SetGID}{}% 17
-\BOOKMARK [2][-]{subsection.12.1}{TL;DR}{section.12}% 18
-\BOOKMARK [2][-]{subsection.12.2}{Introduction}{section.12}% 19
-\BOOKMARK [2][-]{subsection.12.3}{war story}{section.12}% 20
-\BOOKMARK [2][-]{subsection.12.4}{uid}{section.12}% 21
-\BOOKMARK [1][-]{section.13}{Homework}{}% 22
-\BOOKMARK [1][-]{section.14}{Exam}{}% 23
-\BOOKMARK [1][-]{section.15}{Show Reading Materials}{}% 24
+\BOOKMARK [1][-]{section.1}{Machine Configuration 7:00 - 7:15}{}% 1
+\BOOKMARK [1][-]{section.2}{Intro 7:15 - 7:20}{}% 2
+\BOOKMARK [1][-]{section.3}{7:20 - 7:35 SIGTSTP and SIGINT}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{SIGINT}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{SIGTSTP}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Verify the signals}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{7:45-7:55 jobs vs processes}{}% 7
+\BOOKMARK [1][-]{section.5}{red 7:55-8:10 Exercise + break: ssh practice}{}% 8
+\BOOKMARK [1][-]{section.6}{ kill }{}% 9
+\BOOKMARK [1][-]{section.7}{An example of a pesky program}{}% 10
+\BOOKMARK [1][-]{section.8}{fg and bg}{}% 11
+\BOOKMARK [1][-]{section.9}{INT, TERM, KILL; Understanding Ignorable Signals}{}% 12
+\BOOKMARK [1][-]{section.10}{red 8:30-8:40 EXERCISE: C Programming Warmup + A Break}{}% 13
+\BOOKMARK [1][-]{section.11}{8:40 - 9:00 Writing Custom Signal Handlers With C}{}% 14
+\BOOKMARK [2][-]{subsection.11.1}{01\137signal\137handler.c}{section.11}% 15
+\BOOKMARK [2][-]{subsection.11.2}{How to compile?}{section.11}% 16
+\BOOKMARK [2][-]{subsection.11.3}{02\137ignore.c}{section.11}% 17
+\BOOKMARK [2][-]{subsection.11.4}{03\137block.c}{section.11}% 18
+\BOOKMARK [1][-]{section.12}{Summary}{}% 19
+\BOOKMARK [1][-]{section.13}{What are signals?}{}% 20
+\BOOKMARK [1][-]{section.14}{9:00 - 9:05 Water break}{}% 21
+\BOOKMARK [1][-]{section.15}{9:00 - 9:20 SetUID and SetGID}{}% 22
+\BOOKMARK [2][-]{subsection.15.1}{TL;DR}{section.15}% 23
+\BOOKMARK [2][-]{subsection.15.2}{Introduction}{section.15}% 24
+\BOOKMARK [2][-]{subsection.15.3}{uid}{section.15}% 25
+\BOOKMARK [1][-]{section.16}{9:20 - 9:45 Discussion of homework}{}% 26
+\BOOKMARK [2][-]{subsection.16.1}{Problem 1}{section.16}% 27
+\BOOKMARK [2][-]{subsection.16.2}{Problem 2}{section.16}% 28
+\BOOKMARK [2][-]{subsection.16.3}{Problem 3}{section.16}% 29
+\BOOKMARK [2][-]{subsection.16.4}{Discord}{section.16}% 30
