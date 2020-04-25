@@ -1,23 +1,33 @@
 # Week 11 Homework
-This is a great assignment. A year from now when you, the Linux expert, are building linux from scratch and installing it on a brand new SSD from Amazon, you'll find that partitioning your disk is super easy! 
+This is a great homework assignment - you're going to master some essential Linux knowledge. If you scroll through the certification requirements here:
 
-Your task is:
+https://training.linuxfoundation.org/certification/linux-foundation-certified-sysadmin-lfcs/
 
-Add a disk to your digital ocean machine. Format it and add two partitions:
-* one for swap space
-* one for your home directory
+you'll see under 'Storage Management' that to be able to:
 
-then add swap space to your machine and move your home directory. Reboot your machine to show that the changes you made have survived a reboot.
+* List, create, delete and modify physical storage partitions
+* Configure systems to mount file systems at or during boot time
+* Create and configure file systems
 
-Put the contents of your /etc/fstab in fstab.txt
-Take a screenshot called "afterReboot.png" of your machine showing the following commands:
-```
-user@machine$ uptime
-user@machine$ lsblk
-# should show swap space
-user@machine$ cat /etc/fstab
-# should show the changes you made to make sure that your changes survived reboot. 
-```
+are listed as essential knowledge for linux professionals. In about 45 minutes of lecture today you've learned a great deal about these topics.
+
+
+Your homework is to:
+* create a droplet with a few users ( use adduser )
+* add a disk to your droplet
+* move /home to the new disk
+* modify /etc/fstab such that your modifications survive a reboot
+
+I want you to submit two images via pull request. 
+
+The first image should contain the output of the following commands:
+* uptime
+* lsblk
+* ls -l /home
+* curl ipinfo.io/ip
+
+and the second should be a screenshot of your digital ocean page showing the same ip address as the one shown in your curl command.
 
 ## Submission guidelines
-Submit the following two files via pull request no later than Midnight of November 19th 2019. Place both files in `Homework/StudentSubmissions/Week11/YourName`.
+Submit both images by pull request in the directory /Homework/Week11/StudentSubmissions/YourName by 4-16-2020 at 11:59 PM, no late homework please! This is important and youll need to understand these concepts so we can move on with further lecture topics.
+
