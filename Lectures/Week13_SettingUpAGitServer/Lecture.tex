@@ -259,6 +259,159 @@ couple of times at home until you can do the whole process in 5 minutes, then
 come in and get an easy A.} We meet at 8PM, I'm hoping that we can all be done
 in a half hour and go home early.}
 
+\section{Setting up a GitLab Server}
+
+Before we setup a git server that works exclusively through the command line
+interface. Github is a git server and you get a pretty UI with lots of buttons
+on the internet. Do you like that better?
+
+Interestingly enough you can create your own github-like website using GitLab.
+Have a look at ~\ref{fig:gitlab} to see the website you'll make in the next few
+minutes. You can set up this website on a PC or raspberry pi at home. Or you can
+set up a cloud server on digital ocean ( or AWS or google cloud or whatever )
+and run your gitlab website there. It will only be accessible to people with
+login credentials, so you can use it yourself or share it with friends and
+family or maybe your college buddies you get together with to write code.
+
+\begin{figure}[h]
+\centering
+	\includegraphics[width=0.8\textwidth]{Images/gitlab.PNG}
+	\caption{{\small \texttt{Example of gitlab on digital ocean webserver.}}}
+	\label{fig:gitlab}
+\end{figure}
+
+\subsection{Setup}
+All these notes are based on information I found here:
+
+\url{https://computingforgeeks.com/how-to-install-and-configure-gitlab-ce-on-debian-buster/}
+
+Information always disappears from the internet. Also these notes dont work
+100\%. So I'm fixing them up such that they work on Debian10 on Digital Ocean as
+of 4/25/2020. If you use Ubuntu18 on AWS in 2021 I can't guarantee these notes
+will work.
+
+Also note:
+
+You need lots of memory for this! Up until now we've been using \$5 servers that
+only have 1GB of memory. According to the Gitlab requirements shown here:
+
+\url{https://docs.gitlab.com/ee/install/requirements.html} we need 8GB of
+memory. So I'm going to select a \$40 machine that has 8GB of ram. Make sure to
+delete this droplet AS SOON as you finish the assignment. This way you'll spend
+under 50 cents. If you leave it on, you'll run up a big charge.
+
+
+
+Do the following:
+
+\begin{lstlisting}
+root@server$ apt update
+root@server$ apt -y install curl gnupg2 ca-certificates
+root@server$ curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash
+\end{lstlisting}
+
+At this point you should see:
+
+\begin{lstlisting}
+The repository is setup! You can now install packages.
+\end{lstlisting}
+
+Now install gitlab-ce ( Gitlab community edition, the free one for personal use
+). You'll see that we're setting it up to point to our ip address.
+
+
+\begin{lstlisting}
+root@server$ export GITLAB_URL="$(curl ipinfo.io/ip)"
+root@server$ EXTERNAL_URL="${GITLAB_URL}" apt install gitlab-ce
+\end{lstlisting}
+
+We are setting ours up without https for now. This is a bad idea. We should
+cover letsencrypt \url{letsencrypt.org} so you all learn how to get an ssl
+certificate for your webserver. If there's interest and I have time to set ip up
+I'll provide more information here. TODO TODO TODO NOTE TO SELF
+
+Anyway now you'll see that the gitlab stuff is installing.
+
+As it installs you'll see the names of familiar programs flying by! See
+~\ref{fig:familiar} for an example. We learned about some of these programs used
+by gitlab throughout this semester. You're well on your way to expertise as a
+linux user.
+
+\begin{figure}[h]
+\centering
+	\includegraphics[width=0.8\textwidth]{Images/forClass.PNG}
+	\caption{{\small \texttt{Look at the things mentioned in the installer. E.g.
+chmod, chgrp, chown, nginx, postgres, crond, etc..}}}
+	\label{fig:familiar}
+\end{figure}
+
+Now your server works! On the server side, when the install is done you'll see
+something like fig~\ref{fig:installDone}. Open a browser on any computer in the world ( almost
+anywhere ) and put the ipaddress of your gitlab server in the search bar. A
+gitlab webpage will popup. You did that! 
+
+\begin{figure}[h]
+\centering
+	\includegraphics[width=0.8\textwidth]{Images/installDone.PNG}
+	\caption{{\small \texttt{What the server shows when installation is done.}}}
+	\label{fig:installDone}
+\end{figure}
+
+
+It will ask you to input a new password.
+
+Set the password.
+
+Then log in using the username \textbf{root} and the password you just created.
+From here, the website works pretty much like github. You can poke around with
+it to learn about it, see fior yourself. 
+
+When your curiosity is satisfied you can destory the droplet on digital ocean.
+Remember you're paying mega bucks for this thing. Best thing to do would
+probably be find a crappy old pc, stick 8gb ram in it, install debian + gitlab
+and then run the server from your house. Or look for a cheaper cloud provider.
+Digital ocean is dead cheap to get started with - a bare bones machine for 5
+bucks. I'm not sure how economical it is for larger projects, you'd need to do
+your own research. Already for ths 8gb machine which we'll rarely use youre
+paying 40 a month, that's way too much for my taste, I dont know about yours.
+
+
+\subsection{ERRNOMEM}
+
+I wanted to see how strict the requirememts were fpr this server. Gitlab says
+8gb memory. I tried to run it on a 5 dollar server with 1GB ram. the installer
+fails showing a low memory error. Try for yourself! The error I got is shown in
+fig~\ref{fig:noMem}.
+
+\begin{figure}[h]
+\centering
+	\includegraphics[width=0.8\textwidth]{Images/nomemerror.PNG}
+	\caption{{\small \texttt{Can't install gitlab with only 1GB mem.}}}
+	\label{fig:noMem}
+\end{figure}
+
+To get around this I tried giving a large amount of swap space, 4GB.
+Just as we did before. Open a terminal and:
+
+\begin{lstlisting}
+root@machine$ fallocate -l 4GB /swapfile
+root@machine$ chmod 600 /swapfile
+root@machine$ mkswap /swapfile
+root@machine$ swapon /swapfile
+\end{lstlisting}
+
+and add the following to your /etc/fstab file:
+
+\begin{verbatim}
+/swapfile swap swap defaults 0 0
+\end{verbatim}
+
+
+Now if you rerun the installation steps, gitlab will successfully install thanks
+to the swap space. \textbf{This will be the slowest website you've ever used. It
+will be unusable. This was just done as an experiment and I thought you'd like
+to see swapspace in action since we discussed it a few weeks ago.}
+
 \section{Final Interesting Topic 1: \textit{join}}
 
 \begin{center}
