@@ -83,7 +83,7 @@ https://www.reddit.com/r/cryptography/comments/5z3r97/can_we_use_asic_hardware_t
 ### Install stuff first
 
 ```
-root@machine$ apt update && apt install gnupg2
+root@machine$ apt update && apt install gnupg2 stress tmux
 root@machine$ adduser gpguser
 # do the stuff
 root@machine$ su - gpguser
