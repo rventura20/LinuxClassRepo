@@ -80,6 +80,16 @@ https://www.reddit.com/r/cryptography/comments/5z3r97/can_we_use_asic_hardware_t
 
 ## Using GPG
 
+### Install stuff first
+
+```
+root@machine$ apt update && apt install gnupg2
+root@machine$ adduser gpguser
+# do the stuff
+root@machine$ su - gpguser
+gpguser@machine$ # now we're ready to start!
+```
+
 ### Why should you know about GPG keys? 
 GPG keys are used for encrypting/decrypting data and verifying the authorship/provenance of email/data. These keys are industry standards and as we mentioned, they are backed by some serious mathematics.
 
