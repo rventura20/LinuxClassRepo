@@ -1,3 +1,46 @@
+# GPG Youtube Video Notes
+
+ Video is here: https://youtu.be/nn9-226MOqY
+ 
+ Commands used:
+
+```
+#to generate a key pair
+gpg --full-generate-key
+
+# to list the pub keys on your machine
+gpg --list-keys
+
+# to list the priv keys on your machine
+gpg --list-secret-keys
+
+# to output the pubkey for EMAIL_FOR_KEY_YOU_WANT_TO_EXPORT
+gpg --armor --output OUTPUT_NAME_FOR_PUBKEYFILE --export EMAIL_FOR_KEY_YOU_WANT_TO_EXPORT
+
+# to import someone elses public key file
+gpg --import NAME_OF_KEYFILE_TO_IMPORT
+
+# to encrypt a file called FILE_TO_ENCRYPT using the pub key from EMAIL_OF_RECIPIENT_OF_ENCRYPTED_MSG
+# and then output the encrypted stuff to a file called OUTPUT_FILENAME
+gpg --armor --output OUTPUT_FILENAME --encrypt --recipient EMAIL_OF_RECIPIENT_OF_ENCRYPTED_MSG FILE_TO_ENCRYPT
+
+# to decrypt a file called ENCRYPTED_FILENAME and output the decrypted text to DECRYPTED_FILENAME
+gpg --output DECRYPTED_FILENAME ENCRYPTED_FILENAME
+
+# to sign a file called INPUT using your priv key and output the signed message to a file called OUTPUT
+gpg --armor --output OUTPUT --sign INPUT
+
+# to verify ( decrypt ) a signed ( encrypted ) file
+gpg --output DECRYPTED_FILENAME --decrypt ENCRYPTED_FILENAME
+```
+
+
+
+## NOTE!! FORGET ABOUT THE STUFF BELOW
+if you watch this vid:
+https://youtu.be/nn9-226MOqY
+
+
 # Computer Security, Encryption, Cybersecurity, etc.
 
 [ start loop test code in the background and don't mention what it is. Along the lines of "I'm just going to run this and don't you worry what it's doing."]
