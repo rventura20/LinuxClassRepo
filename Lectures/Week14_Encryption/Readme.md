@@ -1,8 +1,15 @@
 # GPG Youtube Video Notes
 
- Video is here: https://youtu.be/nn9-226MOqY
- 
- Commands used:
+Video is here: https://youtu.be/nn9-226MOqY
+
+
+If you are on a Debian 10 server on digital ocean, make sure to run these commands first:
+
+```
+apt update && apt install gnupg2
+```
+
+GPG2 Commands used:
 
 ```
 #to generate a key pair
@@ -33,7 +40,6 @@ gpg --armor --output OUTPUT --sign INPUT
 # to verify ( decrypt ) a signed ( encrypted ) file
 gpg --output DECRYPTED_FILENAME --decrypt ENCRYPTED_FILENAME
 ```
-
 
 
 ## NOTE!! FORGET ABOUT THE STUFF BELOW
