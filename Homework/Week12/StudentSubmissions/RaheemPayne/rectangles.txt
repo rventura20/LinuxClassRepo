@@ -1,1 +1,0 @@
-awk -F ";" '{ printf "%-19s %5s\n", "Area of " $1 ":",  ($3 * $2) ; total = ($3 * $2) + total } END { printf "%-19s %5s\n", "TOTAL AREA:", total}' rectangle.txt

@@ -1,2 +1,0 @@
-#!/bin/bash
-echo "trying to upload screenshots"

@@ -1,1 +1,0 @@
-SELECT * FROM person WHERE id = 28819;
