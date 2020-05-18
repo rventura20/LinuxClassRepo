@@ -1,3 +1,52 @@
+# GPG Youtube Video Notes
+
+Video is here: https://youtu.be/nn9-226MOqY
+
+
+If you are on a Debian 10 server on digital ocean, make sure to run these commands first:
+
+```
+apt update && apt install gnupg2
+```
+
+GPG2 Commands used:
+
+```
+#to generate a key pair
+gpg --full-generate-key
+
+# to list the pub keys on your machine
+gpg --list-keys
+
+# to list the priv keys on your machine
+gpg --list-secret-keys
+
+# to output the pubkey for EMAIL_FOR_KEY_YOU_WANT_TO_EXPORT
+gpg --armor --output OUTPUT_NAME_FOR_PUBKEYFILE --export EMAIL_FOR_KEY_YOU_WANT_TO_EXPORT
+
+# to import someone elses public key file
+gpg --import NAME_OF_KEYFILE_TO_IMPORT
+
+# to encrypt a file called FILE_TO_ENCRYPT using the pub key from EMAIL_OF_RECIPIENT_OF_ENCRYPTED_MSG
+# and then output the encrypted stuff to a file called OUTPUT_FILENAME
+gpg --armor --output OUTPUT_FILENAME --encrypt --recipient EMAIL_OF_RECIPIENT_OF_ENCRYPTED_MSG FILE_TO_ENCRYPT
+
+# to decrypt a file called ENCRYPTED_FILENAME and output the decrypted text to DECRYPTED_FILENAME
+gpg --output DECRYPTED_FILENAME ENCRYPTED_FILENAME
+
+# to sign a file called INPUT using your priv key and output the signed message to a file called OUTPUT
+gpg --armor --output OUTPUT --sign INPUT
+
+# to verify ( decrypt ) a signed ( encrypted ) file
+gpg --output DECRYPTED_FILENAME --decrypt ENCRYPTED_FILENAME
+```
+
+
+## NOTE!! FORGET ABOUT THE STUFF BELOW
+if you watch this vid:
+https://youtu.be/nn9-226MOqY
+
+
 # Computer Security, Encryption, Cybersecurity, etc.
 
 [ start loop test code in the background and don't mention what it is. Along the lines of "I'm just going to run this and don't you worry what it's doing."]
@@ -5,7 +54,7 @@
 When you hide a key under the doormat to your house you are doing what is called "Security through obscurity". Another example of security through obscurity is using a combination lock to secure your bicycle. https://en.wikipedia.org/wiki/Security_through_obscurity The assumption is that a nefarious party won't know the secret that you are trying to hide. In the case of your key hidden in the flower pot out back, you assume a home invader won't find the key. In the case of your bike, you're assuming the thief won't guess your three digit code - there are usually 40 digits on the front so there are 40*40*40 = not that many combinations to guess from ! Security like this either assumes your attacker is unmotivated, severely pressed for time, or has some other trivial circumstance preventing intrusion.
 
 ## ROT13
-Security by obscurity generally doesn't work in the digital world. If you try to do something simple like encode a message to your class during a lecture using a simple substitution, like mapping the letters in your least favorite student's name to the letter after it, you'll get something like:
+**Security by obscurity** generally doesn't work in the digital world. If you try to do something simple like encode a message to your class during a lecture using a simple substitution, like mapping the letters in your least favorite student's name to the letter after it, you'll get something like:
 
 ** mjovy **
 
@@ -79,6 +128,16 @@ https://www.openpgp.org/
 https://www.reddit.com/r/cryptography/comments/5z3r97/can_we_use_asic_hardware_to_brute_force_encryption/
 
 ## Using GPG
+
+### Install stuff first
+
+```
+root@machine$ apt update && apt install gnupg2 stress tmux
+root@machine$ adduser gpguser
+# do the stuff
+root@machine$ su - gpguser
+gpguser@machine$ # now we're ready to start!
+```
 
 ### Why should you know about GPG keys? 
 GPG keys are used for encrypting/decrypting data and verifying the authorship/provenance of email/data. These keys are industry standards and as we mentioned, they are backed by some serious mathematics.
