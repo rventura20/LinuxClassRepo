@@ -7,7 +7,7 @@ Create a Digital Ocean account
 Login to a server configured like this:
 * Debian 10
 * $5 a month - don't waste money
-* Use your id_rsa.pub file so you can connect with a password.
+* Use your id_rsa.pub file so you can connect without a password.
 
 ## Submission guidelines
 Submit the following:
