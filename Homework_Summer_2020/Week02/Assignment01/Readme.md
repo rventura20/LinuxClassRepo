@@ -1,5 +1,8 @@
 # Basic Git + Github Usage
 
+Corresponding lecture is here:
+https://www.youtube.com/watch?v=pyNcwVu_Y1A
+
 In this assignment you'll demonstrate basic knowledge of git and github.
 
 Todo:
