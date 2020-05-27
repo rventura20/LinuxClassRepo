@@ -16,12 +16,15 @@ This will download the novel into a file called pg19337.txt in your present work
 
 Using what you know about grep, pipes and the wc command, your job is to do the following:
 
-** Find 10 words that appear at least 100 times each in the novel **
+** Find 10 words that appear at least 50 times each in the novel **
 
 In the terminal you must:
 * download the file
 * compute the md5sum of the file so I can see you haven't tampered with it. `md5sum pg19337.txt`
-* run your grep/pipe/wc commands to prove to me that you've found 10 words that appear at least 100 times each.
+* run your grep/pipe/wc commands to prove to me that you've found 10 words that appear at least 50 times each.
+
+** I've attached a sample of my work showing you that it is indeed possible. Note the md5sum - you're must agree with mine!**
+
 
 ## Submission guidelines
 Submit screenshot(s) of your terminal as you do the work. You should probably be able to fit everything into one or two pictures.
