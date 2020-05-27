@@ -6,7 +6,8 @@ Redirect the output of grep using
 * 2>
 * 1>>
 * 2>>
-Clearly demonstrate that you understand the differences between these four.
+
+Clearly demonstrate that you understand the differences between these four. In lecture I will have done this exercise with wc. Note that to get 2> and 2>> to output anything you'll need to do something wrong so grep will throw and error message to stderr.
 
 
 ## Part 2 - Writing your own code to use stdin, stdout, stderr
