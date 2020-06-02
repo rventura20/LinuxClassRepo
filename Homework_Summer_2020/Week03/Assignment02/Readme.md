@@ -4,21 +4,15 @@ In this assignment you will test your knowledge of adding users and modifying pe
 
 ## Requirements
 
-* Turn off password based access to droplet 
 * Add the user "yourname" to your server
-* Add the user "melvyn" to your server with a very secure password. 
-* Add the user "virginia" to your server with a very secure password.
+* Add the user "melvyn" to your server
+* Add the user "virginia" to your server
+* Add "melvyn" and "yourname" to a group called "njcu"
 * Add virginia to the sudo group.
 * Add my public ssh key to /home/melvyn/.ssh/authorized\_keys
 * Add my public ssh key to /home/virginia/.ssh/authorized\_keys
 * Create the file /home/yourname/lookHereMelvyn.txt with permissions that allow
- melvyn to modify the file
-
-
-Note above I said "a very secure password". Use a ridiculous password and forget
-it. We don't want your machine being hacked, so make a ridiculous password. We
-will never use this password, so you don't need to remember it. This is just a
-security measure.
+ melvyn to modify the file.
 
 ## Submission guidelines
 
