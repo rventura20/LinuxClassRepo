@@ -8,6 +8,7 @@ In this assignment you will test your knowledge of adding users and modifying pe
 * Add the user "yourname" to your server
 * Add the user "melvyn" to your server with a very secure password. 
 * Add the user "virginia" to your server with a very secure password.
+* Add virginia to the sudo group.
 * Add my public ssh key to /home/melvyn/.ssh/authorized\_keys
 * Add my public ssh key to /home/virginia/.ssh/authorized\_keys
 * Create the file /home/yourname/lookHereMelvyn.txt with permissions that allow
