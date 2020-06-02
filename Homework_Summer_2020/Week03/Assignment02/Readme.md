@@ -1,4 +1,4 @@
-# Week 05 Homework
+# Basics of Users and Permissions
 
 In this assignment you will test your knowledge of adding users and modifying permissions.
 
