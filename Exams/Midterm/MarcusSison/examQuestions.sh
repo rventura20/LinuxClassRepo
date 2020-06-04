@@ -10,7 +10,7 @@ question3(){
 	echo "todo"
 }
 
-run_julians_questions(){
+run_marcus_questions(){
 	question1
 	question2
 	question3
