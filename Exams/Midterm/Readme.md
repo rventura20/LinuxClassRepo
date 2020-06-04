@@ -35,10 +35,14 @@ class needs you to make these good questions on time so I have a few days to
 polish it and work out any kinks.
 
 ## Part 2 
-Pull changes from my repo into your fork.
+Pull changes from my repo into your fork, then run the exam.sh script and answer all the questions correctly.
 
 ## Grading
 50% for making good exam questions.
 50% of your grade will be from your score on the test.
 
 Please get a 100.
+
+## Submission Guidelines
+
+See blackboard for deadlines and other relevant information.
