@@ -10,9 +10,7 @@ question3(){
 	echo "todo"
 }
 
-
-
-run_itsabravos_questions(){
+run_allens_questions(){
 	question1
 	question2
 	question3

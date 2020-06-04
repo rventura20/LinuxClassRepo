@@ -10,9 +10,7 @@ question3(){
 	echo "todo"
 }
 
-
-
-run_muhammedjawnehs_questions(){
+run_shivangis_questions(){
 	question1
 	question2
 	question3
