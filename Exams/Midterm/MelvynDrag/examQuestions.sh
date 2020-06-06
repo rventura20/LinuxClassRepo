@@ -7,19 +7,20 @@ question1(){
 	read answer
 	case $answer in
 		"a") 
-			echo "melvyn question 1 right" >> $ANSWER_FILE
+			echo "$RIGHT" >> $ANSWER_FILE
 			;;
 		"b")
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "$WRONG" >> $ANSWER_FILE
 			;;
 		"c")
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "$WRONG" >> $ANSWER_FILE
 			;;
 		"d") 
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "$WRONG" >> $ANSWER_FILE
 			;;
 		*)
 			echo "Please enter a valid selection from a-d"
+			# if no valid input, run the question again.
 			question1
 			;;
 	esac
@@ -34,16 +35,16 @@ question2(){
 	read answer
 	case $answer in
 		"a") 
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "$WRONG" >> $ANSWER_FILE
 			;;
 		"b")
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "$WRONG" >> $ANSWER_FILE
 			;;
 		"c")
-			echo "melvyn question 1 right" >> $ANSWER_FILE
+			echo "$RIGHT" >> $ANSWER_FILE
 			;;
 		"d") 
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "$WRONG" >> $ANSWER_FILE
 			;;
 		*)
 			echo "Please enter a valid selection from a-d"
@@ -54,6 +55,7 @@ question2(){
 }
 
 question3(){
+	# NOTE This is a nonsensical question from the show "The Office"
 	echo "What is best? Bears or Bees?"
 	echo "a) bears"
 	echo "b) bees"
@@ -62,16 +64,16 @@ question3(){
 	read answer
 	case $answer in
 		"a") 
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "$WRONG" >> $ANSWER_FILE
 			;;
 		"b")
-			echo "melvyn question 1 right" >> $ANSWER_FILE
+			echo "$RIGHT" >> $ANSWER_FILE
 			;;
 		"c")
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "$WRONG" >> $ANSWER_FILE
 			;;
 		"d") 
-			echo "melvyn question 1 wrong" >> $ANSWER_FILE
+			echo "$WRONG" >> $ANSWER_FILE
 			;;
 		*)
 			echo "Please enter a valid selection from a-d"
