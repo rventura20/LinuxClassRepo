@@ -2,8 +2,8 @@ question1(){
 	echo "How to quit vim without saving the file"
 	echo "a) :q!"
 	echo "b) :e!"
-	echo "c) :q"
-	echo "d) :quit"
+	echo "c) :e"
+	echo "d) :exit"
 	read answer
 	case $answer in 
 		"a")
@@ -26,7 +26,7 @@ question1(){
 }
 
 question2(){
-	echo "How to only save the changes in vim file"
+	echo "How to save a file in Vim without closing the file?"
 	echo "a) :w"
 	echo "b) :wq"
 	echo "c) :s"
@@ -54,11 +54,11 @@ question2(){
 }
 question3(){
 
-	echo "Which command is used to delete unwanted character in normal mode"
-	echo "a) a"
-	echo "b) d"
-	echo "c) x"
-	echo "d) w"
+	echo "Which command is used to split a vim window vertically?"
+	echo "a) :vert"
+	echo "b) :split"
+	echo "c) :vsplit"
+	echo "d) :vertsplit"
 	read answer
 	case $answer in
 		"a") 

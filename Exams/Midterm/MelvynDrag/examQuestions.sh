@@ -1,9 +1,9 @@
 question1(){
-	echo "How many eggs in a dozen?"
-	echo "a) 12"
-	echo "b) 24"
-	echo "c) 100"
-	echo "d) -1"
+	echo "Which of the following do NOT provide Linux servers in the cloud?"
+	echo "a) Microsoft Word"
+	echo "b) Google Cloud"
+	echo "c) Digital Ocean"
+	echo "d) Amazon Web Services"
 	read answer
 	case $answer in
 		"a") 
@@ -27,11 +27,11 @@ question1(){
 }
 
 question2(){
-	echo "What is heaviest?  A lb. of feathers or a lb. of steel?"
-	echo "a) feathers"
-	echo "b) steel"
-	echo "c) equal"
-	echo "d) impossible to get a pound of feathers"
+	echo "Which of the following is a popular command line text editor?"
+	echo "a) sed"
+	echo "b) cowsay"
+	echo "c) Emacs"
+	echo "d) GREP" 
 	read answer
 	case $answer in
 		"a") 
@@ -55,12 +55,11 @@ question2(){
 }
 
 question3(){
-	# NOTE This is a nonsensical question from the show "The Office"
-	echo "What is best? Bears or Bees?"
-	echo "a) bears"
-	echo "b) bees"
-	echo "c) battlestar galactica"
-	echo "d) michael!" 
+	echo "Which of the following is NOT version control software?"
+	echo "a) git"
+	echo "b) ubuntu"
+	echo "c) mercurial"
+	echo "d) svn" 
 	read answer
 	case $answer in
 		"a") 

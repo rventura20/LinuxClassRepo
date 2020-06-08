@@ -1,9 +1,9 @@
 question1(){
-	echo "Which command do you use to insert a text file to grep"
-	echo "a) wget"
-	echo "b) git get"
-	echo "c) insert file.txt"
-	echo "d) just copy and past link"
+	echo "What command do you use to search for a string in a file?"
+	echo "a) grep"
+	echo "b) wget"
+	echo "c) search"
+	echo "d) find"
 	read answer
 	case $answer in
 		"a")
@@ -26,9 +26,10 @@ question1(){
 }
 
 question2(){
-	echo "Fill in the blank to find all matching words, the, in the text file : grep ____ the pg1.txt | wc -l"
+	echo "Fill in the blank to find lines containing the whole word 'the', in pg1.txt :"
+	echo "    grep ____ \"the\" pg1.txt"
 	echo "a) -i"
-	echo "b) -wi"
+	echo "b) -w"
 	echo "c) -f"
 	echo "d) -the"
 	read answer
@@ -54,11 +55,11 @@ question2(){
 }
 
 question3(){
-	echo "Which command allows you to find the lines without the word the, using grep?"
-	echo "a) grep -i"
-	echo "b) grep -wo"
-	echo "c) grep -v"
-	echo "d) grep -the"
+	echo "Which command allows you to find lines in 'file.txt' without the word 'the'?"
+	echo "a) grep -i \"the\" file.txt"
+	echo "b) grep -wo \"the\" file.txt"
+	echo "c) grep -v \"the\" file.txt"
+	echo "d) grep -the \"the\" file.txt"
 	read answer
 	case $answer in
 		"a")

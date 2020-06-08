@@ -27,10 +27,10 @@ question1(){
 
 question2(){
 	echo " What cd command is used in order to return directly to home directory "
-	echo "a) cd/ "
+	echo "a) cd / "
 	echo "b) cd .. "
-	echo "c) cd~ "
-	echo "d) cd "
+	echo "c) cd ~ "
+	echo "d) cd /home"
 	read answer
 	case $answer in
 		"a") 

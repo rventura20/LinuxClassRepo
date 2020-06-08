@@ -1,6 +1,6 @@
 question1(){
 	echo "what is git"
-	echo "a) a distributed version control system and source code management"
+	echo "a) a distributed version control system and source code management software"
 	echo "b) a python language"
 	echo "c) a file management system"
 	echo "d) the chrome browser"
@@ -26,11 +26,11 @@ question1(){
 	esac
 }
 question2(){
-	echo "What command do you use to make a commit"
+	echo "What flag do you use to add a message to a git commit"
 	echo "a) -b"
 	echo "b) -c"
 	echo "c) -m"
-	echo "d) impossible to commit a file"
+	echo "d) you do no add messages to git commits"
 	read answer
 	case $answer in
 		"a") 
@@ -53,11 +53,11 @@ question2(){
 
 }
 question3(){
-	echo "how do you configure a user name"
-	echo "a) .name"
-	echo "b) .email"
-	echo "c) .house"
-	echo "d) .heic"
+	echo "How do you configure a user name for git?"
+	echo "a) git config user.name"
+	echo "b) git config user.email"
+	echo "c) git config user.house"
+	echo "d) git config username.heic"
 	read answer
 	case $answer in
 		"a")

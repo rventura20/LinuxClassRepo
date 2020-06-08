@@ -31,7 +31,7 @@ question2(){
 	echo "a) ls"
 	echo "b) ls -r"
 	echo "c) ls -t"
-	echo "d) ls -ltr"
+	echo "d) list -rev"
 	read answer
 	case $answer in
 		"a" ) 
@@ -54,7 +54,7 @@ question2(){
 }
 
 question3(){
-	echo "Which command is used to display line of text/string that are passed as an arguement?"
+	echo "Which command is used to display a line of text that is passed as an arguement?"
 	echo "a) cp"
 	echo "b) rm"
 	echo "c) echo"
