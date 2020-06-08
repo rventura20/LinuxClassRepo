@@ -1,0 +1,1 @@
+Pictures showing what I need to see. Note in the image `afterReboot.png` I've highlight the output of `uptime`, `lsblk`, and `cat/etc/fstab`. The image should also show your ipaddress. You can show this using the `curl ipinfo.io/ip` command, or it can show your ssh command.
