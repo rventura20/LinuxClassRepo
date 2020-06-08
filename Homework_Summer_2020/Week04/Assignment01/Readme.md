@@ -13,7 +13,7 @@ https://www.amazon.com/AWK-Programming-Language-Alfred-Aho/dp/020107981X
 Use Vim to create this file (VERY IMPORTANT!!! Note that the columns are "colon-delimited" - there are ":"s between the fields ):
 
 ``` 
-triangle1:10:0
+triangle1:10:10
 triangle2:4:3
 triangle3:5:200
 ```
