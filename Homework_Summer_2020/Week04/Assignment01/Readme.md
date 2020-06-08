@@ -69,10 +69,7 @@ TOTAL AREA:          556
 
 ## Submission guidelines
 
-Due Sunday, June 14th 2020 by 11:59 PM. 
-Submit 2 screenshots *on blackboard*. 
-
-
+Due Sunday, June 14th 2020 by 11:59 PM. Submit screenshots *on blackboard* showing the output of `curl ipinfo.io/ip`, `cat triangles.txt` and `awk YOUR_AWK_COMMANDS HERE` along with a picture of your digital ocean account showing that you created the server with the ip address output by curl.
 
 See the sample submissions in this directory showing what I expect to see.
 
