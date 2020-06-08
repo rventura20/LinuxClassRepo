@@ -1,4 +1,4 @@
-# Moving your Home Partition to a New Disk.
+# Moving your Home Directory to a New Disk.
 This is a great homework assignment - you're going to master some essential Linux knowledge. If you scroll through the certification requirements here:
 
 https://training.linuxfoundation.org/certification/linux-foundation-certified-sysadmin-lfcs/
