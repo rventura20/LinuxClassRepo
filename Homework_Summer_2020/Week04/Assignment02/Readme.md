@@ -18,7 +18,7 @@ Your homework is to:
 * move /home to the new disk
 * modify /etc/fstab such that your modifications survive a reboot
 
-I want you to submit two images via pull request. 
+I want you to submit two images **On Blackboard**. 
 
 The first image should contain the output of the following commands:
 * uptime
